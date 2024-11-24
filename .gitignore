@@ -1,5 +1,6 @@
 /.phpunit.cache
 /node_modules
+/public_html
 /public/build
 /public/hot
 /public/storage
@@ -21,3 +22,6 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/.osp
+/.vite
+/.AdminLTE
