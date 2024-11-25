@@ -9,7 +9,7 @@ class SectionController extends Controller
 {
     public function index()
     {
-        return view('admin.index', ['sections' => Section::getFirstLevelSections()]);
+        return view('admin.sections', ['sections' => Section::getFirstLevelSections()]);
     }
 
     public function create()
@@ -20,9 +20,15 @@ class SectionController extends Controller
     {
     }
 
-    public function show(int $id)
+    public function show(Section $section)
     {
-        return view('admin.index', ['sections' => Section::getSectionsByParentSectionId($id)]);
+        return view(
+            'admin.sections',
+            [
+                'sections' => Section::getSections($section),
+                'section' => $section
+            ]
+        );
     }
 
     public function edit(string $id)

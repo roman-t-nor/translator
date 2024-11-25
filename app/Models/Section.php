@@ -34,8 +34,8 @@ class Section extends Model
         return self::where('depth_level', 1)->orderBy('left_margin')->get();
     }
 
-    public static function getSectionsByParentSectionId(int $id)
+    public static function getSections(self $section): Collection
     {
-        return Section::where('parent_id', $id)->get();
+        return Section::where('parent_id', $section->id)->get();
     }
 }

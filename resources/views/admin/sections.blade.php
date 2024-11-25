@@ -8,18 +8,23 @@
                         <th style="width: 10px">#</th>
                         <th>Title</th>
                         <th>Id</th>
+                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($sections as $section)
+                    @foreach($sections as $s)
                         <tr class="align-middle">
                             <td>{{ $loop->iteration }}</td>
                             <td>
-                                <a href="{{ route('admin.sections.show', ['section'=>$section->id]) }}"
+                                <a href="{{ route('admin.sections.show', ['section'=>$s->id]) }}"
                                    class="btn btn-secondary"
-                                >{{ $section->name }}</a>
+                                >{{ $s->name }}</a>
                             </td>
-                            <td>{{ $section->id }}</td>
+                            <td style="width: 80px">{{ $s->id }}</td>
+                            <td style="width: 80px">
+                                <a href="{{ route('admin.sections.edit', ['section'=>$s->id]) }}"
+                                   class="btn btn-outline-secondary"
+                                >Edit</a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -36,4 +41,17 @@
             </div>
         </div>
     @endif
+
+    @isset($section)
+        @if($section->parent_id)
+            <a href="{{ route('admin.sections.show', ['section' => $section->parent_id]) }}"
+               class="btn btn-secondary"
+            >Back</a>
+        @else
+            <a href="{{ route('admin.sections.index') }}"
+               class="btn btn-secondary"
+            >Back</a>
+        @endif
+    @endisset
+
 </x-admin>
