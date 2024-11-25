@@ -9,7 +9,10 @@ class SectionController extends Controller
 {
     public function index()
     {
-        return view('admin.sections', ['sections' => Section::getFirstLevelSections()]);
+        return view('sections', [
+            'sections' => Section::getFirstLevelSections(),
+            'title' => 'All sections',
+        ]);
     }
 
     public function create()
@@ -23,10 +26,11 @@ class SectionController extends Controller
     public function show(Section $section)
     {
         return view(
-            'admin.sections',
+            'sections',
             [
                 'sections' => Section::getSections($section),
-                'section' => $section
+                'section' => $section,
+                'title' => 'Section: ' . $section->name
             ]
         );
     }

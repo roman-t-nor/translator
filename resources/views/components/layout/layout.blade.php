@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<x-admin.head/>
+<x-layout.head/>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 <div class="app-wrapper">
-    <x-admin.aside :$sections/>
+    <x-layout.aside :$sections/>
     <main class="app-main">
-        <x-admin.main-header/>
+        <x-layout.main-header/>
         <div class="app-content">
             <div class="container-fluid">
                 @if ($slot->isEmpty())
@@ -20,9 +20,9 @@
             </div>
         </div>
     </main>
-    <x-admin.footer/>
+    <x-layout.footer/>
 </div>
-<x-admin.scripts/>
+<x-layout.scripts/>
 </body>
 
 </html>

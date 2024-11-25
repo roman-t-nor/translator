@@ -7,7 +7,7 @@
     </div>
     <div class="sidebar-wrapper">
         <nav class="mt-2">
-            <x-admin.aside-menu :$sections/>
+            <x-layout.aside-menu :$sections/>
         </nav>
     </div>
 </aside>

@@ -1,4 +1,4 @@
-<x-admin>
+<x-layout :$title>
     @if($sections->isNotEmpty())
         <div class="card mb-4">
             <div class="card-body">
@@ -44,14 +44,10 @@
 
     @isset($section)
         @if($section->parent_id)
-            <a href="{{ route('admin.sections.show', ['section' => $section->parent_id]) }}"
-               class="btn btn-secondary"
-            >Back</a>
+            <x-button-back :url="route('admin.sections.show', ['section' => $section->parent_id])"/>
         @else
-            <a href="{{ route('admin.sections.index') }}"
-               class="btn btn-secondary"
-            >Back</a>
+            <x-button-back :url="route('admin.sections.index')"/>
         @endif
     @endisset
 
-</x-admin>
+</x-layout>
