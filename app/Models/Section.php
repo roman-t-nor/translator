@@ -11,7 +11,7 @@ class Section extends Model
 
     public static function prepareSections(): Collection
     {
-        $sections = Section::orderBy('left_margin')->get();
+        $sections = self::orderBy('left_margin')->get();
         foreach ($sections as $section) {
             if ($section->parent_id) {
                 self::markSectionsAsParent($section->parent_id, $sections);
@@ -27,5 +27,15 @@ class Section extends Model
                 $section->is_parent = true;
             }
         });
+    }
+
+    public static function getFirstLevelSections(): Collection
+    {
+        return self::where('depth_level', 1)->orderBy('left_margin')->get();
+    }
+
+    public static function getSectionsByParentSectionId(int $id)
+    {
+        return Section::where('parent_id', $id)->get();
     }
 }

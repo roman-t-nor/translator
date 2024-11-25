@@ -10,7 +10,13 @@
         <x-admin.main-header/>
         <div class="app-content">
             <div class="container-fluid">
-                {{ $slot }}
+                @if ($slot->isEmpty())
+                    <div class="alert alert-warning">
+                        No items found.
+                    </div>
+                @else
+                    {{ $slot }}
+                @endif
             </div>
         </div>
     </main>
