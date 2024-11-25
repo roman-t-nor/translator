@@ -7,7 +7,7 @@ use Illuminate\View\View;
 
 class AdminController extends Controller
 {
-    public function show(): View
+    public function __invoke(): View
     {
         return view('admin.index', ["sections" => Section::prepareSections()]);
     }

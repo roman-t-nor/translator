@@ -6,7 +6,14 @@
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 <div class="app-wrapper">
     <x-admin.aside :$sections/>
-    <x-admin.main/>
+    <main class="app-main">
+        <x-admin.main-header/>
+        <div class="app-content">
+            <div class="container-fluid">
+                {{ $slot }}
+            </div>
+        </div>
+    </main>
     <x-admin.footer/>
 </div>
 <x-admin.scripts/>

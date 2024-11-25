@@ -18,7 +18,7 @@
 
                     <li class="nav-item">
 
-                        <a href="/xxx" class="nav-link">
+                        <a href="{{ route('admin.sections.show', ['section'=>$section->id]) }}" class="nav-link">
                             {!! str_repeat('&nbsp;&nbsp;&nbsp;', $section->depth_level) !!}
                             <i class="av-arrow bi bi-folder"></i>
                             <p>
@@ -29,7 +29,7 @@
                             </p>
                         </a>
                         @if($section->is_parent)
-                            <ul class="nav nav-treeview">
+                            <ul class="nav d-none">
                         @endif
                     </li>
                     @php
