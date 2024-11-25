@@ -1,7 +1,7 @@
-<x-admin :$sections>
-    @if($sections)
+<x-admin>
+    @isset($component->sections)
         <ul class="nav">
-            @foreach($sections as $section)
+            @foreach($component->sections as $section)
                 <li class="nav-item">
                     <a href="{{ route('admin.sections.show', ['section'=>$section->id]) }}" class="nav-link">
                         {!! str_repeat('&nbsp;&nbsp;&nbsp;', $section->depth_level) !!}
@@ -16,5 +16,5 @@
                 </li>
             @endforeach
         </ul>
-    @endif
+    @endisset
 </x-admin>

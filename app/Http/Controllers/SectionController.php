@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Section;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
     public function index()
     {
-        return view('admin.index', ["sections" => Section::prepareSections()]);
+        return view('admin.index');
     }
 
     public function create()
@@ -22,7 +21,7 @@ class SectionController extends Controller
 
     public function show(string $id)
     {
-        return view('admin.index', ["sections" => Section::prepareSections()]);
+        return view('admin.index');
     }
 
     public function edit(string $id)

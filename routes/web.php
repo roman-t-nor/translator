@@ -4,13 +4,12 @@ use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->route('admin.sections.index');
+    return redirect()->route('admin.index');
 });
-
-Route::get('/admin', [SectionController::class, 'index']);
 
 Route::prefix('admin')->group(function () {
     Route::name('admin.')->group(function () {
-        Route::resource('sections', SectionController::class)->except(['index']);
+        Route::get('/', [SectionController::class, 'index'])->name('index');
+        Route::resource('sections', SectionController::class);
     });
 });
