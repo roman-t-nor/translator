@@ -17,7 +17,7 @@ class Layout extends Component
     public function __construct(string $title, ?Section $section = null)
     {
         $this->title = $title;
-        $this->sections = Section::getAllSections();
+        $this->sections = Section::getSectionsTree($section);
         $this->section = $section;
     }
 

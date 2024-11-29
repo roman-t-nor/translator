@@ -21,7 +21,7 @@ class Breadcrumbs extends Component
     private function getItems(Section $section): array
     {
         $parentSections = Section::getParentSections($section);
-        $sections = [...array_reverse($parentSections), $section];
+        $sections = array_reverse($parentSections);
 
         $items = array_map(function (Section $s) use ($section): array {
             $item = ["title" => $s->name];

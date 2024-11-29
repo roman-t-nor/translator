@@ -8,7 +8,7 @@
             </p>
         </a>
         @if($sections)
-            <ul class="nav nav-treeview">
+            <ul class="nav">
                 @foreach($sections as $s)
                     @isset($prevDepthLevel)
                         @if($s->depth_level < $prevDepthLevel)
@@ -16,7 +16,7 @@
                         @endif
                     @endisset
 
-                    <li class="nav-item">
+                    <li class="w-100">
 
                         <a href="{{ route('admin.sections.show', ['section'=>$s->id]) }}" class="nav-link">
                             {!! str_repeat('&nbsp;&nbsp;&nbsp;', $s->depth_level) !!}
@@ -30,14 +30,16 @@
                         </a>
                         @if($s->is_parent)
                             <ul class="nav">
-                        @endif
+                        @else
                     </li>
-                    @php
-                        $prevDepthLevel = $s->depth_level;
-                    @endphp
-                @endforeach
-            </ul>
         @endif
+
+        @php
+            $prevDepthLevel = $s->depth_level;
+        @endphp
+        @endforeach
+    </li>
+    @endif
     </li>
 
 </ul>
