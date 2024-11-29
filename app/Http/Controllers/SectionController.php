@@ -28,7 +28,7 @@ class SectionController extends Controller
         return view(
             'sections',
             [
-                'sections' => Section::getSections($section),
+                'sections' => Section::getChildSections($section),
                 'section' => $section,
                 'title' => 'Section: ' . $section->name
             ]

@@ -18,9 +18,11 @@ class Breadcrumbs extends Component
         }
     }
 
-    private function getItems(?Section $section): array
+    private function getItems(Section $section): array
     {
-        $sections = array_reverse($this->getParentSections([$section]));
+        $parentSections = Section::getParentSections($section);
+        $sections = [...array_reverse($parentSections), $section];
+
         $items = array_map(function (Section $s) use ($section): array {
             $item = ["title" => $s->name];
             if ($s === $section) {
@@ -32,17 +34,6 @@ class Breadcrumbs extends Component
         }, $sections);
 
         return [["url" => route('admin.sections.index'), "title" => "Home"], ...$items];
-    }
-
-    private function getParentSections(array $sections)
-    {
-        $section = $sections[array_key_last($sections)];
-        if (!$section->parent_id) {
-            return $sections;
-        }
-        $sections = [...$sections, Section::findOrFail($section->parent_id)];
-
-        return $this->getParentSections($sections);
     }
 
     public function render(): View|Closure|string

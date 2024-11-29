@@ -9,31 +9,31 @@
         </a>
         @if($sections)
             <ul class="nav nav-treeview">
-                @foreach($sections as $section)
+                @foreach($sections as $s)
                     @isset($prevDepthLevel)
-                        @if($section->depth_level < $prevDepthLevel)
+                        @if($s->depth_level < $prevDepthLevel)
                             {!! "</ul>" !!}
                         @endif
                     @endisset
 
                     <li class="nav-item">
 
-                        <a href="{{ route('admin.sections.show', ['section'=>$section->id]) }}" class="nav-link">
-                            {!! str_repeat('&nbsp;&nbsp;&nbsp;', $section->depth_level) !!}
+                        <a href="{{ route('admin.sections.show', ['section'=>$s->id]) }}" class="nav-link">
+                            {!! str_repeat('&nbsp;&nbsp;&nbsp;', $s->depth_level) !!}
                             <i class="av-arrow bi bi-folder"></i>
                             <p>
-                                {{ $section->name }}
-                                @if($section->is_parent)
+                                {{ $s->name }}
+                                @if($s->is_parent)
                                     <i class="nav-arrow bi bi-chevron-right"></i>
                                 @endif
                             </p>
                         </a>
-                        @if($section->is_parent)
-                            <ul class="nav d-none">
+                        @if($s->is_parent)
+                            <ul class="nav">
                         @endif
                     </li>
                     @php
-                        $prevDepthLevel = $section->depth_level;
+                        $prevDepthLevel = $s->depth_level;
                     @endphp
                 @endforeach
             </ul>

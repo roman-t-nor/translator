@@ -9,7 +9,7 @@ class Section extends Model
 {
     public bool $is_parent = false;
 
-    public static function prepareSections(): Collection
+    public static function getAllSections(): Collection
     {
         $sections = self::orderBy('left_margin')->get();
         foreach ($sections as $section) {
@@ -34,8 +34,21 @@ class Section extends Model
         return self::where('depth_level', 1)->orderBy('left_margin')->get();
     }
 
-    public static function getSections(self $section): Collection
+    public static function getChildSections(self $section): Collection
     {
         return Section::where('parent_id', $section->id)->get();
     }
+
+    public static function getParentSections(self $section, $parentSections = []): array
+    {
+        if (!$section->parent_id) {
+            return $parentSections;
+        }
+
+        $parentSection = Section::findOrFail($section->parent_id);
+        $parentSections[] = $parentSection;
+
+        return self::getParentSections($parentSection, $parentSections);
+    }
+
 }
