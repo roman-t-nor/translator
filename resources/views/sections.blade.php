@@ -1,4 +1,4 @@
-<x-layout :$title>
+<x-layout :$title :section="$section ?? null">
     @if($sections->isNotEmpty())
         <div class="card mb-4">
             <div class="card-body">
