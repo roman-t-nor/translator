@@ -20,11 +20,23 @@
 
                         <a href="{{ route('admin.sections.show', ['section'=>$s->id]) }}" class="nav-link">
                             {!! str_repeat('&nbsp;&nbsp;&nbsp;', $s->depth_level) !!}
-                            <i class="av-arrow bi bi-folder"></i>
+                            @if($s->is_active)
+                                <i class="av-arrow bi bi-folder2-open text-primary-emphasis"></i>
+                            @else
+                                <i class="av-arrow bi bi-folder2"></i>
+                            @endif
                             <p>
-                                {{ $s->name }}
+                                @if($s->is_active)
+                                    <span class=" text-primary-emphasis">{{$s->name}}</span>
+                                @else
+                                    {{$s->name}}
+                                @endif
                                 @if($s->is_parent)
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                    @if($s->is_active)
+                                        <i class="nav-arrow bi bi-chevron-down"></i>
+                                    @else
+                                        <i class="nav-arrow bi bi-chevron-right"></i>
+                                    @endif
                                 @endif
                             </p>
                         </a>

@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection as SupportCollection;
 
 /**
  *
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
 class Section extends Model
 {
     public bool $is_parent = false;
+    public bool $is_active = false;
 
     public static function getFirstLevelSections(): Collection
     {
@@ -33,10 +35,10 @@ class Section extends Model
         return Section::where('parent_id', $section->id)->get();
     }
 
-    public static function getParentSections(self $section, $parentSections = []): array
+    public static function getParentSections(self $section, $parentSections = []): SupportCollection
     {
         if (!count($parentSections)) {
-            $parentSections = [$section];
+            $parentSections = collect([$section]);
         }
 
         if (!$section->parent_id) {
@@ -44,7 +46,7 @@ class Section extends Model
         }
 
         $parentSection = Section::findOrFail($section->parent_id);
-        $parentSections[] = $parentSection;
+        $parentSections->push($parentSection);
 
         return self::getParentSections($parentSection, $parentSections);
     }
@@ -64,26 +66,37 @@ class Section extends Model
             }
         }
 
-        return self::prepareSections($query->get());
-    }
+        $sections = $query->get();
 
-    private static function prepareSections($sections): Collection
-    {
-        foreach ($sections as $section) {
-            if ($section->parent_id) {
-                self::markSectionsAsParent($section->parent_id, $sections);
-            }
+        $sections = self::setIsParent($sections);
+        if (!empty($parentSections)) {
+            $parentSectionsId = $parentSections->pluck('id');
+            $sections->each(function (self $s) use ($parentSectionsId) {
+                if ($parentSectionsId->contains($s->id)) {
+                    $s->is_active = true;
+                }
+            });
         }
+
         return $sections;
     }
 
-    private static function markSectionsAsParent(int $parent_id, Collection $sections): void
+    private static function setIsParent(Collection $sections): Collection
     {
-        $sections->map(function (self $section) use ($parent_id) {
-            if ($section->id === $parent_id) {
-                $section->is_parent = true;
+        $parentSectionsId = self::getAllParentSectionsId();
+
+        $sections->map(function (self $s) use ($parentSectionsId) {
+            if ($parentSectionsId->contains($s->id)) {
+                $s->is_parent = true;
             }
         });
+
+        return $sections;
+    }
+
+    private static function getAllParentSectionsId(): SupportCollection
+    {
+        return Section::whereNotNull('parent_id')->distinct()->pluck('parent_id');
     }
 
 }

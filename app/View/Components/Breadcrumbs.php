@@ -5,35 +5,36 @@ namespace App\View\Components;
 use App\Models\Section;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\View\Component;
 
 class Breadcrumbs extends Component
 {
-    public array $items = [];
+    public ?SupportCollection $items;
 
     public function __construct(?Section $section)
     {
+        $this->items = collect();
         if ($section) {
-            $this->items = $this->getItems($section);
+            $this->getItems($section);
         }
     }
 
-    private function getItems(Section $section): array
+    private function getItems(Section $section)
     {
-        $parentSections = Section::getParentSections($section);
-        $sections = array_reverse($parentSections);
+        $sections = Section::getParentSections($section)->reverse();
 
-        $items = array_map(function (Section $s) use ($section): array {
+        $sections->each(function (Section $s) use ($section) {
             $item = ["title" => $s->name];
             if ($s === $section) {
                 $item["url"] = "";
             } else {
                 $item["url"] = route('admin.sections.show', ['section' => $s->id]);
             }
-            return $item;
-        }, $sections);
+            $this->items->push($item);
+        });
 
-        return [["url" => route('admin.sections.index'), "title" => "Home"], ...$items];
+        $this->items->prepend(["url" => route('admin.sections.index'), "title" => "Home"]);
     }
 
     public function render(): View|Closure|string

@@ -1,4 +1,5 @@
 @aware(['title', 'section'])
+
 <div class="app-content-header">
     <div class="container-fluid">
         <div class="row">
