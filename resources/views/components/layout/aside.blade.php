@@ -8,7 +8,8 @@
     </div>
     <div class="sidebar-wrapper">
         <nav class="mt-2">
-            <x-layout.aside-menu :$sections :$section/>
+            {{--            <x-layout.aside-menu :$sections :$section/>--}}
+            <x-menu/>
         </nav>
     </div>
 </aside>
