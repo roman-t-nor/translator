@@ -1,4 +1,3 @@
-@aware(['section'])
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand">
         <a href="/admin/" class="brand-link">
@@ -8,8 +7,7 @@
     </div>
     <div class="sidebar-wrapper">
         <nav class="mt-2">
-            {{--            <x-layout.aside-menu :$sections :$section/>--}}
-            <x-menu/>
+            <x-menu :elements="$sections"/>
         </nav>
     </div>
 </aside>

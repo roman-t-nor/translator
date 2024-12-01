@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Eloquent;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -51,33 +52,30 @@ class Section extends Model
 
     public static function getSectionsTree(?self $section): Collection
     {
-//        $query = Section::where('depth_level', 1)->orderBy('left_margin');
-//
-//        if ($section) {
-//            $parentSections = self::getParentSections($section);
-//            foreach ($parentSections as $s) {
-//                $query->orWhere(function (Builder $builder) use ($s) {
-//                    $builder->where('left_margin', '>', $s->left_margin)
-//                        ->where('right_margin', '<', $s->right_margin)
-//                        ->where('depth_level', $s->depth_level + 1);
-//                });
-//            }
-//        }
-//
-//        $sections = $query->get();
-//
-//        $sections = self::setIsParent($sections);
-//        if (!empty($parentSections)) {
-//            $parentSectionsId = $parentSections->pluck('id');
-//            $sections->each(function (self $s) use ($parentSectionsId) {
-//                if ($parentSectionsId->contains($s->id)) {
-//                    $s->is_active = true;
-//                }
-//            });
-//        }
+        $query = Section::where('depth_level', 1)->orderBy('left_margin');
 
-        $sections = collect();
-        $sections->push(["id" => 18, "depth_level", "title", ]);
+        if ($section) {
+            $parentSections = self::getParentSections($section);
+            foreach ($parentSections as $s) {
+                $query->orWhere(function (Builder $builder) use ($s) {
+                    $builder->where('left_margin', '>', $s->left_margin)
+                        ->where('right_margin', '<', $s->right_margin)
+                        ->where('depth_level', $s->depth_level + 1);
+                });
+            }
+        }
+
+        $sections = $query->get();
+
+        $sections = self::setIsParent($sections);
+        if (!empty($parentSections)) {
+            $parentSectionsId = $parentSections->pluck('id');
+            $sections->each(function (self $s) use ($parentSectionsId) {
+                if ($parentSectionsId->contains($s->id)) {
+                    $s->is_active = true;
+                }
+            });
+        }
 
         return $sections;
     }

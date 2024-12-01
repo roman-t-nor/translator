@@ -11,31 +11,23 @@ class Menu extends Component
 {
     public Collection $items;
 
-    public function __construct()
+    public function __construct(Collection $elements)
     {
-        $this->items = $this->getItems();
+        $this->items = $this->getItems($elements);
     }
 
-    private function getItems(): Collection
+    private function getItems(Collection $elements): Collection
     {
         $items = collect();
-        $items->push(new Item("1", 1));
-        $items->push(new Item("2", 1));
-        $items->push(new Item("22", 2));
-        $items->push(new Item("22", 2));
-        $items->push(new Item("222", 3));
-        $items->push(new Item("222", 3));
-        $items->push(new Item("222", 3));
-        $items->push(new Item("22", 2));
-        $items->push(new Item("3", 1));
-        $items->push(new Item("33", 2));
-        $items->push(new Item("333", 3));
-        $items->push(new Item("333", 3));
-        $items->push(new Item("333", 3));
-        $items->push(new Item("3333", 4));
-        $items->push(new Item("3333", 4));
-        $items->push(new Item("3333", 4));
-
+        foreach ($elements as $e) {
+            $items->push(new Item(
+                $e->id,
+                $e->name,
+                $e->depth_level,
+                $e->is_parent,
+                $e->is_active
+            ));
+        }
         return $items;
     }
 
