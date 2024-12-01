@@ -6,15 +6,18 @@ use App\Models\Section;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class Breadcrumbs extends Component
 {
     public ?Collection $items;
 
-    public function __construct(?Section $section)
+    public function __construct()
     {
         $this->items = collect();
+        /** @var Section | null $section */
+        $section = Route::current()->parameter("section");
         if ($section) {
             $this->getItems($section);
         }

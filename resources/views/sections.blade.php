@@ -1,4 +1,4 @@
-<x-layout :$title :section="$section ?? null">
+<x-layout :$title>
     @if($sections->isNotEmpty())
         <div class="card mb-4">
             <div class="card-body">
@@ -36,7 +36,7 @@
                     {{$sections->links()}}
                 </div>
             @endif
-            
+
         </div>
     @endif
 
