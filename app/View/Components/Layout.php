@@ -5,7 +5,7 @@ namespace App\View\Components;
 use App\Models\Section;
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class Layout extends Component

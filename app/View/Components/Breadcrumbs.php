@@ -5,12 +5,12 @@ namespace App\View\Components;
 use App\Models\Section;
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class Breadcrumbs extends Component
 {
-    public ?SupportCollection $items;
+    public ?Collection $items;
 
     public function __construct(?Section $section)
     {
