@@ -1,0 +1,1 @@
+<x-layout title="Settings"/>

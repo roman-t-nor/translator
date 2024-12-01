@@ -12,7 +12,7 @@
             <div class="container-fluid">
                 @if ($slot->isEmpty())
                     <div class="alert alert-warning">
-                        No items found.
+                        No content for this page.
                     </div>
                 @else
                     {{ $slot }}

@@ -6,8 +6,6 @@
         </a>
     </div>
     <div class="sidebar-wrapper">
-        <nav class="mt-2">
-            <x-menu :elements="$sections"/>
-        </nav>
+        <x-layout.navigation :$sections/>
     </div>
 </aside>

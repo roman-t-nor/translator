@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- *
- *
  * @property int $id
  * @property string $name
  * @property int|null $parent_id

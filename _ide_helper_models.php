@@ -22,6 +22,7 @@ namespace App\Models{
  * @property int $left_margin
  * @property int $right_margin
  * @property int $depth_level
+ * @mixin Eloquent
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section newModelQuery()
@@ -36,7 +37,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereRightMargin($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class Section extends \Eloquent {}
 }
@@ -48,6 +48,7 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string $email
+ * @mixin Eloquent
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
@@ -67,7 +68,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
 }
