@@ -30,15 +30,13 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer d-flex justify-content-center">
-                <ul class="pagination m-0">
-                    <li class="page-item"><a class="page-link" href="#">«</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">»</a></li>
-                </ul>
-            </div>
+
+            @if($sections->hasPages())
+                <div class="card-footer d-flex justify-content-center">
+                    {{$sections->links()}}
+                </div>
+            @endif
+            
         </div>
     @endif
 

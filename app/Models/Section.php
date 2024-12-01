@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 /**
@@ -22,14 +23,14 @@ class Section extends Model
     public bool $is_parent = false;
     public bool $is_active = false;
 
-    public static function getFirstLevelSections(): Collection
+    public static function getFirstLevelSections(): LengthAwarePaginator
     {
-        return self::where('depth_level', 1)->orderBy('left_margin')->get();
+        return self::where('depth_level', 1)->orderBy('left_margin')->paginate(20);
     }
 
-    public static function getChildSections(self $section): Collection
+    public static function getChildSections(self $section): LengthAwarePaginator
     {
-        return Section::where('parent_id', $section->id)->get();
+        return Section::where('parent_id', $section->id)->paginate(20);
     }
 
     public static function getParentSections(self $section, $parentSections = []): Collection
