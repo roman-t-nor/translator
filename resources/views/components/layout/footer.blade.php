@@ -1,2 +1,3 @@
-<footer class="app-footer"> <!--begin::To the end-->
-</footer> <!--end::Footer-->
+<footer class="app-footer">
+    {{ $footer }}
+</footer>

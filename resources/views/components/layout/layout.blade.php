@@ -20,7 +20,7 @@
             </div>
         </div>
     </main>
-    <x-layout.footer/>
+    <x-layout.footer :$footer/>
 </div>
 <x-layout.scripts/>
 </body>

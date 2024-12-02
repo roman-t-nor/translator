@@ -40,12 +40,15 @@
         </div>
     @endif
 
-    @isset($section)
-        @if($section->parent_id)
-            <x-button-back :url="route('admin.sections.show', ['section' => $section->parent_id])"/>
-        @else
-            <x-button-back :url="route('admin.sections.index')"/>
-        @endif
-    @endisset
-
+    <x-slot:footer>
+        @isset($section)
+            @if($section->parent_id)
+                <x-button.back :url="route('admin.sections.show', ['section' => $section->parent_id])"/>
+            @else
+                <x-button.back :url="route('admin.sections.index')"/>
+            @endif
+        @endisset
+        <x-button.create-section :url="route('admin.sections.create')"/>
+        <x-button.create-element :url="route('admin.sections.create')"/>
+    </x-slot:footer>
 </x-layout>
