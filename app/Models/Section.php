@@ -22,6 +22,7 @@ class Section extends Model
 {
     public bool $is_parent = false;
     public bool $is_active = false;
+    protected $fillable = ["name"];
 
     public static function getFirstLevelSections(): LengthAwarePaginator
     {

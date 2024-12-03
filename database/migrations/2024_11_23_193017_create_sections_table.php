@@ -14,10 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->integer('parent_id')->nullable();
-            $table->boolean('active');
-            $table->integer('left_margin');
-            $table->integer('right_margin');
-            $table->integer('depth_level');
+            $table->boolean('active')->default(1);
+            $table->integer('left_margin')->nullable();
+            $table->integer('right_margin')->nullable();
+            $table->integer('depth_level')->default(1);
             $table->timestamps();
         });
     }

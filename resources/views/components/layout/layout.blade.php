@@ -20,9 +20,15 @@
             </div>
         </div>
     </main>
-    <x-layout.footer :$footer/>
+
+    @isset($footer)
+        <x-layout.footer :$footer/>
+    @endisset
+
 </div>
+
 <x-layout.scripts/>
+
 </body>
 
 </html>

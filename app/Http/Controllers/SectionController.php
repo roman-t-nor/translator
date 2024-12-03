@@ -9,7 +9,7 @@ class SectionController extends Controller
 {
     public function index()
     {
-        return view('sections', [
+        return view('sections.index', [
             'sections' => Section::getFirstLevelSections(),
             'title' => 'All sections',
         ]);
@@ -17,20 +17,28 @@ class SectionController extends Controller
 
     public function create()
     {
+        return view('sections.create', ['title' => 'Create new section']);
     }
 
     public function store(Request $request)
     {
+        $request->validate([
+            "title" => ["required", "min:3"]
+        ]);
+
+        $s = Section::create(["name" => $request->input("title")]);
+
+        return redirect()->route('admin.sections.show', ['section' => $s->id]);
     }
 
     public function show(Section $section)
     {
         return view(
-            'sections',
+            'sections.index',
             [
                 'sections' => Section::getChildSections($section),
                 'section' => $section,
-                'title' => 'Section: ' . $section->name
+                'title' => 'Section: '.$section->name
             ]
         );
     }

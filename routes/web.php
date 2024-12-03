@@ -11,6 +11,6 @@ Route::prefix("admin")->group(function () {
     Route::name("admin.")->group(function () {
         Route::get("/", [SectionController::class, "index"])->name("index");
         Route::resource("sections", SectionController::class);
-        Route::view("settings", "settings")->name("settings");
+        Route::view("settings", "settings.index")->name("settings");
     });
 });
