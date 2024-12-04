@@ -25,17 +25,18 @@ class Breadcrumbs extends Component
 
     private function getItems(Section $section)
     {
-        $sections = Section::getParentSections($section)->reverse();
+        $sections = Section::getParentSections($section);
 
-        $sections->each(function (Section $s) use ($section) {
-            $item = ["title" => $s->name];
-            if ($s === $section) {
-                $item["url"] = "";
-            } else {
-                $item["url"] = route('admin.sections.show', ['section' => $s->id]);
-            }
-            $this->items->push($item);
-        });
+        $sections->each(
+            function (Section $s) use ($section) {
+                $item = ["title" => $s->name];
+                if ($s->id === $section->id) {
+                    $item["url"] = "";
+                } else {
+                    $item["url"] = route('admin.sections.show', ['section' => $s->id]);
+                }
+                $this->items->push($item);
+            });
 
         $this->items->prepend(["url" => route('admin.sections.index'), "title" => "Home"]);
     }

@@ -36,20 +36,9 @@ class Section extends Model
         return Section::where('parent_id', $section->id)->paginate(20);
     }
 
-    public static function getParentSections(self $section, $parentSections = []): Collection
+    public static function getParentSections(self $section): Collection
     {
-        if (!count($parentSections)) {
-            $parentSections = collect([$section]);
-        }
-
-        if (!$section->parent_id) {
-            return $parentSections;
-        }
-
-        $parentSection = Section::findOrFail($section->parent_id);
-        $parentSections->push($parentSection);
-
-        return self::getParentSections($parentSection, $parentSections);
+        return Section::defaultOrder()->ancestorsAndSelf($section);
     }
 
     public static function getSectionsTree(?self $section)
@@ -97,7 +86,7 @@ class Section extends Model
 
     private static function getAllParentSectionsId(): Collection
     {
-        return Section::whereNotNull('parent_id')->distinct()->pluck('parent_id');
+        return Section::hasChildren()->pluck('id');
     }
 
 }
