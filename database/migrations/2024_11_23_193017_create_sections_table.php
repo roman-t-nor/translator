@@ -13,11 +13,8 @@ return new class extends Migration {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('parent_id')->nullable();
             $table->boolean('active')->default(1);
-            $table->integer('left_margin')->nullable();
-            $table->integer('right_margin')->nullable();
-            $table->integer('depth_level')->default(1);
+            $table->nestedSet();
             $table->timestamps();
         });
     }

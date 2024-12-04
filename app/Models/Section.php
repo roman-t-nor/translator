@@ -3,30 +3,32 @@
 namespace App\Models;
 
 use Eloquent;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Kalnoy\Nestedset\NodeTrait;
 
 /**
  * @property int $id
  * @property string $name
  * @property int|null $parent_id
  * @property int $active
- * @property int $left_margin
- * @property int $right_margin
- * @property int $depth_level
+ * @property int $_lft
+ * @property int $_rgt
  * @mixin Eloquent
  */
 class Section extends Model
 {
+    use NodeTrait;
+
     public bool $is_parent = false;
     public bool $is_active = false;
     protected $fillable = ["name"];
 
     public static function getFirstLevelSections(): LengthAwarePaginator
     {
-        return self::where('depth_level', 1)->orderBy('left_margin')->paginate(20);
+        return self::whereIsRoot()->paginate(20);
     }
 
     public static function getChildSections(self $section): LengthAwarePaginator
@@ -50,17 +52,17 @@ class Section extends Model
         return self::getParentSections($parentSection, $parentSections);
     }
 
-    public static function getSectionsTree(?self $section): Collection
+    public static function getSectionsTree(?self $section)
     {
-        $query = Section::where('depth_level', 1)->orderBy('left_margin');
+        $query = Section::withDepth()->defaultOrder()->whereIsRoot();
 
         if ($section) {
             $parentSections = self::getParentSections($section);
             foreach ($parentSections as $s) {
                 $query->orWhere(function (Builder $builder) use ($s) {
-                    $builder->where('left_margin', '>', $s->left_margin)
-                        ->where('right_margin', '<', $s->right_margin)
-                        ->where('depth_level', $s->depth_level + 1);
+                    $builder->where('_lft', '>', $s->_lft)
+                        ->where('_rgt', '<', $s->_rgt)
+                        ->where('parent_id', $s->id);
                 });
             }
         }

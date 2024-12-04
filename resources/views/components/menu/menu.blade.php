@@ -38,9 +38,9 @@
         @endphp
     @endforeach
 
-    @isset($prevDepth)
+    @if($prevDepth)
         {!! Str::repeat("</li></ul>", $prevDepth - 1)."</li>" !!}
-    @endisset
+    @endif
 </ul>
 
 

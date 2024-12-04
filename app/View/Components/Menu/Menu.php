@@ -23,7 +23,7 @@ class Menu extends Component
             $items->push(new Item(
                 $e->id,
                 $e->name,
-                $e->depth_level,
+                $e->depth,
                 $e->is_parent,
                 $e->is_active
             ));

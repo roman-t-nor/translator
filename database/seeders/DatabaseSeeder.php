@@ -19,9 +19,8 @@ class DatabaseSeeder extends Seeder
                 'name' => $s->NAME,
                 'parent_id' => $s->IBLOCK_SECTION_ID,
                 'active' => $s->ACTIVE === "Y",
-                'left_margin' => $s->LEFT_MARGIN,
-                'right_margin' => $s->RIGHT_MARGIN,
-                'depth_level' => $s->DEPTH_LEVEL,
+                '_lft' => $s->LEFT_MARGIN,
+                '_rgt' => $s->RIGHT_MARGIN,
             ]);
         }
 
