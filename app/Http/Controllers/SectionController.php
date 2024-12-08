@@ -17,10 +17,10 @@ class SectionController extends Controller
 
     public function create(?Section $section)
     {
-        return view('sections.create', [
+        return view('sections.create-edit', [
             'title' => 'Create new section',
             'sections' => Section::getAllSections(),
-            'section' => $section,
+            'parent_section_id' => $section->id ?? null,
         ]);
     }
 
@@ -36,8 +36,7 @@ class SectionController extends Controller
         $parentSectionId = $request->integer("parent_section_id");
         if ($parentSectionId) {
             $parentSection = Section::findOrFail($parentSectionId);
-            $section = new Section($attributes);
-            $parentSection->appendNode($section);
+            $section = Section::create($attributes, $parentSection);
         } else {
             $section = Section::create($attributes);
         }
@@ -58,12 +57,36 @@ class SectionController extends Controller
         );
     }
 
-    public function edit(string $id)
+    public function edit(Section $section)
     {
+        return view('sections.create-edit', [
+            'title' => 'Edit section: '.$section->name,
+            'sections' => Section::getAllSections(),
+            'section' => $section,
+            'parent_section_id' => $section->parent_id ?? null,
+        ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Section $section)
     {
+        $request->validate([
+            "title" => ["required", "min:3"]
+        ]);
+        $attributes = [
+            "name" => $request->input("title"),
+            "parent_id" => $request->integer("parent_section_id"),
+            "active" => $request->input("is_active") ? 1 : 0
+        ];
+
+        $section->update($attributes);
+
+        if ($section->parent_id) {
+            $back = redirect()->route('admin.sections.show', ["section" => $section->parent_id]);
+        } else {
+            $back = redirect()->route('admin.sections.index');
+        }
+
+        return $back;
     }
 
     public function destroy(string $id)

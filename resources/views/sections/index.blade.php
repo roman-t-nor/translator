@@ -4,21 +4,29 @@
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
-                    <tr>
+                    <tr class="align-middle text-center">
                         <th style="width: 10px">#</th>
                         <th>Title</th>
+                        <th>Active</th>
                         <th>Id</th>
                         <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($sections as $s)
-                        <tr class="align-middle">
+                        <tr class="align-middle text-center">
                             <td>{{ $loop->iteration }}</td>
-                            <td>
+                            <td class="text-start">
                                 <a href="{{ route('admin.sections.show', ['section'=>$s->id]) }}"
                                    class="btn btn-secondary"
                                 >{{ $s->name }}</a>
+                            </td>
+                            <td style="width: 80px">
+                                @if($s->active)
+                                    <span class="text-success fs-6"><i class="bi bi-circle-fill"></i></span>
+                                @else
+                                    <span class="text-secondary fs-6"><i class="bi bi-circle-fill"></i></span>
+                                @endif
                             </td>
                             <td style="width: 80px">{{ $s->id }}</td>
                             <td style="width: 80px">
