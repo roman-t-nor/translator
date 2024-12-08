@@ -48,7 +48,15 @@
                 <x-button.back :url="route('admin.sections.index')"/>
             @endif
         @endisset
-        <x-button.create-section :url="route('admin.sections.create')"/>
+
+        @isset($section)
+            <x-button.create-section
+                :url="route('admin.sections.create-child-section', compact('section'))"
+            />
+        @else
+            <x-button.create-section :url="route('admin.sections.create')"/>
+        @endisset
+
         <x-button.create-element :url="route('admin.sections.create')"/>
     </x-slot:footer>
 </x-layout>

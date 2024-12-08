@@ -31,6 +31,11 @@ class Section extends Model
         return self::whereIsRoot()->paginate(20);
     }
 
+    public static function getAllSections()
+    {
+        return self::withDepth()->defaultOrder()->get();
+    }
+
     public static function getChildSections(self $section): LengthAwarePaginator
     {
         return Section::where('parent_id', $section->id)->paginate(20);

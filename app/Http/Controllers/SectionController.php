@@ -15,9 +15,13 @@ class SectionController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(?Section $section)
     {
-        return view('sections.create', ['title' => 'Create new section']);
+        return view('sections.create', [
+            'title' => 'Create new section',
+            'sections' => Section::getAllSections(),
+            'section' => $section,
+        ]);
     }
 
     public function store(Request $request)
@@ -25,10 +29,21 @@ class SectionController extends Controller
         $request->validate([
             "title" => ["required", "min:3"]
         ]);
+        $attributes = [
+            "name" => $request->input("title")
+        ];
 
-        $s = Section::create(["name" => $request->input("title")]);
+        $parentSectionId = $request->integer("parent_section_id");
+        if ($parentSectionId) {
+            $parentSection = Section::findOrFail($parentSectionId);
+            $section = new Section($attributes);
+            $parentSection->appendNode($section);
+        } else {
+            $section = Section::create($attributes);
+        }
 
-        return redirect()->route('admin.sections.show', ['section' => $s->id]);
+
+        return redirect()->route('admin.sections.show', compact('section'));
     }
 
     public function show(Section $section)
