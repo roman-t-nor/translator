@@ -89,7 +89,16 @@ class SectionController extends Controller
         return $back;
     }
 
-    public function destroy(string $id)
+    public function destroy(Section $section)
     {
+        $section->delete();
+        
+        if ($section->parent_id) {
+            $back = redirect()->route('admin.sections.show', ["section" => $section->parent_id]);
+        } else {
+            $back = redirect()->route('admin.sections.index');
+        }
+
+        return $back;
     }
 }

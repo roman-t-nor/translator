@@ -33,14 +33,16 @@
                 @endif
             </p>
         </a>
-        @php
-            $prevDepth = $i->depth
-        @endphp
+        @isset($prevDepth)
+            @php
+                $prevDepth = $i->depth
+            @endphp
+        @endisset
     @endforeach
 
-    @if($prevDepth)
+    @isset($prevDepth)
         {!! Str::repeat("</li></ul>", $prevDepth - 1)."</li>" !!}
-    @endif
+    @endisset
 </ul>
 
 

@@ -70,11 +70,23 @@
         @endisset
     </form>
 
+    @isset($section)
+        <form
+            method="post"
+            action="{{ route("admin.sections.destroy", compact("section")) }}"
+            id="sections_destroy"
+        >
+            @csrf
+            @method("DELETE")
+        </form>
+    @endisset
+
     <x-slot:footer>
 
         @isset($section)
             <x-button.back :url="route('admin.sections.show', compact('section'))"/>
             <x-button.update form="sections_store"/>
+            <x-button.delete form="sections_destroy" class="ms-auto"/>
         @else
             <x-button.back :url="route('admin.sections.index')"/>
             <x-button.save form="sections_store"/>

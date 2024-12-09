@@ -66,5 +66,12 @@
         @endisset
 
         <x-button.create-element :url="route('admin.sections.create')"/>
+
+        @isset($section)
+            <a href="{{ route('admin.sections.edit', ['section' => $section->id]) }}"
+               class="btn btn-secondary ms-auto"
+            >Edit section</a>
+        @endisset
+
     </x-slot:footer>
 </x-layout>
