@@ -21,6 +21,10 @@ class Breadcrumbs extends Component
         if ($section) {
             $this->getItems($section);
         }
+        if (strpos(Route::currentRouteName(), 'elements') !== false) {
+            $this->items->push(['title' => 'Elements', 'url' => '']);
+        }
+
     }
 
     private function getItems(Section $section)
@@ -29,13 +33,10 @@ class Breadcrumbs extends Component
 
         $sections->each(
             function (Section $s) use ($section) {
-                $item = ["title" => $s->name];
-                if ($s->id === $section->id) {
-                    $item["url"] = "";
-                } else {
-                    $item["url"] = route('admin.sections.show', ['section' => $s->id]);
-                }
-                $this->items->push($item);
+                $this->items->push([
+                    "title" => $s->name,
+                    "url" => route('admin.sections.show', ['section' => $s->id])
+                ]);
             });
 
         $this->items->prepend(["url" => route('admin.sections.index'), "title" => "Home"]);

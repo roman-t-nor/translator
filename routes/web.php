@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ElementController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,7 @@ Route::prefix("admin")->group(function () {
         Route::get("sections/{section}/create", [SectionController::class, "create"])
             ->name("sections.create-child-section");
         Route::resource("sections", SectionController::class);
+        Route::resource("sections.elements", ElementController::class);
         Route::view("settings", "settings.index")->name("settings");
     });
 });

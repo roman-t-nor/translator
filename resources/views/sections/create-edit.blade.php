@@ -82,15 +82,14 @@
     @endisset
 
     <x-slot:footer>
-
         @isset($section)
             <x-button.back :url="route('admin.sections.show', compact('section'))"/>
-            <x-button.update form="sections_store"/>
+            <x-button.section.update form="sections_store"/>
             <x-button.delete form="sections_destroy" class="ms-auto"/>
         @else
             <x-button.back :url="route('admin.sections.index')"/>
-            <x-button.save form="sections_store"/>
+            <x-button.section.save form="sections_store"/>
         @endisset
-
     </x-slot:footer>
+
 </x-layout>

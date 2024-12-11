@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Kalnoy\Nestedset\NodeTrait;
@@ -16,6 +17,7 @@ use Kalnoy\Nestedset\NodeTrait;
  * @property int $active
  * @property int $_lft
  * @property int $_rgt
+ * @property Collection $elements
  * @mixin Eloquent
  */
 class Section extends Model
@@ -25,6 +27,11 @@ class Section extends Model
     public bool $is_parent = false;
     public bool $is_active = false;
     protected $fillable = ["name", "parent_id", "active"];
+
+    public function elements(): HasMany
+    {
+        return $this->hasMany(Element::class);
+    }
 
     public static function getFirstLevelSections(): LengthAwarePaginator
     {
