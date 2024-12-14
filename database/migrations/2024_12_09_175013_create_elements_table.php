@@ -13,6 +13,8 @@ return new class extends Migration {
         Schema::create('elements', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('translation')->nullable();
+            $table->string('context', 1500)->nullable();
             $table->unsignedBigInteger('section_id');
             $table->boolean('active')->default(1);
             $table->timestamps();
