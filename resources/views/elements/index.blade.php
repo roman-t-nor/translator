@@ -7,6 +7,8 @@
                     <tr class="align-middle text-center">
                         <th style="width: 10px">#</th>
                         <th>Title</th>
+                        <th>Translation</th>
+                        <th>Context</th>
                         <th>Active</th>
                         <th>Id</th>
                     </tr>
@@ -17,6 +19,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-start">
                                 <a href="" class="btn border element-link">{{ $e->name }}</a>
+                            </td>
+                            <td class="text-start">
+                                {{ $e->translation }}
+                            </td>
+                            <td class="text-start">
+                                {!! $e->context !!}
                             </td>
                             <td style="width: 80px">
                                 @if($e->active)
