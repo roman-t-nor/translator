@@ -16,7 +16,7 @@
                         <tr class="align-middle text-center">
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-start">
-                                <a href="" class="btn btn-link">{{ $e->name }}</a>
+                                <a href="" class="btn border element-link">{{ $e->name }}</a>
                             </td>
                             <td style="width: 80px">
                                 @if($e->active)

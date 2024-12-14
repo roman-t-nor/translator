@@ -42,6 +42,7 @@
                                 <x-button.element.index
                                     :url="route('admin.sections.elements.index', ['section' => $s])"
                                     :count="$s->elements->count()"
+                                    @class(["bg-opacity-75" => $s->elements->isEmpty()])
                                 />
                             </td>
                             <td style="width: 80px">

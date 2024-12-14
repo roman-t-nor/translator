@@ -1,3 +1,7 @@
 input[type="checkbox"]:hover {
     cursor: pointer;
 }
+
+.element-link:hover {
+    border-color: #222 !important;
+}
