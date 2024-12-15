@@ -5,3 +5,13 @@ input[type="checkbox"]:hover {
 .element-link:hover {
     border-color: #222 !important;
 }
+
+.page-item.active span {
+    font-weight: bold;
+    background-color: #343a40;
+    color: #fff;
+}
+
+.page-item a {
+    text-decoration: underline;
+}

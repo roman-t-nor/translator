@@ -30,13 +30,17 @@ class ElementController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "title" => ["required", "min:3"]
+            'title' => ['required', 'min:3', 'max:255'],
+            'translation' => ['required', 'min:3', 'max:255'],
+            'context' => ['min:3', 'max:1500', 'nullable']
         ]);
 
-        $section = Section::findOrFail($request->integer("section_id"));
+        $section = Section::findOrFail($request->integer('section_id'));
 
         Element::create([
             'name' => $request->input('title'),
+            'translation' => $request->input('translation'),
+            'context' => $request->input('context'),
             'section_id' => $section->id
         ]);
 
@@ -57,13 +61,17 @@ class ElementController extends Controller
     public function update(Request $request, Section $section, Element $element)
     {
         $request->validate([
-            "title" => ["required", "min:3"]
+            'title' => ['required', 'min:3', 'max:255'],
+            'translation' => ['required', 'min:3', 'max:255'],
+            'context' => ['min:3', 'max:1500', 'nullable']
         ]);
 
-        $section = Section::findOrFail($request->integer("section_id"));
+        $section = Section::findOrFail($request->integer('section_id'));
 
         $element->update([
             'name' => $request->input('title'),
+            'translation' => $request->input('translation'),
+            'context' => $request->input('context'),
             'section_id' => $section->id
         ]);
 

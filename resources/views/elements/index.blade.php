@@ -22,8 +22,7 @@
                                         'section' => $section,
                                         'element' => $e
                                     ]) }}"
-                                    class="btn border element-link"
-                                    style="white-space: nowrap"
+                                    class="btn border element-link font-monospace text-nowrap"
                                 >{{ $e->name }}</a>
                             </td>
                             <td class="text-start">
