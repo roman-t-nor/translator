@@ -33,6 +33,6 @@ class Menu extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.menu.menu');
+        return view('components.menu');
     }
 }

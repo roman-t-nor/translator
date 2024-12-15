@@ -1,22 +1,20 @@
 <nav class="mt-2">
     <ul class="nav sidebar-menu flex-column mb-4" data-lte-toggle="treeview" role="menu" data-accordion="false">
-        <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-                <i class="av-arrow bi bi-diagram-3"></i>
-                <p>
-                    Content
-                    <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-            </a>
-            <x-menu :elements="$sections"/>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route("admin.settings") }}" class="nav-link">
-                <i class="av-arrow bi bi-gear"></i>
-                <p>
-                    Settings
-                </p>
-            </a>
-        </li>
+        @foreach($items as $item)
+            <li @class(['nav-item', 'menu-open' => $item->active])>
+                <a href="{{ route($item->route) }}" class="nav-link">
+                    <i @class([$item->icon])></i>
+                    <p>
+                        {{ $item->title }}
+                        @if($item->elements)
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        @endif
+                    </p>
+                </a>
+                @if($item->elements)
+                    <x-menu :elements="$item->elements"/>
+                @endif
+            </li>
+        @endforeach
     </ul>
 </nav>

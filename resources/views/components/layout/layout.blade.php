@@ -5,7 +5,7 @@
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 <div class="app-wrapper">
-    <x-layout.aside :$sections/>
+    <x-layout.aside/>
     <main class="app-main">
         <x-message class="container-fluid mt-2"/>
         <x-layout.main-header/>

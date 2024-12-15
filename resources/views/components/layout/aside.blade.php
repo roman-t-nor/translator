@@ -6,6 +6,6 @@
         </a>
     </div>
     <div class="sidebar-wrapper">
-        <x-layout.navigation :$sections/>
+        <x-navigation/>
     </div>
 </aside>
