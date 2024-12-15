@@ -46,7 +46,14 @@ class ElementController extends Controller
         ]);
 
         Message::add('Element "'.$element->name.'" created');
-        return redirect()->route('admin.sections.elements.index', compact('section'));
+
+        if ($request->input('saving_type') === 'just_save') {
+            $route = redirect()->route('admin.sections.elements.index', compact('section'));
+        } else {
+            $route = back(); // save and create
+        }
+
+        return $route;
     }
 
     public function edit(Section $section, Element $element)

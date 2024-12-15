@@ -69,7 +69,7 @@
             </div>
 
             <div class="row mb-3">
-                <label for="section" class="col-sm-1 col-form-label">Parent section</label>
+                <label for="section" class="col-sm-1 col-form-label">Section</label>
                 <div class="col-sm-6">
                     <select class="form-select mb-3" id="section" size="10" name="section_id">
                         @foreach($sections as $s)
@@ -111,6 +111,7 @@
             <x-button.element.delete form="elements_destroy" class="ms-auto"/>
         @else
             <x-button.element.save form="elements_store"/>
+            <x-button.element.save_and_create form="elements_store"/>
         @endisset
     </x-slot:footer>
 
