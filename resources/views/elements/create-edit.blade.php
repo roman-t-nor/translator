@@ -108,7 +108,7 @@
 
         @isset($element)
             <x-button.element.update form="elements_store"/>
-            <x-button.delete form="elements_destroy" class="ms-auto"/>
+            <x-button.element.delete form="elements_destroy" class="ms-auto"/>
         @else
             <x-button.element.save form="elements_store"/>
         @endisset

@@ -82,7 +82,7 @@
         @isset($section)
             <x-button.back :url="route('admin.sections.show', compact('section'))"/>
             <x-button.section.update form="sections_store"/>
-            <x-button.delete form="sections_destroy" class="ms-auto"/>
+            <x-button.section.delete form="sections_destroy" class="ms-auto"/>
         @else
             <x-button.back :url="route('admin.sections.index')"/>
             <x-button.section.save form="sections_store"/>

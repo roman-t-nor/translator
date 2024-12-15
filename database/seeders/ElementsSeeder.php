@@ -10,7 +10,7 @@ class ElementsSeeder extends Seeder
     public function run(): void
     {
         $elements = DB::table('b_iblock_element as e')
-            ->select('e.ID', 'e.NAME', 'e.IBLOCK_SECTION_ID', 'e.ACTIVE')
+            ->select('e.ID', 'e.NAME', 'e.IBLOCK_SECTION_ID', 'e.ACTIVE', 'e.DATE_CREATE')
             ->selectRaw('GROUP_CONCAT(p.VALUE SEPARATOR "|")  as "VALUES"')
             ->whereNot('p.IBLOCK_PROPERTY_ID', 12)
             ->join('b_iblock_element_property as p', 'e.ID', '=', 'p.IBLOCK_ELEMENT_ID')
@@ -38,6 +38,7 @@ class ElementsSeeder extends Seeder
                 'context' => $context,
                 'section_id' => $e->IBLOCK_SECTION_ID,
                 'active' => $e->ACTIVE === "Y",
+                'created_at' => $e->DATE_CREATE,
             ]);
         }
 

@@ -21,6 +21,7 @@ class SectionSeeder extends Seeder
                 'active' => $s->ACTIVE === "Y",
                 '_lft' => $s->LEFT_MARGIN,
                 '_rgt' => $s->RIGHT_MARGIN,
+                'created_at' => $s->DATE_CREATE,
             ]);
         }
 

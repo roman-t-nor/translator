@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('translation')->nullable();
             $table->string('context', 1500)->nullable();
-            $table->unsignedBigInteger('section_id');
+            $table->foreignId('section_id')->constrained()->onDelete('cascade');
             $table->boolean('active')->default(1);
             $table->timestamps();
         });
