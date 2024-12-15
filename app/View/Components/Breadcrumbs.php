@@ -16,15 +16,30 @@ class Breadcrumbs extends Component
     public function __construct()
     {
         $this->items = collect();
+
         /** @var Section | null $section */
         $section = Route::current()->parameter("section");
         if ($section) {
             $this->getItems($section);
-        }
-        if (strpos(Route::currentRouteName(), 'elements') !== false) {
-            $this->items->push(['title' => 'Elements', 'url' => '']);
+            $this->addLastItem();
         }
 
+    }
+
+    private function addLastItem()
+    {
+        $lastItem = match (Route::currentRouteName()) {
+            'admin.sections.create-child-section' => 'Create new section',
+            'admin.sections.edit' => 'Update section',
+            'admin.sections.elements.index' => 'Elements',
+            'admin.sections.elements.create' => 'Create new element',
+            'admin.sections.elements.edit' => 'Edit element',
+            default => null
+        };
+
+        if (!empty($lastItem)) {
+            $this->items->push(['title' => $lastItem]);
+        }
     }
 
     private function getItems(Section $section)
@@ -35,7 +50,7 @@ class Breadcrumbs extends Component
             function (Section $s) use ($section) {
                 $this->items->push([
                     "title" => $s->name,
-                    "url" => route('admin.sections.show', ['section' => $s->id])
+                    "url" => route('admin.sections.show', ['section' => $s])
                 ]);
             });
 

@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Element;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
 class ElementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Section $section)
     {
         return view('elements.index', [
@@ -19,51 +17,62 @@ class ElementController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Section $section)
     {
-        //
+        return view('elements.create-edit', [
+            'title' => 'Create Element',
+            'section' => $section,
+            'sections' => Section::getAllSections(),
+            'parent_section_id' => null,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "title" => ["required", "min:3"]
+        ]);
+
+        $section = Section::findOrFail($request->integer("section_id"));
+
+        Element::create([
+            'name' => $request->input('title'),
+            'section_id' => $section->id
+        ]);
+
+        return redirect()->route('admin.sections.elements.index', compact('section'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Section $section, Element $element)
     {
-        //
+        return view('elements.create-edit', [
+            'title' => 'Edit Element',
+            'section' => $section,
+            'element' => $element,
+            'sections' => Section::getAllSections(),
+            'parent_section_id' => $section->id ?? null,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Section $section, Element $element)
     {
-        //
+        $request->validate([
+            "title" => ["required", "min:3"]
+        ]);
+
+        $section = Section::findOrFail($request->integer("section_id"));
+
+        $element->update([
+            'name' => $request->input('title'),
+            'section_id' => $section->id
+        ]);
+
+        return redirect()->route('admin.sections.elements.index', compact('section'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Section $section, Element $element)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $element->delete();
+        return redirect()->route('admin.sections.elements.index', compact('section'));
     }
 }

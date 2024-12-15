@@ -9,7 +9,6 @@
                         <th>Title</th>
                         <th>Translation</th>
                         <th>Context</th>
-                        <th>Active</th>
                         <th>Id</th>
                     </tr>
                     </thead>
@@ -18,20 +17,20 @@
                         <tr class="align-middle text-center">
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-start">
-                                <a href="" class="btn border element-link">{{ $e->name }}</a>
+                                <a
+                                    href="{{ route('admin.sections.elements.edit', [
+                                        'section' => $section,
+                                        'element' => $e
+                                    ]) }}"
+                                    class="btn border element-link"
+                                    style="white-space: nowrap"
+                                >{{ $e->name }}</a>
                             </td>
                             <td class="text-start">
                                 {{ $e->translation }}
                             </td>
                             <td class="text-start">
                                 {!! $e->context !!}
-                            </td>
-                            <td style="width: 80px">
-                                @if($e->active)
-                                    <span class="text-success fs-6"><i class="bi bi-circle-fill"></i></span>
-                                @else
-                                    <span class="text-secondary fs-6"><i class="bi bi-circle-fill"></i></span>
-                                @endif
                             </td>
                             <td style="width: 80px">{{ $e->id }}</td>
                         </tr>
@@ -50,8 +49,8 @@
     @endif
 
     <x-slot:footer>
-        <x-button.back :url="route('admin.sections.show', ['section' => $section->id])"/>
-        <x-button.element.create :url="route('admin.sections.elements.create', ['section' => $section->id])"/>
+        <x-button.back :url="route('admin.sections.show', compact('section'))"/>
+        <x-button.element.create :url="route('admin.sections.elements.create', compact('section'))"/>
     </x-slot:footer>
 
 </x-layout>

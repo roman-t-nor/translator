@@ -38,9 +38,7 @@
                         type="checkbox"
                         id="is_active"
                         name="is_active"
-                        @isset($section)
-                            @if($section->active) checked @endif
-                        @endisset
+                        @checked(isset($section) && $section->active)
                     >
                 </div>
             </div>
@@ -48,12 +46,11 @@
                 <label for="parent_section" class="col-sm-1 col-form-label">Parent section</label>
                 <div class="col-sm-6">
                     <select class="form-select mb-3" id="parent_section" size="10" name="parent_section_id">
-
-                        <option @unless($parent_section_id) selected @endunless>- Root -</option>
+                        <option @selected(!$parent_section_id)>- Root -</option>
                         @foreach($sections as $s)
                             <option
                                 value="{{ $s->id }}"
-                                @if($s->id === $parent_section_id) selected @endif
+                                @selected($s->id === $parent_section_id)
                             >
                                 {!! Str::repeat("&nbsp;-&nbsp;", $s->depth) !!}
                                 {{ $s->name }}

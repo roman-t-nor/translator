@@ -1,4 +1,4 @@
 <button
     {{ $attributes->merge(["class" => "btn btn-success", "type" => "submit"]) }}
-><i class="bi bi-floppy"></i>&nbsp;&nbsp;Save section
+><i class="bi bi-floppy2-fill"></i>&nbsp;&nbsp;Update element
 </button>
