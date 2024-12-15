@@ -7,6 +7,7 @@
 <div class="app-wrapper">
     <x-layout.aside :$sections/>
     <main class="app-main">
+        <x-message class="container-fluid mt-2"/>
         <x-layout.main-header/>
         <div class="app-content">
             <div class="container-fluid">

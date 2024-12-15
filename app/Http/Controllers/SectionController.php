@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Section;
+use App\View\Components\Message;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -41,7 +42,7 @@ class SectionController extends Controller
             $section = Section::create($attributes);
         }
 
-
+        Message::add('Section "'.$section->name.'" created');
         return redirect()->route('admin.sections.show', compact('section'));
     }
 
@@ -86,6 +87,7 @@ class SectionController extends Controller
             $back = redirect()->route('admin.sections.index');
         }
 
+        Message::add('Section "'.$section->name.'" updated');
         return $back;
     }
 
@@ -101,6 +103,7 @@ class SectionController extends Controller
             $back = redirect()->route('admin.sections.index');
         }
 
+        Message::add('Section "'.$section->name.'" deleted');
         return $back;
     }
 }

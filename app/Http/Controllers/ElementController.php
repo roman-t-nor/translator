@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Element;
 use App\Models\Section;
+use App\View\Components\Message;
 use Illuminate\Http\Request;
 
 class ElementController extends Controller
@@ -37,13 +38,14 @@ class ElementController extends Controller
 
         $section = Section::findOrFail($request->integer('section_id'));
 
-        Element::create([
+        $element = Element::create([
             'name' => $request->input('title'),
             'translation' => $request->input('translation'),
             'context' => $request->input('context'),
             'section_id' => $section->id
         ]);
 
+        Message::add('Element "'.$element->name.'" created');
         return redirect()->route('admin.sections.elements.index', compact('section'));
     }
 
@@ -75,12 +77,14 @@ class ElementController extends Controller
             'section_id' => $section->id
         ]);
 
+        Message::add('Element "'.$element->name.'" updated');
         return redirect()->route('admin.sections.elements.index', compact('section'));
     }
 
     public function destroy(Section $section, Element $element)
     {
         $element->delete();
+        Message::add('Element "'.$element->name.'" deleted');
         return redirect()->route('admin.sections.elements.index', compact('section'));
     }
 }
