@@ -10,9 +10,8 @@ export default defineConfig({
         }),
     ],
     build: {
-        outDir: "./public_html/admin",
-        assetsDir: "dist",
-        emptyOutDir: false,
+        outDir: "./public_html/admin/dist",
+        assetsDir: "",
     },
     publicDir: "resources/public",
 });
