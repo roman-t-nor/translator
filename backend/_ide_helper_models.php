@@ -17,15 +17,45 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
+ * @property string|null $translation
+ * @property string|null $context
+ * @property int $section_id
+ * @property int $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Section $section
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element whereContext($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element whereTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Element whereUpdatedAt($value)
+ */
+	class Element extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
  * @property int|null $parent_id
  * @property int $active
  * @property int $_lft
  * @property int $_rgt
+ * @property Collection $elements
  * @mixin Eloquent
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Kalnoy\Nestedset\Collection<int, Section> $children
  * @property-read int|null $children_count
+ * @property-read int|null $elements_count
  * @property-read Section|null $parent
  * @method static \Kalnoy\Nestedset\Collection<int, static> all($columns = ['*'])
  * @method static \Kalnoy\Nestedset\QueryBuilder<static>|Section ancestorsAndSelf($id, array $columns = [])

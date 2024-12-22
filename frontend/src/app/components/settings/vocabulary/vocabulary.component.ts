@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { StateService } from '@/services/state.service';
 
 type DbVocabularyType = {
-  ID: string;
-  DEPTH_LEVEL: string;
-  NAME: string;
+  id: number;
+  depth: number;
+  name: string;
 };
 
 type VocabularyType = {
@@ -29,26 +29,20 @@ export class VocabularyComponent {
   }
 
   getVocabularies() {
-    const formData = new FormData();
-    formData.set('action', 'get_vocabularies_sections');
-
     this.http
-      .post<DbVocabularyType[]>('', formData)
+      .get<DbVocabularyType[]>('sections')
       .subscribe((dbVocabularies) => {
         dbVocabularies.forEach((dbVocabulary: DbVocabularyType) => {
           this.vocabularies.push({
-            id: Number(dbVocabulary.ID),
-            title: this.formatTitle(
-              dbVocabulary.NAME,
-              dbVocabulary.DEPTH_LEVEL,
-            ),
+            id: dbVocabulary.id,
+            title: this.formatTitle(dbVocabulary.name, dbVocabulary.depth),
           });
         });
       });
   }
 
-  formatTitle(title: string, level: string) {
-    return '&nbsp;'.repeat(Number(level)) + title;
+  formatTitle(title: string, depth: number) {
+    return '&nbsp;'.repeat(depth * 3) + title;
   }
 
   setVocabularyId($event: Event) {

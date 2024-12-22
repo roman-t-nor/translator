@@ -38,9 +38,30 @@ class Section extends Model
         return self::whereIsRoot()->paginate(20);
     }
 
-    public static function getAllSections()
+    public static function getAllSections(): Collection
     {
         return self::withDepth()->defaultOrder()->get();
+    }
+
+    public static function getAllActiveSections(): Collection
+    {
+        $sections = self::withDepth()->with('ancestors')->where('active', 1)->defaultOrder()->get();
+        $sections = $sections->filter(
+            function (Section $s) {
+                return $s->ancestors->every(function (Section $ancestor) {
+                    return $ancestor->active;
+                });
+            })->values();
+
+        $sections = $sections->map(function (Section $s) {
+            return [
+                "id" => $s->id,
+                "depth" => $s->depth,
+                "name" => $s->name
+            ];
+        });
+
+        return $sections;
     }
 
     public static function getChildSections(self $section): LengthAwarePaginator

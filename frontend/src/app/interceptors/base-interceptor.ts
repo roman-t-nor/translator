@@ -1,13 +1,5 @@
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpEventType,
-  HttpHandlerFn,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
-import { catchError, EMPTY, map, Observable } from 'rxjs';
-import { ResponseType } from '@/types/response-type';
+import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { inject, isDevMode } from '@angular/core';
 import { MessageService } from '@/services/message.service';
 import { DEVELOPMENT_DOMAIN } from '@/app.config';
@@ -21,29 +13,33 @@ export function baseInterceptor(
   const developmentDomain = inject<string>(DEVELOPMENT_DOMAIN);
   const domain = isDevMode() ? developmentDomain : '';
 
-  const url = `${domain}/admin/api/`;
+  let url = `${domain}/admin/api`;
+  url = req.url ? `${url}/${req.url}` : url;
   const cloneReq = req.clone({ url });
 
-  return next(cloneReq).pipe(
-    map((event) => {
-      if (event.type !== HttpEventType.Response) {
-        return event;
-      }
+  console.log('METHOD:', req.method, ',  URL:', url);
 
-      const body = event.body as ResponseType;
-
-      if (body.result === 'error') {
-        throw new HttpErrorResponse({ statusText: body.message });
-      }
-
-      return new HttpResponse({
-        body: body.payload,
-      });
-    }),
-
-    catchError((event) => {
-      messageService.sendError(event.statusText);
-      return EMPTY;
-    }),
-  );
+  return next(cloneReq);
+  //     .pipe(
+  //   map((event) => {
+  //     if (event.type !== HttpEventType.Response) {
+  //       return event;
+  //     }
+  //
+  //     const body = event.body as ResponseType;
+  //
+  //     if (body.result === 'error') {
+  //       throw new HttpErrorResponse({ statusText: body.message });
+  //     }
+  //
+  //     return new HttpResponse({
+  //       body: body.payload,
+  //     });
+  //   }),
+  //
+  //   catchError((event) => {
+  //     messageService.sendError(event.statusText);
+  //     return EMPTY;
+  //   }),
+  // );
 }
