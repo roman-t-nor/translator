@@ -48,7 +48,7 @@ class ElementController extends Controller
         Message::add('Element "'.$element->name.'" created');
 
         if ($request->input('saving_type') === 'just_save') {
-            $route = redirect()->route('admin.sections.elements.index', compact('section'));
+            $route = redirect()->route('sections.elements.index', compact('section'));
         } else {
             $route = back(); // save and create
         }
@@ -85,13 +85,13 @@ class ElementController extends Controller
         ]);
 
         Message::add('Element "'.$element->name.'" updated');
-        return redirect()->route('admin.sections.elements.index', compact('section'));
+        return redirect()->route('sections.elements.index', compact('section'));
     }
 
     public function destroy(Section $section, Element $element)
     {
         $element->delete();
         Message::add('Element "'.$element->name.'" deleted');
-        return redirect()->route('admin.sections.elements.index', compact('section'));
+        return redirect()->route('sections.elements.index', compact('section'));
     }
 }

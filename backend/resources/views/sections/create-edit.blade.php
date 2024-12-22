@@ -3,9 +3,9 @@
     <form
         method="post"
         @isset($section)
-            action="{{ route("admin.sections.update", compact("section")) }}"
+            action="{{ route("sections.update", compact("section")) }}"
         @else
-            action="{{ route("admin.sections.store") }}"
+            action="{{ route("sections.store") }}"
         @endisset
         id="sections_store"
     >
@@ -70,7 +70,7 @@
     @isset($section)
         <form
             method="post"
-            action="{{ route("admin.sections.destroy", compact("section")) }}"
+            action="{{ route("sections.destroy", compact("section")) }}"
             id="sections_destroy"
         >
             @csrf
@@ -80,11 +80,11 @@
 
     <x-slot:footer>
         @isset($section)
-            <x-button.back :url="route('admin.sections.show', compact('section'))"/>
+            <x-button.back :url="route('sections.show', compact('section'))"/>
             <x-button.section.update form="sections_store"/>
             <x-button.section.delete form="sections_destroy" class="ms-auto"/>
         @else
-            <x-button.back :url="route('admin.sections.index')"/>
+            <x-button.back :url="route('sections.index')"/>
             <x-button.section.save form="sections_store"/>
         @endisset
     </x-slot:footer>

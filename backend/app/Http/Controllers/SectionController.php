@@ -43,7 +43,7 @@ class SectionController extends Controller
         }
 
         Message::add('Section "'.$section->name.'" created');
-        return redirect()->route('admin.sections.show', compact('section'));
+        return redirect()->route('sections.show', compact('section'));
     }
 
     public function show(Section $section)
@@ -82,9 +82,9 @@ class SectionController extends Controller
         $section->update($attributes);
 
         if ($section->parent_id) {
-            $back = redirect()->route('admin.sections.show', ["section" => $section->parent_id]);
+            $back = redirect()->route('sections.show', ["section" => $section->parent_id]);
         } else {
-            $back = redirect()->route('admin.sections.index');
+            $back = redirect()->route('sections.index');
         }
 
         Message::add('Section "'.$section->name.'" updated');
@@ -98,9 +98,9 @@ class SectionController extends Controller
         $section->delete();
 
         if ($parentId) {
-            $back = redirect()->route('admin.sections.show', ["section" => $parentId]);
+            $back = redirect()->route('sections.show', ["section" => $parentId]);
         } else {
-            $back = redirect()->route('admin.sections.index');
+            $back = redirect()->route('sections.index');
         }
 
         Message::add('Section "'.$section->name.'" deleted');

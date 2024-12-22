@@ -11,7 +11,7 @@
             @endif
         @endisset
         {!! "<li class='nav-item'>" !!}
-        <a href="{{ route('admin.sections.show', ['section'=>$i->id]) }}" class="nav-link">
+        <a href="{{ route('sections.show', ['section'=>$i->id]) }}" class="nav-link">
             {!! str_repeat('&nbsp;', $i->depth * 4) !!}
             @if($i->is_active)
                 <i class="nav-icon bi bi-folder2-open text-primary-emphasis"></i>

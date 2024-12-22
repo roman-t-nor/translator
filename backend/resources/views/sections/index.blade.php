@@ -2,14 +2,14 @@
     @isset($section)
         @if($section->elements->isNotEmpty())
             <x-button.element.index
-                :url="route('admin.sections.elements.index', compact('section'))"
+                :url="route('sections.elements.index', compact('section'))"
                 :count="$section->elements->count()"
                 class="mb-3"
             >Elements:
             </x-button.element.index>
         @else
             <x-button.element.create
-                :url="route('admin.sections.elements.create', compact('section'))"
+                :url="route('sections.elements.create', compact('section'))"
                 class="mb-3"
             />
         @endif
@@ -34,13 +34,13 @@
                         <tr class="align-middle text-center">
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-start">
-                                <a href="{{ route('admin.sections.show', ['section' => $s->id]) }}"
+                                <a href="{{ route('sections.show', ['section' => $s->id]) }}"
                                    class="btn btn-secondary"
                                 >{{ $s->name }}</a>
                             </td>
                             <td style="width: 180px">
                                 <x-button.element.index
-                                    :url="route('admin.sections.elements.index', ['section' => $s])"
+                                    :url="route('sections.elements.index', ['section' => $s])"
                                     :count="$s->elements->count()"
                                     @class(["bg-opacity-75" => $s->elements->isEmpty()])
                                 />
@@ -55,7 +55,7 @@
                             <td style="width: 80px">{{ $s->id }}</td>
                             <td style="width: 80px">
                                 <a
-                                    href="{{ route('admin.sections.edit', ['section'=>$s->id]) }}"
+                                    href="{{ route('sections.edit', ['section'=>$s->id]) }}"
                                     class="btn btn-outline-secondary"
                                 >Edit</a>
                             </td>
@@ -77,23 +77,23 @@
     <x-slot:footer>
         @isset($section)
             @if($section->parent_id)
-                <x-button.back :url="route('admin.sections.show', ['section' => $section->parent_id])"/>
+                <x-button.back :url="route('sections.show', ['section' => $section->parent_id])"/>
             @else
-                <x-button.back :url="route('admin.sections.index')"/>
+                <x-button.back :url="route('sections.index')"/>
             @endif
 
         @endisset
 
         @isset($section)
             <x-button.section.create
-                :url="route('admin.sections.create-child-section', compact('section'))"
+                :url="route('sections.create-child-section', compact('section'))"
             />
             <x-button.section.edit
-                :url="route('admin.sections.edit', ['section' => $section->id])"
+                :url="route('sections.edit', ['section' => $section->id])"
                 class="ms-auto"
             />
         @else
-            <x-button.section.create :url="route('admin.sections.create')"/>
+            <x-button.section.create :url="route('sections.create')"/>
         @endisset
 
     </x-slot:footer>

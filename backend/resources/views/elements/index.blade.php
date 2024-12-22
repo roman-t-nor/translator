@@ -18,7 +18,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-start">
                                 <a
-                                    href="{{ route('admin.sections.elements.edit', [
+                                    href="{{ route('sections.elements.edit', [
                                         'section' => $section,
                                         'element' => $e
                                     ]) }}"
@@ -48,8 +48,8 @@
     @endif
 
     <x-slot:footer>
-        <x-button.back :url="route('admin.sections.show', compact('section'))"/>
-        <x-button.element.create :url="route('admin.sections.elements.create', compact('section'))"/>
+        <x-button.back :url="route('sections.show', compact('section'))"/>
+        <x-button.element.create :url="route('sections.elements.create', compact('section'))"/>
     </x-slot:footer>
 
 </x-layout>

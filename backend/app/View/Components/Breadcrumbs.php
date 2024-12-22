@@ -29,11 +29,11 @@ class Breadcrumbs extends Component
     private function addLastItem()
     {
         $lastItem = match (Route::currentRouteName()) {
-            'admin.sections.create-child-section' => 'Create new section',
-            'admin.sections.edit' => 'Update section',
-            'admin.sections.elements.index' => 'Elements',
-            'admin.sections.elements.create' => 'Create new element',
-            'admin.sections.elements.edit' => 'Edit element',
+            'sections.create-child-section' => 'Create new section',
+            'sections.edit' => 'Update section',
+            'sections.elements.index' => 'Elements',
+            'sections.elements.create' => 'Create new element',
+            'sections.elements.edit' => 'Edit element',
             default => null
         };
 
@@ -50,11 +50,11 @@ class Breadcrumbs extends Component
             function (Section $s) use ($section) {
                 $this->items->push([
                     "title" => $s->name,
-                    "url" => route('admin.sections.show', ['section' => $s])
+                    "url" => route('sections.show', ['section' => $s])
                 ]);
             });
 
-        $this->items->prepend(["url" => route('admin.sections.index'), "title" => "Home"]);
+        $this->items->prepend(["url" => route('sections.index'), "title" => "Home"]);
     }
 
     public function render(): View|Closure|string

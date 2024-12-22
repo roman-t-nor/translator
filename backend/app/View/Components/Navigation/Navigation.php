@@ -21,7 +21,7 @@ class Navigation extends Component
 
         $this->items->push(new Item(
             title: 'Content',
-            route: 'admin.sections.index',
+            route: 'sections.index',
             icon: 'av-arrow bi bi-diagram-3',
             elements: $this->getSections(),
             active: !!strpos($routeName, 'sections')
@@ -29,9 +29,9 @@ class Navigation extends Component
 
         $this->items->push(new Item(
             title: 'Settings',
-            route: 'admin.settings',
+            route: 'settings',
             icon: 'av-arrow bi bi-gear',
-            active: $routeName === 'admin.settings'
+            active: $routeName === 'settings'
         ));
     }
 

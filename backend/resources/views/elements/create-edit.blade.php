@@ -3,9 +3,9 @@
     <form
         method="post"
         @isset($element)
-            action="{{ route('admin.sections.elements.update', compact('section', 'element')) }}"
+            action="{{ route('sections.elements.update', compact('section', 'element')) }}"
         @else
-            action="{{ route('admin.sections.elements.store', compact('section')) }}"
+            action="{{ route('sections.elements.store', compact('section')) }}"
         @endisset
         id="elements_store"
     >
@@ -95,7 +95,7 @@
     @isset($element)
         <form
             method="post"
-            action="{{ route('admin.sections.elements.destroy', compact('section', 'element')) }}"
+            action="{{ route('sections.elements.destroy', compact('section', 'element')) }}"
             id="elements_destroy"
         >
             @csrf
@@ -104,7 +104,7 @@
     @endisset
 
     <x-slot:footer>
-        <x-button.back :url="route('admin.sections.elements.index', compact('section'))"/>
+        <x-button.back :url="route('sections.elements.index', compact('section'))"/>
 
         @isset($element)
             <x-button.element.update form="elements_store"/>
