@@ -1,1 +1,242 @@
-/* You can add global styles to this file, and also import other style files */
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+h1{
+  color: #0082c2 !important;
+}
+
+.logo{
+  width: 100px;
+}
+
+.title, .question{
+  color: #444;
+}
+
+.direction-switcher svg{
+  margin-top: -3px;
+}
+
+.direction-switcher .from, .direction-switcher .to{
+  min-width: 100px;
+}
+.direction-switcher .from{
+  text-align: right;
+}
+
+.question{
+  background-color: #fdf9e5;
+  border-color: #efcc00 !important;
+  line-height: 1.2;
+}
+
+.result-success{
+  background-color: #F0FDF0;
+}
+.result-success svg{
+  fill: #198754;
+  margin-top: -5px;
+}
+.result-wrong{
+  background-color: #FFDDDD;
+}
+.result-wrong svg{
+  fill: #dc3545;
+  margin-top: -5px;
+}
+
+table#matched_entries{
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+  color: #000;
+}
+#matched_entries th, #matched_entries td{
+  border: 1px solid black;
+  padding: 8px
+}
+#matched_entries thead{
+  background-color: hsl(39, 100%, 80%);
+}
+#matched_entries .odd{
+  background-color: hsl(39, 100%, 95%);
+}
+#matched_entries .even{
+  background-color: hsl(34, 89%, 90%);
+}
+
+/* stick to bottom footer */
+/*body > .container{*/
+/*    min-height: 100vh;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+/*.main{*/
+/*    flex-grow: 1;*/
+/*}*/
+/*.content{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+/*.footer{*/
+/*    margin-top: auto;*/
+/*}*/
+/* /stick to bottom footer */
+
+.ajax-translate.respect_list_groups .list_group,
+.ajax-translate .list_item.list_item_last{
+  border-bottom: 2px solid #DEB887 !important;
+  margin-bottom: 24px !important;
+}
+
+.ajax-translate .list_item .content, .ajax-translate .modal-title{
+  font-style: normal;
+}
+.ajax-translate .list_item{
+  border-bottom: 1px solid transparent;
+}
+.ajax-translate .list_item .content{
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 42px;
+}
+.ajax-translate .modal-title{
+  font-weight: 500;
+}
+.ajax-translate .list_item:hover{
+  border-bottom: 1px dashed #999;
+  cursor: pointer !important;
+}
+.ajax-translate .list_item.active{
+  color: #fff;
+  border-bottom: 1px solid #999;
+}
+.translate-to p{
+  border-top: 1px solid #DEB887;
+}
+.modal-body .translate-to p:first-child{
+  border-top: none;
+}
+
+.translating{
+  color: #e38764;
+}
+
+.modal .modal-title{
+  flex-grow: 1;
+}
+
+.modal#save .modal-body{
+  padding-top: 8px;
+}
+
+.btn_controls{
+  position: sticky;
+  bottom: 20px;
+}
+
+.simple_trainer .body .item{
+  font-style: normal;
+  font-weight: 400;
+}
+.simple_trainer .body .item.active{
+  font-weight: 700;
+}
+
+.simple_trainer h5, .simple_trainer div.modal-content b{
+  color: #fff;
+}
+
+.modal-center{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  height: 100%;
+}
+
+.modal-center .wrapper{
+  margin: auto;
+}
+
+.modal-center p{
+  flex-basis: 100%;
+  padding: 2em 0;
+}
+
+/**** Message  ****/
+.message{
+  position: fixed;
+  display: flex;
+  right: 45px;
+  top: -10%;
+  transition: top 500ms, right 500ms;
+  z-index: 9999;
+}
+.message.message-top-position{
+  top: 15px;
+  right: 45px;
+}
+.message-inner{
+  color: white;
+  text-align: center;
+  margin: auto;
+  padding: 6px 20px 6px 15px;
+  border-radius: 15px;
+  position: relative;
+  font-size: 15px;
+}
+.message-inner .close{
+  position: absolute;
+  right: 12px;
+}
+
+.message-inner .close:hover{
+  font-weight: bold;
+  cursor: pointer;
+}
+.message-inner svg{
+  margin-top: -4px;
+  margin-right: 3px;
+}
+.message-inner:hover{
+  cursor: default;
+}
+.message-inner-error{
+  background-color: #CC0000;
+}
+.message-inner-error:hover{
+  background-color: darkred;
+}
+.message-inner-success{
+  background-color: #228B22;
+}
+.message-inner-success:hover{
+  background-color: darkgreen;
+}
+/**** /Message ****/
+.stats{
+  font-size: .75em;
+}
+
+html, body, body > .container{
+  min-height: 100vh;
+}
+body > .container{
+    display: flex;
+    flex-direction: column;
+}
+.main{
+    flex-grow: 1;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-switch:hover,
+.form-switch label:hover,
+.form-switch input:hover{
+  cursor: pointer !important;
+}

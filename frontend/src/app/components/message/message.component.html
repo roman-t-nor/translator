@@ -1,0 +1,16 @@
+<div [class]="classOuter">
+  <div class="message-inner message-inner-{{ type }}">
+    @switch (type) {
+      @case ("success") {
+        <message-success />
+      }
+      @case ("error") {
+        <message-error />
+      }
+    }
+
+    {{ message }}
+
+    <!--    <span class="close" (click)="close()">&#x2715;</span>-->
+  </div>
+</div>

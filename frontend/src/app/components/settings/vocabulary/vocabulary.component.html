@@ -1,0 +1,10 @@
+<select
+  (change)="setVocabularyId($event)"
+  class="form-select"
+  name="vocabulary_id"
+>
+  <option value="0">Выберите словарь</option>
+  @for (vocabulary of vocabularies; track vocabulary.id) {
+    <option [value]="vocabulary.id" [innerHTML]="vocabulary.title"></option>
+  }
+</select>

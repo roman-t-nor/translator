@@ -1,8 +1,37 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  ApplicationConfig,
+  InjectionToken,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { TranslateService } from './services/translate/translate.service';
+import { TranslateServiceFactory } from './services/translate/factory';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { baseInterceptor } from './interceptors/base-interceptor';
+import { SaveService } from '@/services/save/save.service';
+import { SaveServiceFactory } from '@/services/save/factory';
 
-import { routes } from './app.routes';
+export const DEVELOPMENT_DOMAIN = new InjectionToken<string>('');
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(withInterceptors([baseInterceptor])),
+    {
+      provide: DEVELOPMENT_DOMAIN,
+      useValue: 'http://translator.loc',
+    },
+    { provide: 'isGetEntriesInTestMode', useValue: false },
+    { provide: 'isTranslateServiceInTestMode', useValue: false },
+    { provide: 'isSaveServiceInTestMode', useValue: false },
+    {
+      provide: TranslateService,
+      useFactory: TranslateServiceFactory,
+      deps: ['isTranslateServiceInTestMode'],
+    },
+    {
+      provide: SaveService,
+      useFactory: SaveServiceFactory,
+      deps: ['isSaveServiceInTestMode'],
+    },
+  ],
 };

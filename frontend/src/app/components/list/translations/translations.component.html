@@ -1,0 +1,13 @@
+<ul class="translate-to mb-2">
+  @for (translation of translations; track $index) {
+    <li class="fs-5 pb-2">
+      {{ translation }}
+    </li>
+  }
+
+  @if (isEntryTranslating) {
+    <li class="fs-6 pb-2">
+      <loading />
+    </li>
+  }
+</ul>

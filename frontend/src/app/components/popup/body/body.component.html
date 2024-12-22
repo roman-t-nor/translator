@@ -1,0 +1,15 @@
+<div class="modal-body">
+  @if (isInSavingMode | async) {
+    <popup-translations />
+    <popup-form />
+  } @else {
+    <div class="modal-center">
+      <div class="wrapper">
+        <p class="translate-on-select py-2 fs-1 border-bottom">
+          {{ text }}
+        </p>
+        <popup-translations />
+      </div>
+    </div>
+  }
+</div>

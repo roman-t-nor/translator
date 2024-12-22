@@ -1,0 +1,46 @@
+<div class="row g-3 align-items-center mb-4">
+  <div class="col-4">
+    <label class="w-100">
+      Язык с которого переводим
+      <select
+        (change)="setLanguages()"
+        class="form-select mt-1"
+        id="language-from"
+        name="language-from"
+      >
+        <option value="NB">Норвежский</option>
+        <option value="EN">Английский</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="col-4">
+    <label class="w-100">
+      Язык #1 на который переводим
+      <select
+        (change)="setLanguages()"
+        class="form-select mt-1"
+        id="language-to-1"
+        name="language-to-1"
+      >
+        <option selected value="EN-US">Английский</option>
+        <option value="RU">Русский</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="col-4">
+    <label class="w-100">
+      Язык #2 на который переводим
+      <select
+        (change)="setLanguages()"
+        class="form-select mt-1"
+        id="language-to-2"
+        name="language-to-2"
+      >
+        <option value="">Не выбрано</option>
+        <option selected value="RU">Русский</option>
+      </select>
+    </label>
+  </div>
+</div>

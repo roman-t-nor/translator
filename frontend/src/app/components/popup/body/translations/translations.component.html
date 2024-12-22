@@ -1,0 +1,13 @@
+<ul class="translate-to mt-2 mb-4 list-unstyled">
+  @for (translation of translations; track $index) {
+    <li class="copy-to-translations-on-select fs-5 pb-2">
+      {{ translation }}
+    </li>
+  }
+
+  @if (isTranslating) {
+    <li class="fs-6 pb-2">
+      <loading />
+    </li>
+  }
+</ul>

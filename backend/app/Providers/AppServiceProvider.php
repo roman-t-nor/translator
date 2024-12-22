@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->usePublicPath($_SERVER['DOCUMENT_ROOT'].'/admin');
     }
 
     /**

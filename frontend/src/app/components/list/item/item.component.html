@@ -1,0 +1,9 @@
+<div [class]="className | cssClassesArrayToString" (click)="handleClick()">
+  <div class="p-2 content">{{ entry.text }}</div>
+  @if (isShowTranslations) {
+    <translations
+      [translations]="entry.translations"
+      [isEntryTranslating]="isEntryTranslating"
+    />
+  }
+</div>

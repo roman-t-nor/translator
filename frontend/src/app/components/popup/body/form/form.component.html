@@ -1,0 +1,22 @@
+<form
+  (ngSubmit)="submit($event)"
+  *ngIf="isShow"
+  action=""
+  class="mt-2"
+  method="post"
+>
+  @for (entry of entries; track entry.id) {
+    <form-row [entry]="entry" [index]="$index" (remove)="remove($event)" />
+  }
+
+  <input [value]="currentEntry.text" name="source" type="hidden" />
+  <input [value]="vocabularyId" name="vocabulary_id" type="hidden" />
+  <input name="action" type="hidden" value="save_translate" />
+
+  <button-saving />
+  <button-save />
+</form>
+
+@if (entriesFoundInPast) {
+  <div [innerHTML]="entriesFoundInPast"></div>
+}
