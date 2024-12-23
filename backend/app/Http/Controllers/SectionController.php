@@ -28,13 +28,13 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "title" => ["required", "min:3"]
+            'title' => ['required', 'min:3']
         ]);
         $attributes = [
-            "name" => $request->input("title")
+            'name' => $request->input('title')
         ];
 
-        $parentSectionId = $request->integer("parent_section_id");
+        $parentSectionId = $request->integer('parent_section_id');
         if ($parentSectionId) {
             $parentSection = Section::findOrFail($parentSectionId);
             $section = Section::create($attributes, $parentSection);

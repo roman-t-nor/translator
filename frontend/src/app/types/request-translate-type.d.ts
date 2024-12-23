@@ -1,4 +1,4 @@
-import { Entry } from '../Entry';
+import { Entry } from '@/Entry';
 import { LanguageFromType, LanguageToType } from './languages';
 import { Observable } from 'rxjs';
 

@@ -21,6 +21,13 @@ export class TranslateProdService extends TranslateService {
     formData.set('languageTo', languageTo);
     formData.set('context', entry.context);
 
-    return this.http.post<string>('', formData);
+    return this.http.get<string>('translate', {
+      params: {
+        text: entry.text,
+        languageFrom,
+        languageTo,
+        context: entry.context,
+      },
+    });
   }
 }
