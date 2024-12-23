@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MessageService } from '@/services/message.service';
-import { SuccessComponent } from './success/success.component';
-import { ErrorComponent } from './error/error.component';
+import { IconSuccessComponent } from './icons/success/icon-success.component';
+import { IconErrorComponent } from './icons/error/icon-error.component';
 import { delay, of } from 'rxjs';
 import { NgIf } from '@angular/common';
 
@@ -9,7 +9,7 @@ import { NgIf } from '@angular/common';
   selector: 'message',
   standalone: true,
   templateUrl: './message.component.html',
-  imports: [SuccessComponent, ErrorComponent, NgIf],
+  imports: [IconSuccessComponent, IconErrorComponent, NgIf],
 })
 export class MessageComponent {
   message: string = '';
@@ -29,7 +29,7 @@ export class MessageComponent {
           of(true)
             .pipe(delay(1500))
             .subscribe(() => {
-              this.messageService.close();
+              // this.messageService.close();
             });
         } else {
           this.hide();

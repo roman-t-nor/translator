@@ -1,5 +1,11 @@
-import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {
+  HttpEvent,
+  HttpEventType,
+  HttpHandlerFn,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
+import { catchError, EMPTY, map, Observable, tap, throwError } from 'rxjs';
 import { inject, isDevMode } from '@angular/core';
 import { MessageService } from '@/services/message.service';
 import { DEVELOPMENT_DOMAIN } from '@/app.config';
@@ -19,27 +25,12 @@ export function baseInterceptor(
 
   console.log('METHOD:', req.method, ',  URL:', url);
 
-  return next(cloneReq);
-  //     .pipe(
-  //   map((event) => {
-  //     if (event.type !== HttpEventType.Response) {
-  //       return event;
-  //     }
-  //
-  //     const body = event.body as ResponseType;
-  //
-  //     if (body.result === 'error') {
-  //       throw new HttpErrorResponse({ statusText: body.message });
-  //     }
-  //
-  //     return new HttpResponse({
-  //       body: body.payload,
-  //     });
-  //   }),
-  //
-  //   catchError((event) => {
-  //     messageService.sendError(event.statusText);
-  //     return EMPTY;
-  //   }),
-  // );
+  return next(cloneReq).pipe(
+    catchError((event) => {
+      messageService.sendError(
+        `<b>${event.statusText}</b><hr/> ${event.error.message}`,
+      );
+      return EMPTY;
+    }),
+  );
 }
