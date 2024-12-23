@@ -28,7 +28,7 @@ export function baseInterceptor(
   return next(cloneReq).pipe(
     catchError((event) => {
       messageService.sendError(
-        `<b>${event.statusText}</b><hr/> ${event.error.message}`,
+        `${event.statusText}<hr/> <b>${event.error.message}</b>`,
       );
       return EMPTY;
     }),
