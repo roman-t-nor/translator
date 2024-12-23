@@ -13,4 +13,14 @@ class Element extends Model
     {
         return $this->belongsTo(Section::class);
     }
+
+    public static function store(int $sectionId, string $title, string $translation, ?string $context)
+    {
+        return Element::create([
+            'name' => $title,
+            'translation' => $translation,
+            'context' => $context,
+            'section_id' => $sectionId
+        ]);
+    }
 }

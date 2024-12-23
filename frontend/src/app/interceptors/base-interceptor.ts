@@ -27,9 +27,15 @@ export function baseInterceptor(
 
   return next(cloneReq).pipe(
     catchError((event) => {
-      messageService.sendError(
-        `${event.statusText}<hr/> <b>${event.error.message}</b>`,
-      );
+      let message = event.statusText;
+      if (event.error.errors) {
+        let details = `<hr/>` + Object.values(event.error.errors).join('<br/>');
+        message += `<b>${details}</b>`;
+      }
+      if (event.error.error) {
+        message += `<hr/>${event.error.error}`;
+      }
+      messageService.sendError(message);
       return EMPTY;
     }),
   );

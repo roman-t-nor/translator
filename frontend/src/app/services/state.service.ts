@@ -13,7 +13,7 @@ export class StateService {
   currentEntryIndex: number = 0;
   currentEntry: Entry = this.entries[0];
 
-  vocabularyId: number = 0;
+  sectionId: number = 0;
   settingsLanguages!: SettingsLanguagesType;
 
   respectListGroups: boolean = false;

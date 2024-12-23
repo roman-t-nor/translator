@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Element;
 use App\Models\Section;
+use App\Requests\StoreElementRequest;
 use App\View\Components\Message;
 use Illuminate\Http\Request;
 
-class ElementController extends Controller
+class ElementController
 {
     public function index(Section $section)
     {
@@ -28,22 +29,14 @@ class ElementController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreElementRequest $request, Section $section)
     {
-        $request->validate([
-            'title' => ['required', 'min:3', 'max:255'],
-            'translation' => ['required', 'min:3', 'max:255'],
-            'context' => ['min:3', 'max:1500', 'nullable']
-        ]);
-
-        $section = Section::findOrFail($request->integer('section_id'));
-
-        $element = Element::create([
-            'name' => $request->input('title'),
-            'translation' => $request->input('translation'),
-            'context' => $request->input('context'),
-            'section_id' => $section->id
-        ]);
+        $element = Element::store(
+            sectionId: $section->id,
+            title: $request->input('title'),
+            translation: $request->input('translation'),
+            context: $request->input('context'),
+        );
 
         Message::add('Element "'.$element->name.'" created');
 

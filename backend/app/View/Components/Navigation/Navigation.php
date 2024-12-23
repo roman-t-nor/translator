@@ -24,7 +24,7 @@ class Navigation extends Component
             route: 'sections.index',
             icon: 'av-arrow bi bi-diagram-3',
             elements: $this->getSections(),
-            active: !!strpos($routeName, 'sections')
+            active: str_contains($routeName, 'sections')
         ));
 
         $this->items->push(new Item(

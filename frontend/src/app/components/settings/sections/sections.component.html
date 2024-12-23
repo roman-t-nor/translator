@@ -1,0 +1,10 @@
+<select
+        (change)="setSectionId($event)"
+        class="form-select"
+        name="section_id"
+>
+    <option value="0">Выберите словарь</option>
+    @for (section of sections; track section.id) {
+        <option [value]="section.id" [innerHTML]="section.title"></option>
+    }
+</select>

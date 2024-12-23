@@ -105,9 +105,9 @@ export class FormService {
         );
       }),
     ).subscribe((translations: string[]) => {
-      translations.forEach((translation: string) =>
-        entry.translations.push(translation.toLowerCase()),
-      );
+      translations.forEach((translation: string) => {
+        entry.translations.push(translation.toLowerCase());
+      });
     });
 
     this.isFormEntryTranslating = false;

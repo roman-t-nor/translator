@@ -6,7 +6,7 @@ use App\Models\Section;
 use App\View\Components\Message;
 use Illuminate\Http\Request;
 
-class SectionController extends Controller
+class SectionController
 {
     public function index()
     {

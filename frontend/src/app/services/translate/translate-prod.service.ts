@@ -14,20 +14,14 @@ export class TranslateProdService extends TranslateService {
     languageFrom: LanguageFromType,
     languageTo: LanguageToType,
   ): Observable<string> {
-    const formData = new FormData();
-    formData.set('action', 'translate');
-    formData.set('text', entry.text);
-    formData.set('languageFrom', languageFrom);
-    formData.set('languageTo', languageTo);
-    formData.set('context', entry.context);
-
-    return this.http.get<string>('translate', {
+    return this.http.get('translate', {
       params: {
         text: entry.text,
         languageFrom,
         languageTo,
         context: entry.context,
       },
+      responseType: 'text',
     });
   }
 }

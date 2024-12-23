@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Api\Controllers;
 
 use App\Models\Translation;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class TranslationController extends Controller
+class TranslationController
 {
     public static function translate(Request $request)
     {
@@ -17,6 +17,6 @@ class TranslationController extends Controller
             'context' => ['string', 'nullable'],
         ]);
 
-        return [Translation::translate(...$validated)];
+        return Translation::translate(...$validated);
     }
 }

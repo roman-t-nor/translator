@@ -46,8 +46,8 @@ export class FormComponent {
     return !!this.formService.entries.length;
   }
 
-  get vocabularyId() {
-    return this.state.vocabularyId;
+  get sectionId() {
+    return this.state.sectionId;
   }
 
   remove(index: number) {
@@ -55,11 +55,15 @@ export class FormComponent {
   }
 
   submit($event: Event): void {
+    if (!this.sectionId) {
+      this.messageService.sendError('Section for saving is not supplied');
+      return;
+    }
     this.saveService.isSaving$.next(true);
     this.saveService.save($event).subscribe({
       next: (response: string) => {
         this.formService.entries = [];
-        this.messageService.sendSuccess('Записи сохранены');
+        this.messageService.sendSuccess('Elements saved');
         if (response) {
           const safeResponse = this.sanitizer.bypassSecurityTrustHtml(response);
           this.entriesFoundInPast = safeResponse;

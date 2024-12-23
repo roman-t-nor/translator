@@ -26,11 +26,13 @@ export class MessageComponent {
         if (value) {
           this.message = this.messageService.message;
           this.show();
-          of(true)
-            .pipe(delay(1500))
-            .subscribe(() => {
-              // this.messageService.close();
-            });
+          if (this.messageService.type === 'success') {
+            of(true)
+              .pipe(delay(1500))
+              .subscribe(() => {
+                this.messageService.close();
+              });
+          }
         } else {
           this.hide();
         }
