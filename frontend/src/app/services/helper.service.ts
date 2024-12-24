@@ -50,7 +50,6 @@ export class HelperService {
 
       groupEntries.forEach((e, index) => {
         e = e.trim();
-        e = e.endsWith('.') ? e.slice(0, -1) : e;
         const entry = new Entry(index, e);
         entry.id = id++;
         if (groupEntries.length > 1) {

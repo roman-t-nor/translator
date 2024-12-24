@@ -18,7 +18,9 @@ class Element extends Model
     {
         if ($context) {
             $context = str_replace($title, '<b>'.$title.'</b>', $context);
+            $context = rtrim($context, '.');
         }
+        
         return Element::create([
             'name' => $title,
             'translation' => $translation,
