@@ -91,6 +91,7 @@ export class FormService {
 
     this.entries.push(entry);
     this.isEntriesExist$.next(true);
+    this.currentEntryIndex$.next(this.currentEntryIndex$.getValue() + 1);
 
     const languagesTo = [...this.state.settingsLanguages.to];
     if (languagesTo.length === 2 && languagesTo[0] !== 'RU') {
