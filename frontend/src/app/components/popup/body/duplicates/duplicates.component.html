@@ -12,7 +12,7 @@
             <tr [class]="entry.isOdd ? 'odd' : 'even'">
                 <td><strong>{{ entry.name }}</strong></td>
                 <td>{{ entry.translation }}</td>
-                <td>{{ entry.context }}</td>
+                <td [innerHTML]="entry.context"></td>
                 <td>{{ entry.path }}</td>
             </tr>
         }

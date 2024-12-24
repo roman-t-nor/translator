@@ -9,7 +9,7 @@
         <form-row [entry]="entry" [index]="$index" (remove)="remove($event)"/>
     }
 
-    <input [value]="currentEntry.text" name="source" type="hidden"/>
+    <input [value]="currentEntry.text" name="context" type="hidden"/>
     <input [value]="sectionId" name="section_id" type="hidden"/>
 
     <button-saving/>

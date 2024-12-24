@@ -16,6 +16,9 @@ class Element extends Model
 
     public static function store(int $sectionId, string $title, string $translation, ?string $context)
     {
+        if ($context) {
+            $context = str_replace($title, '<b>'.$title.'</b>', $context);
+        }
         return Element::create([
             'name' => $title,
             'translation' => $translation,

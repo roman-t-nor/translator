@@ -30,14 +30,29 @@ class ElementController
                 context: $context,
             );
 
-            $elementDuplicates = Element::where('name', $title)->get();
-            if ($elementDuplicates->count() > 1) {
+            $elementDuplicates = $this->getDuplicates($title);
+            if ($elementDuplicates) {
                 $duplicates = $duplicates->concat($elementDuplicates);
             }
         }
 
         if ($duplicates->isEmpty()) {
             return null;
+        }
+
+        return $duplicates;
+    }
+
+    private function getDuplicates(string $title)
+    {
+        $duplicates = Element::where('name', $title)->get();
+        if ($duplicates->count() < 2) {
+            return null;
+        }
+        foreach ($duplicates as $k => $duplicate) {
+            $ancestors = Section::defaultOrder()->ancestorsAndSelf($duplicate->section_id);
+            $duplicate->path = $ancestors->pluck('name')->join(' / ');
+            $duplicates[$k] = $duplicate;
         }
 
         return $duplicates;
