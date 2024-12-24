@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Entry } from '@/Entry';
+import { DbElementType } from '@/types/db';
+
+type DuplicateType = DbElementType & { isOdd: boolean };
 
 @Component({
   selector: 'duplicates',
@@ -7,13 +9,23 @@ import { Entry } from '@/Entry';
   templateUrl: './duplicates.component.html',
 })
 export class DuplicatesComponent {
-  @Input() entries: Entry[] = [];
+  @Input() elements: DbElementType[] = [];
+  entries: DuplicateType[] = [];
 
   ngOnInit() {
-    console.log(this.entries);
-  }
-
-  constructor() {
-    console.log(2, this.entries);
+    if (!this.elements.length) {
+      return;
+    }
+    let prevName = this.elements[0].name;
+    let isOdd = true;
+    this.entries = this.elements.map(
+      (element: DbElementType, key: number): DuplicateType => {
+        if (element.name !== prevName) {
+          isOdd = !isOdd;
+        }
+        prevName = element.name;
+        return { ...element, isOdd };
+      },
+    );
   }
 }

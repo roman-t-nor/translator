@@ -28,7 +28,7 @@ import { DuplicatesComponent } from '@/components/popup/body/duplicates/duplicat
 })
 export class FormComponent {
   currentEntry!: Entry;
-  duplicates: Entry[] = [];
+  duplicates: DbElementType[] = [];
 
   constructor(
     private formService: FormService,
@@ -72,15 +72,7 @@ export class FormComponent {
         this.formService.removeAllEntries();
         this.messageService.sendSuccess('Elements saved');
         if (response) {
-          this.duplicates = response.map(
-            (dbElement: DbElementType) =>
-              new Entry(
-                dbElement.id,
-                dbElement.name,
-                dbElement.context,
-                dbElement.translation,
-              ),
-          );
+          this.duplicates = response;
         }
       },
       complete: () => {

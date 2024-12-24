@@ -9,9 +9,9 @@
     </thead>
     <tbody>
         @for (entry of entries; track entry.id) {
-            <tr>
-                <td><strong>{{ entry.text }}</strong></td>
-                <td>{{ entry.translations[0] }}</td>
+            <tr [class]="entry.isOdd ? 'odd' : 'even'">
+                <td><strong>{{ entry.name }}</strong></td>
+                <td>{{ entry.translation }}</td>
                 <td>{{ entry.context }}</td>
                 <td>{{ entry.path }}</td>
             </tr>

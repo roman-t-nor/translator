@@ -10,4 +10,5 @@ export type DbElementType = {
   translation: string;
   context: string;
   section_id: number;
+  path?: string;
 };
