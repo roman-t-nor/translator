@@ -1,0 +1,7 @@
+<textarea
+        class="w-75 fs-1"
+        [(ngModel)]="entry.text"
+        style="padding: 20px;"
+        rows="3"
+        (keydown.enter)="saveEditing($event)"
+></textarea>

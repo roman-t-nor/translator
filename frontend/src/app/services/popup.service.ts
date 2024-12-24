@@ -9,6 +9,7 @@ import { FormService } from '@/services/form.service';
 export class PopupService {
   isOpen$: BehaviorSubject<boolean>;
   isInSavingMode$: BehaviorSubject<boolean>;
+  isInEditingMode$: BehaviorSubject<boolean>;
 
   constructor(
     private state: StateService,
@@ -16,9 +17,12 @@ export class PopupService {
   ) {
     this.isOpen$ = new BehaviorSubject(true);
     this.isInSavingMode$ = new BehaviorSubject(false);
-    this.state.currentEntryIndex$.subscribe(() =>
-      this.isInSavingMode$.next(false),
-    );
+    this.isInEditingMode$ = new BehaviorSubject(false);
+
+    this.state.currentEntryIndex$.subscribe(() => {
+      this.isInSavingMode$.next(false);
+      this.isInEditingMode$.next(false);
+    });
     window.addEventListener('mouseup', (event: MouseEvent) => {
       this.formService.handleMouseUp(event);
     });
@@ -26,7 +30,11 @@ export class PopupService {
       (value: boolean) => value && this.isInSavingMode$.next(true),
     );
 
-    this.isInSavingMode$.next(true); // TEMP
+    this.isInEditingMode$.subscribe((value: boolean) => {
+      value && this.isInSavingMode$.next(false);
+    });
+
+    // this.isInSavingMode$.next(true); // TEMP
   }
 
   show() {

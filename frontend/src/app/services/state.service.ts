@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Entry } from '@/Entry';
 import { TranslateService } from './translate/translate.service';
 import { SettingsLanguagesType } from '@/types/languages';
 import { Subject } from 'rxjs';
+import { HelperService } from '@/services/helper.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class StateService {
   respectListGroups: boolean = false;
   fileName?: string;
   private $isTranslating: boolean = false;
+  private helper = inject(HelperService);
 
   constructor(private translator: TranslateService) {
     this.currentEntryIndex$.subscribe((currentEntryIndex) => {
@@ -88,5 +90,12 @@ export class StateService {
           this.removeIsTranslatingFlag();
         },
       });
+  }
+
+  refreshEntries() {
+    this.entries = this.helper.getEntries(
+      this.entries.map((e: Entry) => e.text).join(''),
+    );
+    this.currentEntryIndex$.next(this.currentEntryIndex);
   }
 }
