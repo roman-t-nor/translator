@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { StateService } from '@/services/state.service';
-
-type DbSectionType = {
-  id: number;
-  depth: number;
-  name: string;
-};
+import { DbSectionType } from '@/types/db';
 
 type SectionType = {
   id: number;

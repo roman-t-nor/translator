@@ -23,7 +23,7 @@ export function baseInterceptor(
   url = req.url ? `${url}/${req.url}` : url;
   const cloneReq = req.clone({ url });
 
-  console.log('METHOD:', req.method, ',  URL:', url);
+  // console.log('METHOD:', req.method, ',  URL:', url);
 
   return next(cloneReq).pipe(
     catchError((event) => {

@@ -1,0 +1,20 @@
+<table id="matched_entries">
+    <thead>
+    <tr>
+        <th>Слово</th>
+        <th>Перевод</th>
+        <th>Примечание</th>
+        <th>Путь</th>
+    </tr>
+    </thead>
+    <tbody>
+        @for (entry of entries; track entry.id) {
+            <tr>
+                <td><strong>{{ entry.text }}</strong></td>
+                <td>{{ entry.translations[0] }}</td>
+                <td>{{ entry.context }}</td>
+                <td>{{ entry.path }}</td>
+            </tr>
+        }
+    </tbody>
+</table>

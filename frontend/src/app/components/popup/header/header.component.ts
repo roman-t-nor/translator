@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StatsComponent } from './stats/stats.component';
+import { StatsComponent } from './stats.component';
 import { PopupService } from '@/services/popup.service';
 import { StateService } from '@/services/state.service';
 import { AsyncPipe } from '@angular/common';

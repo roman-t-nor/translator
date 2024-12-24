@@ -51,8 +51,8 @@ export class AppComponent implements OnInit {
     if (this.isGetEntriesInTestMode) {
       const entries = this.entriesProviderService.getTestEntries();
       this.state.entries = entries;
-      this.state.currentEntry = entries[2];
-      this.state.currentEntryIndex = 2;
+      this.state.currentEntry = entries[1];
+      this.state.currentEntryIndex = 1;
     }
   }
 

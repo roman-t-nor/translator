@@ -9,7 +9,8 @@ import { StateService } from '@/services/state.service';
 import { SaveService } from '@/services/save/save.service';
 import { ButtonSavingComponent } from '@/components/popup/body/form/controls/button-saving/button-saving.component';
 import { MessageService } from '@/services/message.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DbElementType } from '@/types/db';
+import { DuplicatesComponent } from '@/components/popup/body/duplicates/duplicates.component';
 
 @Component({
   selector: 'popup-form',
@@ -22,20 +23,26 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     JsonPipe,
     ButtonSavingComponent,
     NgIf,
+    DuplicatesComponent,
   ],
 })
 export class FormComponent {
   currentEntry!: Entry;
-  entriesFoundInPast?: SafeHtml;
+  duplicates: Entry[] = [];
 
   constructor(
     private formService: FormService,
     private state: StateService,
     private saveService: SaveService,
     private messageService: MessageService,
-    private sanitizer: DomSanitizer,
   ) {
     this.currentEntry = this.state.currentEntry;
+    this.formService.isEntriesExist$.subscribe((value: boolean) => {
+      console.log('isEntriesExist$', value);
+      if (value) {
+        this.duplicates = [];
+      }
+    });
   }
 
   get entries(): Entry[] {
@@ -56,17 +63,24 @@ export class FormComponent {
 
   submit($event: Event): void {
     if (!this.sectionId) {
-      this.messageService.sendError('Section for saving is not supplied');
+      this.messageService.sendError('Section for saving is not selected');
       return;
     }
     this.saveService.isSaving$.next(true);
     this.saveService.save($event).subscribe({
-      next: (response: string) => {
-        this.formService.entries = [];
+      next: (response: DbElementType[]) => {
+        this.formService.removeAllEntries();
         this.messageService.sendSuccess('Elements saved');
         if (response) {
-          const safeResponse = this.sanitizer.bypassSecurityTrustHtml(response);
-          this.entriesFoundInPast = safeResponse;
+          this.duplicates = response.map(
+            (dbElement: DbElementType) =>
+              new Entry(
+                dbElement.id,
+                dbElement.name,
+                dbElement.context,
+                dbElement.translation,
+              ),
+          );
         }
       },
       complete: () => {

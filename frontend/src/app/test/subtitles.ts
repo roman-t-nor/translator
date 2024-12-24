@@ -5,7 +5,7 @@
 
 2
 00:00:06,720 --> 00:00:10,940
-Lurer på hvor mange William
+Lurer på hvor mange trenger William
 vet du mer enn meg
 skal ligge med i russetiden.
 

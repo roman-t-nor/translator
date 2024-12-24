@@ -16,6 +16,6 @@
     <button-save/>
 </form>
 
-@if (entriesFoundInPast) {
-    <div [innerHTML]="entriesFoundInPast"></div>
+@if (duplicates.length) {
+    <duplicates [entries]="duplicates"/>
 }

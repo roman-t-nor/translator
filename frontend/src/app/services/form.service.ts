@@ -24,12 +24,12 @@ export class FormService {
   ) {
     if (isGetEntriesInTestMode) {
       this.entries = [
-        new Entry(1, 'Text 1'),
-        new Entry(2, 'Text 2'),
-        new Entry(3, 'Text 3'),
+        new Entry(1, 'trenger'),
+        // new Entry(2, 'Text 2'),
+        // new Entry(3, 'Text 3'),
       ];
       this.entries[0].translations.push('translation 1');
-      this.entries[0].translations.push('translation 2');
+      // this.entries[0].translations.push('translation 2');
     }
 
     this.state.currentEntryIndex$.subscribe(() => (this.entries = []));

@@ -22,9 +22,11 @@ export class PopupService {
     window.addEventListener('mouseup', (event: MouseEvent) => {
       this.formService.handleMouseUp(event);
     });
-    this.formService.isEntriesExist$.subscribe((value: boolean) =>
-      this.isInSavingMode$.next(value),
+    this.formService.isEntriesExist$.subscribe(
+      (value: boolean) => value && this.isInSavingMode$.next(true),
     );
+
+    this.isInSavingMode$.next(true); // TEMP
   }
 
   show() {
