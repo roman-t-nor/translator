@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
       provide: DEVELOPMENT_DOMAIN,
       useValue: 'http://translator.loc',
     },
-    { provide: 'isGetEntriesInTestMode', useValue: true },
+    { provide: 'isGetEntriesInTestMode', useValue: false },
     { provide: 'isTranslateServiceInTestMode', useValue: false },
     { provide: 'isSaveServiceInTestMode', useValue: false },
     {

@@ -14,8 +14,8 @@ export class PopupService {
     private state: StateService,
     private formService: FormService,
   ) {
-    this.isOpen$ = new BehaviorSubject(true);
-    this.isInSavingMode$ = new BehaviorSubject(true);
+    this.isOpen$ = new BehaviorSubject(false);
+    this.isInSavingMode$ = new BehaviorSubject(false);
     this.state.currentEntryIndex$.subscribe(() =>
       this.isInSavingMode$.next(false),
     );
@@ -26,7 +26,7 @@ export class PopupService {
       (value: boolean) => value && this.isInSavingMode$.next(true),
     );
 
-    this.isInSavingMode$.next(true); // TEMP
+    // this.isInSavingMode$.next(true); // TEMP
   }
 
   show() {
