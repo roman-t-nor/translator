@@ -23,7 +23,7 @@ export class FormRowComponent implements OnInit {
   @Input() entry!: Entry;
   @Input() index!: number;
   @Output() remove = new EventEmitter<number>();
-  private $fieldTranslateTo!: HTMLElement;
+  private $fieldTranslateTo!: HTMLInputElement;
 
   constructor(
     private formService: FormService,
@@ -49,6 +49,18 @@ export class FormRowComponent implements OnInit {
     if (this.index === 0) {
       this.$fieldTranslateTo.focus();
     }
+
+    this.formService.selectedContentToCopyToTranslation$.subscribe(
+      (content) => {
+        if (this.isCurrent) {
+          const input = this.$fieldTranslateTo;
+          const selectionStart = input.selectionStart as number;
+          const selectionEnd = input.selectionEnd as number;
+          input.setRangeText(content, selectionStart, selectionEnd, 'end');
+          input.focus();
+        }
+      },
+    );
   }
 
   setCurrentEntryIndex() {

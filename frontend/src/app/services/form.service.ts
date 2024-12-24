@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Entry } from '@/Entry';
-import { BehaviorSubject, zip } from 'rxjs';
+import { BehaviorSubject, Subject, zip } from 'rxjs';
 import { StateService } from '@/services/state.service';
 import { HelperService } from '@/services/helper.service';
 import { TranslateService } from '@/services/translate/translate.service';
@@ -15,6 +15,7 @@ export class FormService {
   currentEntryIndex$: BehaviorSubject<number> = new BehaviorSubject(0);
   currentEntry: Entry = this.entries[0];
   isFormEntryTranslating: boolean = false;
+  selectedContentToCopyToTranslation$: Subject<string> = new Subject<string>();
 
   constructor(
     private state: StateService,
@@ -24,12 +25,12 @@ export class FormService {
   ) {
     if (isGetEntriesInTestMode) {
       this.entries = [
-        // new Entry(1, 'trikken'),
-        // new Entry(2, 'Text 2'),
-        // new Entry(3, 'Text 3'),
+        new Entry(1, 'trikken'),
+        new Entry(2, 'Text 2'),
+        new Entry(3, 'Text 3'),
       ];
-      // this.entries[0].translations.push('translation 1');
-      // this.entries[0].translations.push('translation 2');
+      this.entries[0].translations.push('translation 1');
+      this.entries[0].translations.push('translation 2');
     }
 
     this.state.currentEntryIndex$.subscribe(() => (this.entries = []));
@@ -118,7 +119,7 @@ export class FormService {
     if (!this.entries.length) {
       return;
     }
-    this.currentEntry.translations.push(selectedContent);
+    this.selectedContentToCopyToTranslation$.next(selectedContent);
   }
 
   removeEntry(index: number) {
