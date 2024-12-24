@@ -38,7 +38,7 @@
                         type="checkbox"
                         id="is_active"
                         name="is_active"
-                        @checked(isset($section) && $section->active)
+                        @checked(!isset($section) || (isset($section) && $section->active))
                     >
                 </div>
             </div>
