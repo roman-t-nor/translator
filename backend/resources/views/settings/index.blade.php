@@ -1,1 +1,1 @@
-<x-layout title="Settings"/>
+<x-layout title="Settings"></x-layout>

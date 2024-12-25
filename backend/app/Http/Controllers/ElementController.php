@@ -6,6 +6,7 @@ use App\Models\Element;
 use App\Models\Section;
 use App\Requests\StoreElementRequest;
 use App\View\Components\Message;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -93,12 +94,16 @@ class ElementController
     {
         $ids = collect($request->input('element_id'))->map(fn(string $id) => (int) $id);
 
+        if ($ids->isEmpty()) {
+            throw new Exception('No selected elements');
+        }
+
         if ($ids->count() === 1) {
             $element = Element::findOrFail($ids[0]);
             Message::add('Element "'.$element->name.'" deleted');
             $element->delete();
         } else {
-            Message::add('Elements |('.$ids->count().')| deleted');
+            Message::add('Elements deleted (count |'.$ids->count().'|)');
             Element::destroy($ids);
         }
 

@@ -1,4 +1,9 @@
-import axios from 'axios';
-window.axios = axios;
+import axios from "axios";
+import Alpine from "alpinejs";
+import checkboxes from "./checkboxes.js";
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios = axios;
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+
+Alpine.data("data", checkboxes);
+Alpine.start();

@@ -9,13 +9,21 @@
                 >
                     @csrf
                     @method('DELETE')
-                    <table class="table table-bordered align-middle text-center">
+                    <table
+                        class="table table-bordered align-middle text-center"
+                        x-data="data"
+                    >
                         <thead>
                         <tr>
                             <th style="width: 10px">#</th>
                             <th style="width: 10px">
                                 <label>
-                                    <input type="checkbox" class="form-check-input">
+                                    <input
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        :checked="isEveryElementsChecked"
+                                        @click="toggleEveryElementsChecked"
+                                    >
                                 </label>
                             </th>
                             <th>Title</th>
@@ -28,7 +36,7 @@
                         @foreach($elements as $e)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td style="width: 10px" class="form-check-input">
+                                <td style="width: 10px">
                                     <label>
                                         <input
                                             type="checkbox"
@@ -75,5 +83,4 @@
         <x-button.element.create :url="route('sections.elements.create', compact('section'))"/>
         <x-button.element.delete-mass form="elements_mass_destroy" class="ms-auto"/>
     </x-slot:footer>
-
 </x-layout>
