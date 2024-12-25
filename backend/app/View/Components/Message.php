@@ -26,11 +26,23 @@ class Message extends Component
 
     public function render(): View|Closure|string
     {
+        $this->message = self::makeBoldTextInQuotesIncluded($this->message);
+        $this->message = self::makeBoldTextInPipesExcluded($this->message);
         return view('components.message');
     }
 
     public function shouldRender()
     {
         return !!$this->message;
+    }
+
+    private static function makeBoldTextInQuotesIncluded(string $text): string
+    {
+        return preg_replace('/"([^"]+)"/', '<b>$0</b>', $text);
+    }
+
+    private static function makeBoldTextInPipesExcluded(string $text): string
+    {
+        return preg_replace('/\|([^|]+)\|/', '<b>$1</b>', $text);
     }
 }

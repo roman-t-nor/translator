@@ -15,3 +15,8 @@ input[type="checkbox"]:hover {
 .page-item a {
     text-decoration: underline;
 }
+
+.form-check-input {
+    vertical-align: middle;
+    margin: 0;
+}

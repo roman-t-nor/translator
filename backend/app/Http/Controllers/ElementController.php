@@ -6,6 +6,7 @@ use App\Models\Element;
 use App\Models\Section;
 use App\Requests\StoreElementRequest;
 use App\View\Components\Message;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ElementController
@@ -81,10 +82,26 @@ class ElementController
         return redirect()->route('sections.elements.index', compact('section'));
     }
 
-    public function destroy(Section $section, Element $element)
+    public function destroy(Section $section, Element $element): RedirectResponse
     {
         $element->delete();
         Message::add('Element "'.$element->name.'" deleted');
         return redirect()->route('sections.elements.index', compact('section'));
+    }
+
+    public function mass_destroy(Request $request): RedirectResponse
+    {
+        $ids = collect($request->input('element_id'))->map(fn(string $id) => (int) $id);
+
+        if ($ids->count() === 1) {
+            $element = Element::findOrFail($ids[0]);
+            Message::add('Element "'.$element->name.'" deleted');
+            $element->delete();
+        } else {
+            Message::add('Elements |('.$ids->count().')| deleted');
+            Element::destroy($ids);
+        }
+
+        return back();
     }
 }
