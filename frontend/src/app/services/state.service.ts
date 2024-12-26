@@ -34,7 +34,11 @@ export class StateService {
   }
 
   toggleMode() {
-    this.mode = this.mode === 'Read' ? 'Memorize' : 'Read';
+    this.mode = this.isModeRead() ? 'Memorize' : 'Read';
+  }
+
+  isModeRead() {
+    return this.mode === 'Read';
   }
 
   get isTranslating() {

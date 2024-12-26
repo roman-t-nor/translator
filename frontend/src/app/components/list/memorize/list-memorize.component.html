@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-10">
+        <div class="container">
+            @for (entry of entries; track entry.id) {
+                <div class="row border p-2 fs-5">
+                    <div class="col-6">{{ entry.text }}</div>
+                    <div class="col-6">
+                        @if ($index < state.currentEntryIndex) {
+                            {{ entry.translations }}
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <controls class="btn_controls offset-10 col-2 d-flex flex-column gap-3 px-4"/>
+</div>

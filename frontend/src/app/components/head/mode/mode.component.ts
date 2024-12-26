@@ -9,16 +9,4 @@ import { StateService } from '@/services/state.service';
 })
 export class ModeComponent {
   state = inject(StateService);
-
-  get title(): 'Read' | 'Memorize' {
-    return this.state.mode;
-  }
-
-  toggle() {
-    this.state.toggleMode();
-  }
-
-  get isMemorize() {
-    return this.state.mode === 'Memorize';
-  }
 }

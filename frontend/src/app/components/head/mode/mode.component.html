@@ -1,7 +1,7 @@
 <div class="switch-wrapper">
     <label class="switch">
-        <input type="checkbox" (click)="toggle()" [checked]="isMemorize">
+        <input type="checkbox" (click)="state.toggleMode()" [checked]="!state.isModeRead()">
         <span class="slider round"></span>
     </label>
-    <span class="text-center flex-grow-1 border-bottom">{{ title }}</span>
+    <span class="text-center flex-grow-1 border-bottom">{{ state.mode }}</span>
 </div>
