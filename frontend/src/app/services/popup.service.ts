@@ -15,7 +15,7 @@ export class PopupService {
     private state: StateService,
     private formService: FormService,
   ) {
-    this.isOpen$ = new BehaviorSubject(true);
+    this.isOpen$ = new BehaviorSubject(false);
     this.isInSavingMode$ = new BehaviorSubject(false);
     this.isInEditingMode$ = new BehaviorSubject(false);
 

@@ -6,8 +6,8 @@ import { StateService } from './services/state.service';
 import { PopupService } from './services/popup.service';
 import { PopupComponent } from './components/popup/popup.component';
 import { SettingsComponent } from '@/components/settings/settings.component';
-import { TitleComponent } from '@/components/title/title.component';
 import { EntriesProviderService } from '@/services/entries-provider.service';
+import { HeadComponent } from '@/components/head/head.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ import { EntriesProviderService } from '@/services/entries-provider.service';
     MessageComponent,
     PopupComponent,
     SettingsComponent,
-    TitleComponent,
+    HeadComponent,
   ],
   templateUrl: './app.component.html',
   styles: ':host{display: flex;flex-direction: column;flex-grow: 1;}',
