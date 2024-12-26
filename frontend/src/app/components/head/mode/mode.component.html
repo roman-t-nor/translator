@@ -1,6 +1,6 @@
 <div class="switch-wrapper">
     <label class="switch">
-        <input type="checkbox" (click)="toggle()">
+        <input type="checkbox" (click)="toggle()" [checked]="isMemorize">
         <span class="slider round"></span>
     </label>
     <span class="text-center flex-grow-1 border-bottom">{{ title }}</span>

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { TitleComponent } from '@/components/head/title/title.component';
-import { SwitchComponent } from '@/components/head/switch/switch.component';
+import { ModeComponent } from '@/components/head/mode/mode.component';
 
 @Component({
   selector: 'app-head',
   standalone: true,
-  imports: [TitleComponent, SwitchComponent],
+  imports: [TitleComponent, ModeComponent],
   templateUrl: './head.component.html',
 })
 export class HeadComponent {}

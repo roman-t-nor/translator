@@ -9,6 +9,7 @@ import { HelperService } from '@/services/helper.service';
   providedIn: 'root',
 })
 export class StateService {
+  mode: 'Read' | 'Memorize' = 'Memorize';
   entries: Entry[] = [];
   currentEntryIndex$: Subject<number> = new Subject<number>();
   currentEntryIndex: number = 0;
@@ -30,6 +31,10 @@ export class StateService {
         localStorage.setItem(this.fileName, currentEntryIndex.toString());
       }
     });
+  }
+
+  toggleMode() {
+    this.mode = this.mode === 'Read' ? 'Memorize' : 'Read';
   }
 
   get isTranslating() {
