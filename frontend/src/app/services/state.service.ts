@@ -4,6 +4,8 @@ import { TranslateService } from './translate/translate.service';
 import { SettingsLanguagesType } from '@/types/languages';
 import { Subject } from 'rxjs';
 import { HelperService } from '@/services/helper.service';
+import { DbSectionType } from '@/types/db';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,7 @@ export class StateService {
   currentEntryIndex: number = 0;
   currentEntry: Entry = this.entries[0];
 
+  sections: DbSectionType[] = [];
   sectionId: number = 0;
   settingsLanguages!: SettingsLanguagesType;
 
@@ -22,6 +25,7 @@ export class StateService {
   fileName?: string;
   private $isTranslating: boolean = false;
   private helper = inject(HelperService);
+  private http = inject(HttpClient);
 
   constructor(private translator: TranslateService) {
     this.currentEntryIndex$.subscribe((currentEntryIndex) => {
@@ -106,5 +110,11 @@ export class StateService {
       this.entries.map((e: Entry) => e.text).join(''),
     );
     this.currentEntryIndex$.next(this.currentEntryIndex);
+  }
+
+  getSections() {
+    this.http
+      .get<DbSectionType[]>('sections')
+      .subscribe((dbSections) => (this.sections = dbSections));
   }
 }

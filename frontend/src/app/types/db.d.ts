@@ -1,7 +1,7 @@
 export type DbSectionType = {
   id: number;
-  depth: number;
   name: string;
+  depth: number;
 };
 
 export type DbElementType = {

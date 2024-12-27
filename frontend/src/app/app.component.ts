@@ -54,6 +54,8 @@ export class AppComponent implements OnInit {
       this.state.currentEntry = entries[0];
       this.state.currentEntryIndex = 0;
     }
+
+    this.state.getSections();
   }
 
   handlerKeyDown(event: KeyboardEvent) {

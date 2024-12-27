@@ -1,11 +1,10 @@
 <select
         (change)="setSectionId($event)"
         class="form-select"
-        [class]="{'form-select-lg': !state.isModeRead()}"
         name="section_id"
 >
     <option value="0">Выберите словарь</option>
-    @for (section of sections; track section.id) {
-        <option [value]="section.id" [innerHTML]="section.title"></option>
+    @for (s of sections; track s.id) {
+        <option [value]="s.id" [innerHTML]="s.name"></option>
     }
 </select>
