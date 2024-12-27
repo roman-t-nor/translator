@@ -1,4 +1,4 @@
-import { afterRender, Component, ElementRef } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { MemorizeService } from '@/services/memorize.service';
 
 @Component({
@@ -10,27 +10,22 @@ import { MemorizeService } from '@/services/memorize.service';
   },
 })
 export class ButtonShuffleComponent {
-  listHeight: number = 0;
-  container: HTMLElement;
-
   constructor(
     public state: MemorizeService,
     private ref: ElementRef,
-  ) {
-    this.container = this.ref.nativeElement
+  ) {}
+
+  shuffle() {
+    const container = this.ref.nativeElement
       .closest('.row')
       .querySelector('.container');
 
-    afterRender(() => {
-      this.listHeight = this.container.offsetHeight;
-    });
-  }
+    const listHeight = container.offsetHeight;
 
-  shuffle() {
     const transitionTime = 300;
-    const rowHeight = this.listHeight / this.state.entries.length;
-    this.container.style.height = this.listHeight + 'px';
-    this.container.classList.add('animated');
+    const rowHeight = listHeight / this.state.entries.length;
+    container.style.height = listHeight + 'px';
+    container.classList.add('animating');
 
     this.state.resetCurrentIndex();
     const entries = this.state.entries;
@@ -67,8 +62,8 @@ export class ButtonShuffleComponent {
         return s;
       });
       this.state.entries = shuffled;
-      this.container.style.height = 'auto';
-      this.container.classList.remove('animated');
+      container.style.height = 'auto';
+      container.classList.remove('animating');
     }, transitionTime);
   }
 }

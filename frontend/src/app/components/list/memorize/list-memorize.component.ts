@@ -7,7 +7,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'list-memorize',
   standalone: true,
   templateUrl: './list-memorize.component.html',
-  styles: '.animated .item {font-weight: normal !important;}',
+  styles: '.animating .item {font-weight: normal !important;}',
   imports: [ControlsComponent, AsyncPipe],
 })
 export class ListMemorizeComponent {
