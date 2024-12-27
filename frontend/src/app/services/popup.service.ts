@@ -33,8 +33,6 @@ export class PopupService {
     this.isInEditingMode$.subscribe((value: boolean) => {
       value && this.isInSavingMode$.next(false);
     });
-
-    // this.isInSavingMode$.next(true); // TEMP
   }
 
   show() {

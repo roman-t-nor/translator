@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { ButtonPopupComponent } from './button-popup/button-popup.component';
+import { ButtonPopupSaveComponent } from './button-popup/button-popup.component';
 import { ButtonTranslateComponent } from './button-translate/button-translate.component';
 import { ButtonNextComponent } from './button-next/button-next.component';
 
@@ -7,9 +7,9 @@ import { ButtonNextComponent } from './button-next/button-next.component';
   selector: 'controls',
   standalone: true,
   imports: [
-    ButtonPopupComponent,
     ButtonTranslateComponent,
     ButtonNextComponent,
+    ButtonPopupSaveComponent,
   ],
   templateUrl: 'controls.component.html',
 })

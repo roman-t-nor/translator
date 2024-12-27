@@ -27,7 +27,6 @@ export class MemorizeService {
 
     this.currentEntryIndex$.subscribe((index) => {
       this.currentEntryIndex = index;
-      console.log(index);
     });
 
     this.state.sectionId$.subscribe((sectionId) => this.getEntries(sectionId));

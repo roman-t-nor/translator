@@ -4,7 +4,6 @@ import { ListComponent } from '@/components/list/list.component';
 import { MessageComponent } from './components/message/message.component';
 import { StateService } from './services/state.service';
 import { PopupService } from './services/popup.service';
-import { PopupComponent } from './components/popup/popup.component';
 import { SettingsComponent } from '@/components/settings/settings.component';
 import { EntriesProviderService } from '@/services/entries-provider.service';
 import { HeadComponent } from '@/components/head/head.component';
@@ -12,13 +11,7 @@ import { HeadComponent } from '@/components/head/head.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    ListComponent,
-    MessageComponent,
-    PopupComponent,
-    SettingsComponent,
-    HeadComponent,
-  ],
+  imports: [ListComponent, MessageComponent, SettingsComponent, HeadComponent],
   templateUrl: './app.component.html',
   styles: ':host{display: flex;flex-direction: column;flex-grow: 1;}',
 })

@@ -2,11 +2,17 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { ButtonNextComponent } from './button-next/button-next.component';
 import { ButtonShuffleComponent } from '@/components/list/memorize/controls/button-shuffle/button-shuffle.component';
 import { ButtonBeginComponent } from '@/components/list/memorize/controls/button-begin/button-begin.component';
+import { ButtonPopupMemoComponent } from '@/components/list/memorize/controls/button-popup/button-popup.component';
 
 @Component({
   selector: 'controls',
   standalone: true,
-  imports: [ButtonNextComponent, ButtonShuffleComponent, ButtonBeginComponent],
+  imports: [
+    ButtonNextComponent,
+    ButtonShuffleComponent,
+    ButtonBeginComponent,
+    ButtonPopupMemoComponent,
+  ],
   templateUrl: 'controls.component.html',
 })
 export class ControlsComponent implements OnInit {

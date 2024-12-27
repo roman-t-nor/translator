@@ -1,9 +1,16 @@
 <div class="modal ajax-translate">
-  <div class="modal-dialog modal-fullscreen">
-    <div *ngIf="isEntriesLoaded" class="modal-content">
-      <popup-header />
-      <popup-body />
-      <popup-footer />
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Header</h3>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h1>Hello!</h1>
+            </div>
+            <div class="modal-footer justify-content-center py-4">
+                <h3>Footer</h3>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

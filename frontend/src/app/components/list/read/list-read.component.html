@@ -1,13 +1,13 @@
-@if (isEntriesLoaded) {
-  <div class="d-flex flex-grow-1 justify-content-center flex-wrap border py-3">
+<div class="d-flex flex-grow-1 justify-content-center flex-wrap border py-3">
     <div class="ajax-translate col-8">
-      @for (entry of entries; track entry.id) {
-        <item [entry]="entry" [index]="$index"></item>
-      }
+        @for (entry of entries; track entry.id) {
+            <item [entry]="entry" [index]="$index"></item>
+        }
     </div>
-  </div>
+</div>
 
-  <controls
-    class="btn_controls offset-10 col-2 d-flex flex-column gap-3 px-4"
-  />
-}
+<controls
+        class="btn_controls offset-10 col-2 d-flex flex-column gap-3 px-4"
+/>
+
+<popup-read/>

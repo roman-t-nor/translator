@@ -165,21 +165,21 @@ table#matched_entries {
     color: #fff;
 }
 
-.modal-center {
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    height: 100%;
-}
+/*.modal-center {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    text-align: center;*/
+/*    height: 100%;*/
+/*}*/
 
-.modal-center .wrapper {
-    margin: auto;
-}
+/*.modal-center .wrapper {*/
+/*    margin: auto;*/
+/*}*/
 
-.modal-center p {
-    flex-basis: 100%;
-    padding: 2em 0;
-}
+/*.modal-center p {*/
+/*    flex-basis: 100%;*/
+/*    padding: 2em 0;*/
+/*}*/
 
 /**** Message  ****/
 .message {
