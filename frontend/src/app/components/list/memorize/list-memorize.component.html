@@ -1,8 +1,12 @@
 <div class="row">
     <div class="col-10">
-        <div class="container">
+        <div class="container position-relative">
             @for (entry of entries; track entry.id) {
-                <div class="row border p-2 fs-5">
+                <div
+                        class="row item border p-2 fs-5"
+                        [class]="{'fw-bolder': $index === state.currentEntryIndex}"
+                        [style]=entry.style
+                >
                     <div class="col-6">{{ entry.text }}</div>
                     <div class="col-6">
                         @if ($index < state.currentEntryIndex) {

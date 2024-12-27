@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Entry } from '@/Entry';
-import { MemorizeService } from '@/services/memorize.service';
+import { MemorizeService, StyledEntry } from '@/services/memorize.service';
 import { ControlsComponent } from '@/components/list/memorize/controls/controls.component';
 import { AsyncPipe } from '@angular/common';
 
@@ -8,12 +7,13 @@ import { AsyncPipe } from '@angular/common';
   selector: 'list-memorize',
   standalone: true,
   templateUrl: './list-memorize.component.html',
+  styles: '.animated .item {font-weight: normal !important;}',
   imports: [ControlsComponent, AsyncPipe],
 })
 export class ListMemorizeComponent {
   constructor(public state: MemorizeService) {}
 
-  get entries(): Entry[] {
+  get entries(): StyledEntry[] {
     return this.state.entries;
   }
 }

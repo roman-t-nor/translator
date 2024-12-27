@@ -14,14 +14,14 @@ type SectionType = {
   templateUrl: 'sections.component.html',
 })
 export class SectionsComponent {
-  sections: SectionType[] = [];
-
   constructor(
+    public state: StateService,
     private http: HttpClient,
-    private state: StateService,
   ) {
     this.getSections();
   }
+
+  sections: SectionType[] = [];
 
   getSections() {
     this.http.get<DbSectionType[]>('sections').subscribe((dbSections) => {

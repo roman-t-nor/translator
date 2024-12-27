@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Entry } from '@/Entry';
 import { BehaviorSubject } from 'rxjs';
 
+export type StyledEntry = Entry & { style?: { [key: string]: string } };
+
 @Injectable({
   providedIn: 'root',
 })
 export class MemorizeService {
-  entries: Entry[] = [];
+  entries: StyledEntry[] = [];
   currentEntryIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   currentEntryIndex: number = 0;
 
@@ -23,5 +25,13 @@ export class MemorizeService {
 
   goNext() {
     this.currentEntryIndex$.next(this.currentEntryIndex + 1);
+  }
+
+  resetCurrentIndex() {
+    this.currentEntryIndex$.next(0);
+  }
+
+  goBegin() {
+    this.resetCurrentIndex();
   }
 }

@@ -1,6 +1,7 @@
 <select
         (change)="setSectionId($event)"
         class="form-select"
+        [class]="{'form-select-lg': !state.isModeRead()}"
         name="section_id"
 >
     <option value="0">Выберите словарь</option>
