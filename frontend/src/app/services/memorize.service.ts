@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, inject, Injectable } from '@angular/core';
 import { Entry } from '@/Entry';
 import { BehaviorSubject } from 'rxjs';
+import { StateService } from '@/services/state.service';
+import { HttpClient } from '@angular/common/http';
+import { DbElementType } from '@/types/db';
 
 export type StyledEntry = Entry & { style?: { [key: string]: string } };
 
@@ -12,19 +15,54 @@ export class MemorizeService {
   currentEntryIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   currentEntryIndex: number = 0;
 
-  constructor() {
-    this.entries.push(new Entry(1, 'Text 1', 'Context 1', 'Translation 1'));
-    this.entries.push(new Entry(2, 'Text 2', 'Context 2', 'Translation 2'));
-    this.entries.push(new Entry(3, 'Text 3', 'Context 3', 'Translation 3'));
-    this.entries.push(new Entry(4, 'Text 4', 'Context 4', 'Translation 4'));
+  state: StateService = inject(StateService);
+  http: HttpClient = inject(HttpClient);
 
-    this.currentEntryIndex$.subscribe((value) => {
-      this.currentEntryIndex = value;
+  constructor(
+    @Inject('isMemorizeServiceInTestMode') isMemorizeServiceInTestMode: boolean,
+  ) {
+    if (isMemorizeServiceInTestMode) {
+      this.addTestEntries();
+    }
+
+    this.currentEntryIndex$.subscribe((index) => {
+      this.currentEntryIndex = index;
+      console.log(index);
     });
+
+    this.state.sectionId$.subscribe((sectionId) => this.getEntries(sectionId));
+  }
+
+  addTestEntries() {
+    for (let i = 1; i <= 4; i++) {
+      this.entries.push(
+        new Entry(i, `Text ${i}`, `Context ${i}`, `Translation ${i}`),
+      );
+    }
+  }
+
+  getEntries(sectionId: number) {
+    this.entries = [];
+    this.resetCurrentIndex();
+    if (!sectionId) {
+      return;
+    }
+    this.http
+      .get<DbElementType[]>(`sections/${sectionId}/elements`)
+      .subscribe((elements) => {
+        elements.forEach((e) =>
+          this.entries.push(new Entry(e.id, e.name, e.context, e.translation)),
+        );
+      });
   }
 
   goNext() {
-    this.currentEntryIndex$.next(this.currentEntryIndex + 1);
+    const nextIndex = this.currentEntryIndex + 1;
+    if (nextIndex > this.entries.length) {
+      alert('Done!');
+      return;
+    }
+    this.currentEntryIndex$.next(nextIndex);
   }
 
   resetCurrentIndex() {

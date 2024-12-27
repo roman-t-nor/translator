@@ -33,5 +33,6 @@ export const appConfig: ApplicationConfig = {
       useFactory: SaveServiceFactory,
       deps: ['isSaveServiceInTestMode'],
     },
+    { provide: 'isMemorizeServiceInTestMode', useValue: true },
   ],
 };

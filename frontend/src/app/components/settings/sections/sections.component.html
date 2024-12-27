@@ -5,6 +5,10 @@
 >
     <option value="0">Выберите словарь</option>
     @for (s of sections; track s.id) {
-        <option [value]="s.id" [innerHTML]="s.name"></option>
+        <option
+                [value]="s.id"
+                [innerHTML]="s.name"
+                [selected]="s.id === state.sectionId"
+        ></option>
     }
 </select>

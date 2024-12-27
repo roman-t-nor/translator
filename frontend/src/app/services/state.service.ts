@@ -18,7 +18,9 @@ export class StateService {
   currentEntry: Entry = this.entries[0];
 
   sections: DbSectionType[] = [];
+  sectionId$: Subject<number> = new Subject<number>();
   sectionId: number = 0;
+
   settingsLanguages!: SettingsLanguagesType;
 
   respectListGroups: boolean = false;
@@ -34,6 +36,10 @@ export class StateService {
       if (this.fileName) {
         localStorage.setItem(this.fileName, currentEntryIndex.toString());
       }
+    });
+
+    this.sectionId$.subscribe((sectionId) => {
+      this.sectionId = sectionId;
     });
   }
 

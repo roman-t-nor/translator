@@ -4,13 +4,16 @@ namespace App\Api\Controllers;
 
 use App\Models\Element;
 use App\Models\Section;
-use App\View\Components\Message;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class ElementController
 {
+    public function index(Section $section): ?Collection
+    {
+        return $section->elements()->get();
+    }
+
     public function store(Section $section, Request $request): ?Collection
     {
         $context = $request->input('context');

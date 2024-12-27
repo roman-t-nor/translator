@@ -19,6 +19,6 @@ export class SectionsComponent {
 
   setSectionId($event: Event) {
     const target = $event.target as HTMLSelectElement;
-    this.state.sectionId = Number(target.value);
+    this.state.sectionId$.next(Number(target.value));
   }
 }
