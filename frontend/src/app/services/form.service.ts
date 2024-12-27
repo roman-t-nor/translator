@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { Entry } from '@/Entry';
 import { BehaviorSubject, Subject, zip } from 'rxjs';
-import { StateService } from '@/services/state.service';
 import { HelperService } from '@/services/helper.service';
 import { TranslateService } from '@/services/translate/translate.service';
 import { LanguageToType } from '@/types/languages';
+import { ReadService } from '@/services/read.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class FormService {
   selectedContentToCopyToTranslation$: Subject<string> = new Subject<string>();
 
   constructor(
-    private state: StateService,
+    private readService: ReadService,
     private helper: HelperService,
     private translator: TranslateService,
     @Inject('isGetEntriesInTestMode') private isGetEntriesInTestMode: boolean,
@@ -33,10 +33,14 @@ export class FormService {
       this.entries[0].translations.push('translation 2');
     }
 
-    this.state.currentEntryIndex$.subscribe(() => (this.entries = []));
+    this.readService.currentEntryIndex$.subscribe(() => (this.entries = []));
     this.currentEntryIndex$.subscribe(
       (currentEntryIndex) =>
         (this.currentEntry = this.entries[currentEntryIndex]),
+    );
+
+    this.isEntriesExist$.subscribe(
+      (value: boolean) => value && this.readService.isInSavingMode$.next(true),
     );
   }
 
@@ -73,7 +77,7 @@ export class FormService {
       (entry: Entry) => entry.text === selectedContent,
     );
     const isSelectedWholeText =
-      selectedContent === this.state.currentEntry.text.toLowerCase();
+      selectedContent === this.readService.currentEntry.text.toLowerCase();
 
     if (isDoubleExist || isSelectedWholeText) {
       return;
@@ -82,7 +86,7 @@ export class FormService {
     const entry = new Entry(
       this.helper.hashCode(selectedContent),
       selectedContent,
-      this.state.currentEntry.text,
+      this.readService.currentEntry.text,
     );
 
     if (this.isFormEntryTranslating) {
@@ -94,7 +98,7 @@ export class FormService {
     this.isEntriesExist$.next(true);
     this.currentEntryIndex$.next(this.currentEntryIndex$.getValue() + 1);
 
-    const languagesTo = [...this.state.settingsLanguages.to];
+    const languagesTo = [...this.readService.settingsLanguages.to];
     if (languagesTo.length === 2 && languagesTo[0] !== 'RU') {
       languagesTo.reverse();
     }
@@ -102,7 +106,7 @@ export class FormService {
       languagesTo.map((languageTo: LanguageToType) => {
         return this.translator.translate(
           entry,
-          this.state.settingsLanguages.from,
+          this.readService.settingsLanguages.from,
           languageTo,
         );
       }),

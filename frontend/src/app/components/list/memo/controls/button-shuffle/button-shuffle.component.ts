@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { MemorizeService } from '@/services/memorize.service';
+import { MemoService } from '@/services/memo.service';
 
 @Component({
   selector: 'button-shuffle',
@@ -11,7 +11,7 @@ import { MemorizeService } from '@/services/memorize.service';
 })
 export class ButtonShuffleComponent {
   constructor(
-    public state: MemorizeService,
+    public state: MemoService,
     private ref: ElementRef,
   ) {}
 

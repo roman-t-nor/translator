@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { EntriesProviderService } from '@/services/entries-provider.service';
-import { StateService } from '@/services/state.service';
 import { FormService } from '@/services/form.service';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'content-upload',
@@ -12,7 +12,7 @@ import { FormService } from '@/services/form.service';
 export class ContentUploadComponent {
   constructor(
     private entriesProviderService: EntriesProviderService,
-    private state: StateService,
+    private readService: ReadService,
     private formService: FormService,
   ) {}
 
@@ -23,10 +23,10 @@ export class ContentUploadComponent {
     const entries$ = this.entriesProviderService.getEntriesFromFile(file);
     const currentEntryIndex = Number(localStorage.getItem(file.name));
     entries$.subscribe((entries) => {
-      this.state.entries = entries;
-      this.state.currentEntryIndex$.next(currentEntryIndex);
+      this.readService.entries = entries;
+      this.readService.currentEntryIndex$.next(currentEntryIndex);
     });
-    this.state.fileName = file.name;
+    this.readService.fileName = file.name;
     this.formService.removeAllEntries();
   }
 
@@ -35,8 +35,8 @@ export class ContentUploadComponent {
     const entries = this.entriesProviderService.getEntriesFromPaste(
       target.value,
     );
-    this.state.entries = entries;
-    this.state.currentEntry = entries[0];
+    this.readService.entries = entries;
+    this.readService.currentEntry = entries[0];
     this.formService.removeAllEntries();
   }
 }

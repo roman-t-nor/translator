@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { StateService } from '@/services/state.service';
-import { PopupService } from '@/services/popup.service';
 import { Entry } from '@/Entry';
 import { FormsModule } from '@angular/forms';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'edit',
@@ -13,16 +12,13 @@ import { FormsModule } from '@angular/forms';
 export class EditComponent {
   entry: Entry;
 
-  constructor(
-    private state: StateService,
-    private popupService: PopupService,
-  ) {
-    this.entry = this.state.currentEntry;
+  constructor(private readService: ReadService) {
+    this.entry = this.readService.currentEntry;
   }
 
   saveEditing($event: Event) {
-    this.state.refreshEntries();
-    this.popupService.isInEditingMode$.next(false);
+    this.readService.refreshEntries();
+    this.readService.isInEditingMode$.next(false);
     $event.preventDefault();
     $event.stopPropagation();
   }

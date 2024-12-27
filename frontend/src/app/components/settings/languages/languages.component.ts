@@ -1,6 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
-import { StateService } from '@/services/state.service';
 import { LanguageFromType, LanguageToType } from '@/types/languages';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'languages',
@@ -9,7 +9,7 @@ import { LanguageFromType, LanguageToType } from '@/types/languages';
 })
 export class LanguagesComponent {
   constructor(
-    private state: StateService,
+    private readService: ReadService,
     private ref: ElementRef,
   ) {}
 
@@ -28,6 +28,6 @@ export class LanguagesComponent {
     if (to2) {
       to.push(to2);
     }
-    this.state.settingsLanguages = { from, to };
+    this.readService.settingsLanguages = { from, to };
   }
 }

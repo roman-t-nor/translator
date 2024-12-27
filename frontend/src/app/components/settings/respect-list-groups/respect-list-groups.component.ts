@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StateService } from '@/services/state.service';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'respect-list-groups',
@@ -7,10 +7,10 @@ import { StateService } from '@/services/state.service';
   templateUrl: 'respect-list-groups.component.html',
 })
 export class RespectListGroupsComponent {
-  constructor(private state: StateService) {}
+  constructor(private readService: ReadService) {}
 
   setRespectListGroups($event: Event) {
     const target = $event.target as HTMLInputElement;
-    this.state.respectListGroups = target.checked;
+    this.readService.respectListGroups = target.checked;
   }
 }

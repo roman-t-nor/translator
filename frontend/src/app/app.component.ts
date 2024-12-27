@@ -7,6 +7,7 @@ import { PopupService } from './services/popup.service';
 import { SettingsComponent } from '@/components/settings/settings.component';
 import { EntriesProviderService } from '@/services/entries-provider.service';
 import { HeadComponent } from '@/components/head/head.component';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   public constructor(
     private titleService: Title,
     private state: StateService,
+    private readService: ReadService,
     private popupService: PopupService,
     private entriesProviderService: EntriesProviderService,
     @Inject('isGetEntriesInTestMode') private isGetEntriesInTestMode: boolean,
@@ -43,9 +45,9 @@ export class AppComponent implements OnInit {
 
     if (this.isGetEntriesInTestMode) {
       const entries = this.entriesProviderService.getTestEntries();
-      this.state.entries = entries;
-      this.state.currentEntry = entries[0];
-      this.state.currentEntryIndex = 0;
+      this.readService.entries = entries;
+      this.readService.currentEntry = entries[0];
+      this.readService.currentEntryIndex = 0;
     }
 
     this.state.getSections();
@@ -58,17 +60,17 @@ export class AppComponent implements OnInit {
     }
 
     if (['ArrowLeft', 'ArrowUp'].includes(event.code)) {
-      this.state.goPrevious();
+      this.readService.goPrevious();
       event.preventDefault();
     }
 
     if (['ArrowRight', 'ArrowDown'].includes(event.code)) {
-      this.state.goNext();
+      this.readService.goNext();
       event.preventDefault();
     }
 
     if (event.code === 'Space') {
-      this.state.translate();
+      this.readService.translate();
       event.preventDefault();
     }
 
@@ -76,9 +78,9 @@ export class AppComponent implements OnInit {
       if (event.shiftKey) {
         this.popupService.isOpen$.next(true);
       } else if (event.ctrlKey) {
-        this.state.translate();
+        this.readService.translate();
       } else {
-        this.state.goNext();
+        this.readService.goNext();
       }
       event.preventDefault();
     }
@@ -91,9 +93,9 @@ export class AppComponent implements OnInit {
 
   handleWheel(event: WheelEvent) {
     if (event.deltaY < 0) {
-      this.state.goPrevious();
+      this.readService.goPrevious();
     } else {
-      this.state.goNext();
+      this.readService.goNext();
     }
   }
 }

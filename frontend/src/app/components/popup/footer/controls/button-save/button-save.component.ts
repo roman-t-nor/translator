@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { StateService } from '@/services/state.service';
-import { PopupService } from '@/services/popup.service';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'popup-button-save',
@@ -8,13 +7,10 @@ import { PopupService } from '@/services/popup.service';
   templateUrl: 'button-save.component.html',
 })
 export class ButtonSaveComponent {
-  constructor(
-    private state: StateService,
-    private popupService: PopupService,
-  ) {}
+  constructor(private readService: ReadService) {}
 
   save() {
-    this.state.refreshEntries();
-    this.popupService.isInEditingMode$.next(false);
+    this.readService.refreshEntries();
+    this.readService.isInEditingMode$.next(false);
   }
 }

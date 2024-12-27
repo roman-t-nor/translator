@@ -1,16 +1,20 @@
 <div class="modal ajax-translate">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
+
             <div class="modal-header">
-                <h3>Header</h3>
+                <ng-content select="header"/>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
             <div class="modal-body">
-                <h1>Hello!</h1>
+                <ng-content select="body"/>
             </div>
+
             <div class="modal-footer justify-content-center py-4">
-                <h3>Footer</h3>
+                <ng-content select="footer"/>
             </div>
+
         </div>
     </div>
 </div>

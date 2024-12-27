@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MemorizeService } from '@/services/memorize.service';
+import { MemoService } from '@/services/memo.service';
 
 @Component({
   selector: 'button-begin',
@@ -10,7 +10,7 @@ import { MemorizeService } from '@/services/memorize.service';
   },
 })
 export class ButtonBeginComponent {
-  constructor(private state: MemorizeService) {}
+  constructor(private state: MemoService) {}
 
   goBegin() {
     this.state.goBegin();

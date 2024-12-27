@@ -22,10 +22,6 @@ export class PopupComponent {
     private popupService: PopupService,
   ) {}
 
-  get isEntriesLoaded(): boolean {
-    return !!this.state.currentEntry;
-  }
-
   ngOnInit(): void {
     const node = this.elementRef.nativeElement.querySelector('.modal');
     this.modal = new Modal(node);

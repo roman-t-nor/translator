@@ -10,7 +10,7 @@ export type StyledEntry = Entry & { style?: { [key: string]: string } };
 @Injectable({
   providedIn: 'root',
 })
-export class MemorizeService {
+export class MemoService {
   entries: StyledEntry[] = [];
   currentEntryIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   currentEntryIndex: number = 0;
@@ -19,9 +19,9 @@ export class MemorizeService {
   http: HttpClient = inject(HttpClient);
 
   constructor(
-    @Inject('isMemorizeServiceInTestMode') isMemorizeServiceInTestMode: boolean,
+    @Inject('isMemoServiceInTestMode') isMemoServiceInTestMode: boolean,
   ) {
-    if (isMemorizeServiceInTestMode) {
+    if (isMemoServiceInTestMode) {
       this.addTestEntries();
     }
 

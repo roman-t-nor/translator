@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { Entry } from '@/Entry';
 import { CssClassesArrayToStringPipe } from '@/pipes/css-classes-array-to-string.pipe';
-import { StateService } from '@/services/state.service';
 import { TranslationsComponent } from '../translations/translations.component';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'item',
@@ -16,12 +16,12 @@ export class ItemComponent implements OnInit {
   $className: string[] = [];
 
   constructor(
-    private state: StateService,
+    private readService: ReadService,
     private ref: ElementRef,
   ) {}
 
   get isCurrentEntry() {
-    return this.state.currentEntryIndex === this.index;
+    return this.readService.currentEntryIndex === this.index;
   }
 
   get className() {
@@ -30,7 +30,7 @@ export class ItemComponent implements OnInit {
       this.$className.push('active');
     }
 
-    if (this.state.respectListGroups && this.entry.lastInGroup) {
+    if (this.readService.respectListGroups && this.entry.lastInGroup) {
       this.$className.push('list_item_last');
     }
 
@@ -38,7 +38,7 @@ export class ItemComponent implements OnInit {
   }
 
   get isEntryTranslating(): boolean {
-    return this.state.isTranslating && this.isCurrentEntry;
+    return this.readService.isTranslating && this.isCurrentEntry;
   }
 
   get isShowTranslations(): boolean {
@@ -46,7 +46,7 @@ export class ItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.state.currentEntryIndex$.subscribe(() => {
+    this.readService.currentEntryIndex$.subscribe(() => {
       this.scrollIntoView();
     });
     this.scrollIntoView();
@@ -62,6 +62,6 @@ export class ItemComponent implements OnInit {
   }
 
   handleClick() {
-    this.state.setCurrentEntry(this.index);
+    this.readService.setCurrentEntry(this.index);
   }
 }
