@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { StateService } from '@/services/state.service';
+import { Component, Input } from '@angular/core';
+import { ReadService } from '@/services/read.service';
+import { MemoService } from '@/services/memo.service';
 
 @Component({
   selector: 'stats',
@@ -8,7 +9,7 @@ import { StateService } from '@/services/state.service';
     '<div class="stats">{{ index }} / {{ total }} ({{ percent }}%)</div>',
 })
 export class StatsComponent {
-  constructor(private state: StateService) {}
+  @Input({ required: true }) state!: ReadService | MemoService;
 
   get index() {
     return this.state.currentEntryIndex + 1;

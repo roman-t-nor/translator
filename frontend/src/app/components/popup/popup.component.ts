@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { Modal } from 'bootstrap';
 import { PopupService } from '@/services/popup.service';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ export class PopupComponent {
   title: string = '';
   body: string = '';
   subscription?: Subscription;
+  @Input() className?: string;
 
   constructor(
     private state: StateService,
