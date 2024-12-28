@@ -21,9 +21,30 @@ import { ButtonEditComponent } from '@/components/list/read/popup/footer/control
 export class PopupFooterReadComponent {
   isInEditingMode: boolean = false;
 
-  constructor(private readService: ReadService) {
-    this.readService.isInEditingMode$.subscribe((value: boolean) => {
+  constructor(private state: ReadService) {
+    this.state.isInEditingMode$.subscribe((value: boolean) => {
       this.isInEditingMode = value;
     });
+  }
+
+  goPrevious() {
+    this.state.goPrevious();
+  }
+
+  translate() {
+    this.state.translate();
+  }
+
+  goNext() {
+    this.state.goNext();
+  }
+
+  edit() {
+    this.state.isInEditingMode$.next(true);
+  }
+
+  save() {
+    this.state.refreshEntries();
+    this.state.isInEditingMode$.next(false);
   }
 }
