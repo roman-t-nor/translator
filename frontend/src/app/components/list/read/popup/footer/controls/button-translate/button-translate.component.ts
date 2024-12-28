@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StateService } from '@/services/state.service';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'popup-button-translate',
@@ -7,9 +7,9 @@ import { StateService } from '@/services/state.service';
   templateUrl: 'button-translate.component.html',
 })
 export class ButtonTranslateComponent {
-  constructor(private state: StateService) {}
+  constructor(private readService: ReadService) {}
 
   translate() {
-    this.state.translate();
+    this.readService.translate();
   }
 }

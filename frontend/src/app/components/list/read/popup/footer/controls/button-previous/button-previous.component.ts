@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StateService } from '@/services/state.service';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'popup-button-previous',
@@ -7,9 +7,9 @@ import { StateService } from '@/services/state.service';
   templateUrl: 'button-previous.component.html',
 })
 export class ButtonPreviousComponent {
-  constructor(private state: StateService) {}
+  constructor(private readService: ReadService) {}
 
   goPrevious() {
-    this.state.goPrevious();
+    this.readService.goPrevious();
   }
 }

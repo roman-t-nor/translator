@@ -9,7 +9,7 @@ import { StatsComponent } from '@/components/stats/stats.component';
   templateUrl: 'header.component.html',
   imports: [AsyncPipe, StatsComponent],
 })
-export class HeaderReadComponent {
+export class PopupHeaderReadComponent {
   constructor(public readService: ReadService) {}
 
   get isInSavingMode() {

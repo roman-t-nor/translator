@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StateService } from '@/services/state.service';
+import { ReadService } from '@/services/read.service';
 
 @Component({
   selector: 'popup-button-next',
@@ -7,9 +7,9 @@ import { StateService } from '@/services/state.service';
   templateUrl: 'button-next.component.html',
 })
 export class ButtonNextComponent {
-  constructor(private state: StateService) {}
+  constructor(private readService: ReadService) {}
 
   goNext() {
-    this.state.goNext();
+    this.readService.goNext();
   }
 }
