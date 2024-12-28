@@ -54,15 +54,9 @@ export class FormRowComponent implements OnInit {
       (content) => {
         if (this.isCurrent) {
           const input = this.$fieldTranslateTo;
-
-          const selectionStart = input.selectionStart as number;
-          const selectionEnd = input.selectionEnd as number;
-          input.setRangeText(
-            ', ' + content,
-            selectionStart,
-            selectionEnd,
-            'end',
-          );
+          const start = input.selectionStart as number;
+          const end = input.selectionEnd as number;
+          input.setRangeText(', ' + content, start, end, 'end');
           input.focus();
         }
       },
