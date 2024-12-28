@@ -28,10 +28,6 @@ export class ListReadComponent {
     return this.readService.entries;
   }
 
-  get isEntriesLoaded(): boolean {
-    return !!this.entries.length;
-  }
-
   ngOnInit(): void {
     window.addEventListener('keydown', this.handlerKeyDown.bind(this));
 

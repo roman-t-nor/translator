@@ -8,6 +8,7 @@ import { StatsComponent } from '@/components/stats/stats.component';
   standalone: true,
   templateUrl: 'header.component.html',
   imports: [AsyncPipe, StatsComponent],
+  styles: ':host{width: 100%}',
 })
 export class PopupHeaderReadComponent {
   constructor(public readService: ReadService) {}
