@@ -2,9 +2,10 @@ import { Component, ElementRef, OnInit, output } from '@angular/core';
 import { ButtonNextComponent } from './button-next/button-next.component';
 import { ButtonShuffleComponent } from '@/components/list/memo/controls/button-shuffle/button-shuffle.component';
 import { ButtonBeginComponent } from '@/components/list/memo/controls/button-begin/button-begin.component';
-import { ButtonPopupMemoComponent } from '@/components/list/memo/controls/button-popup/button-popup.component';
 import { PopupService } from '@/services/popup.service';
 import { MemoService } from '@/services/memo.service';
+import { ButtonPopupWeakComponent } from '@/components/list/memo/controls/button-popup-weak/button-popup-weak.component';
+import { ButtonPopupStrictComponent } from '@/components/list/memo/controls/button-popup-strict/button-popup-strict.component';
 
 @Component({
   selector: 'controls',
@@ -13,14 +14,19 @@ import { MemoService } from '@/services/memo.service';
     ButtonNextComponent,
     ButtonShuffleComponent,
     ButtonBeginComponent,
-    ButtonPopupMemoComponent,
+    ButtonPopupWeakComponent,
+    ButtonPopupStrictComponent,
   ],
   templateUrl: 'controls.component.html',
 })
 export class ControlsComponent implements OnInit {
   shuffled = output();
 
-  showPopup() {
+  showPopupWeak() {
+    this.popupService.show();
+  }
+
+  showPopupStrict() {
     this.popupService.show();
   }
 

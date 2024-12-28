@@ -11,13 +11,13 @@ import { StatsComponent } from '@/components/stats/stats.component';
   styles: ':host{width: 100%}',
 })
 export class PopupHeaderReadComponent {
-  constructor(public readService: ReadService) {}
+  constructor(public state: ReadService) {}
 
   get isInSavingMode() {
-    return this.readService.isInSavingMode$;
+    return this.state.isInSavingMode$;
   }
 
   get text() {
-    return this.readService.currentEntry.text;
+    return this.state.currentEntry.text;
   }
 }

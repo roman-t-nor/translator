@@ -1,4 +1,13 @@
-<button-begin (click)="goBegin()" class="btn btn-lg btn-outline-light"/>
-<button-popup-memo (click)="showPopup()" class="btn btn-lg btn-outline-light"/>
-<button-shuffle (click)="shuffle()" class="btn btn-lg btn-outline-light"/>
-<button-next (click)="goNext()" class="btn btn-lg btn-outline-light"/>
+<button-begin (click)="goBegin()" class="btn btn-lg btn-outline-light" title="Go to begin"/>
+<button-popup-weak
+        (click)="showPopupWeak()"
+        class="btn btn-lg btn-outline-light"
+        title="Open in popup (weak)"
+/>
+<button-popup-strict
+        (click)="showPopupStrict()"
+        class="btn btn-lg btn-outline-light"
+        title="Open in popup (strict)"
+/>
+<button-shuffle (click)="shuffle()" class="btn btn-lg btn-outline-light" title="Shuffle"/>
+<button-next (click)="goNext()" class="btn btn-lg btn-outline-light" title="Go next"/>

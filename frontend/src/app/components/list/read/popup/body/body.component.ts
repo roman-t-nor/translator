@@ -24,17 +24,17 @@ export class PopupBodyReadComponent {
   entry: Entry;
   isInEditingMode: boolean = false;
 
-  constructor(private readService: ReadService) {
-    this.entry = this.readService.currentEntry;
-    this.readService.currentEntryIndex$.subscribe((currentEntryIndex) => {
-      this.entry = this.readService.entries[currentEntryIndex];
+  constructor(private state: ReadService) {
+    this.entry = this.state.currentEntry;
+    this.state.currentEntryIndex$.subscribe((currentEntryIndex) => {
+      this.entry = this.state.entries[currentEntryIndex];
     });
-    this.readService.isInEditingMode$.subscribe((value: boolean) => {
+    this.state.isInEditingMode$.subscribe((value: boolean) => {
       this.isInEditingMode = value;
     });
   }
 
   get isInSavingMode() {
-    return this.readService.isInSavingMode$;
+    return this.state.isInSavingMode$;
   }
 }

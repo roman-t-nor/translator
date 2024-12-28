@@ -3,6 +3,7 @@ import { MemoService, StyledEntry } from '@/services/memo.service';
 import { ControlsComponent } from '@/components/list/memo/controls/controls.component';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { PopupMemoComponent } from '@/components/list/memo/popup/popup.component';
+import { PopupService } from '@/services/popup.service';
 
 @Component({
   selector: 'list-memo',
@@ -14,6 +15,7 @@ import { PopupMemoComponent } from '@/components/list/memo/popup/popup.component
 export class ListMemoComponent {
   constructor(
     public state: MemoService,
+    public popupService: PopupService,
     private ref: ElementRef,
   ) {}
 
@@ -69,5 +71,48 @@ export class ListMemoComponent {
       container.style.height = 'auto';
       container.classList.remove('animating');
     }, transitionTime);
+  }
+
+  ngOnInit(): void {
+    window.addEventListener('keydown', this.handlerKeyDown.bind(this));
+
+    const handleWheel = this.handleWheel.bind(this);
+    this.popupService.isOpen$.subscribe((value) => {
+      if (value) {
+        window.addEventListener('wheel', handleWheel);
+      } else {
+        window.removeEventListener('wheel', handleWheel);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('keydown', this.handlerKeyDown.bind(this));
+    window.removeEventListener('wheel', this.handleWheel.bind(this));
+  }
+
+  handlerKeyDown(event: KeyboardEvent) {
+    if (['ArrowLeft', 'ArrowUp'].includes(event.code)) {
+      this.state.goPrevious();
+      event.preventDefault();
+    }
+
+    if (['ArrowRight', 'ArrowDown', 'Space', 'Enter'].includes(event.code)) {
+      this.state.goNext();
+      event.preventDefault();
+    }
+
+    if (event.code === 'Escape') {
+      this.popupService.isOpen$.next(false);
+      event.preventDefault();
+    }
+  }
+
+  handleWheel(event: WheelEvent) {
+    if (event.deltaY < 0) {
+      this.state.goPrevious();
+    } else {
+      this.state.goNext();
+    }
   }
 }

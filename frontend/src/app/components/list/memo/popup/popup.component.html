@@ -1,3 +1,18 @@
 <popup className="modal-fullscreen">
-    <popup-header-memo ngProjectAs="header"/>
+    <h5
+            class="modal-title fs-4 ps-4 text-center"
+            style="min-height: 1.5em;"
+            ngProjectAs="header"
+    >{{ entry.translations }}</h5>
+
+    <div class="modal-center" ngProjectAs="body">
+        <div class="wrapper">
+            <p class="py-2 fs-1 border-bottom">{{ entry.text }}</p>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-between" ngProjectAs="footer">
+        <stats [state]="state"/>
+        <div class="fs-5" [innerHTML]="entry.context"></div>
+        <button class="btn btn-outline-success" (click)="goNext()">Next</button>
+    </div>
 </popup>

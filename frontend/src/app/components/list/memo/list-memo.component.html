@@ -9,7 +9,7 @@
                 >
                     <div class="col-6">{{ entry.text }}</div>
                     <div class="col-6">
-                        @if ($index < state.currentEntryIndex) {
+                        @if ($index <= state.currentTranslateIndex) {
                             {{ entry.translations }}
                         }
                     </div>
