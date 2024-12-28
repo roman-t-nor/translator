@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class StateService {
-  mode: 'Read' | 'Memo' = 'Read';
+  mode: 'Read' | 'Memo' = 'Memo';
 
   sections: DbSectionType[] = [];
   sectionId$: Subject<number> = new Subject<number>();
