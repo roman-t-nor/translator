@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PopupComponent } from '@/components/popup/popup.component';
 import { MemoService } from '@/services/memo.service';
 import { StatsComponent } from '@/components/stats/stats.component';
+import { Entry } from '@/Entry';
 
 @Component({
   selector: 'popup-memo',
@@ -10,10 +11,13 @@ import { StatsComponent } from '@/components/stats/stats.component';
   templateUrl: './popup.component.html',
 })
 export class PopupMemoComponent {
-  constructor(public state: MemoService) {}
+  entry: Entry;
 
-  get entry() {
-    return this.state.currentEntry;
+  constructor(public state: MemoService) {
+    this.entry = this.state.entries[0];
+    this.state.currentEntry$.subscribe((entry: Entry) => {
+      this.entry = entry;
+    });
   }
 
   goNext() {

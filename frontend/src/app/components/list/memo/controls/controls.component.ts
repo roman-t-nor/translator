@@ -22,11 +22,25 @@ import { ButtonPopupStrictComponent } from '@/components/list/memo/controls/butt
 export class ControlsComponent implements OnInit {
   shuffled = output();
 
+  constructor(
+    private ref: ElementRef,
+    private popupService: PopupService,
+    private state: MemoService,
+  ) {}
+
   showPopupWeak() {
+    this.state.mode = 'weak';
+    this.state.currentEntry$.next(
+      this.state.entries[this.state.currentEntryIndex],
+    );
     this.popupService.show();
   }
 
   showPopupStrict() {
+    this.state.mode = 'strict';
+    this.state.currentEntry$.next(
+      this.state.entriesStrict[this.state.currentEntryIndex],
+    );
     this.popupService.show();
   }
 
@@ -41,12 +55,6 @@ export class ControlsComponent implements OnInit {
   goNext() {
     this.state.goNext();
   }
-
-  constructor(
-    private ref: ElementRef,
-    private popupService: PopupService,
-    private state: MemoService,
-  ) {}
 
   ngOnInit(): void {
     this.ref.nativeElement.style.marginTop = `-${this.ref.nativeElement.offsetHeight}px`;
