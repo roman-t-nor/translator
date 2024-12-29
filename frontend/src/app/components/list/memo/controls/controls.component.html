@@ -1,13 +1,18 @@
-<button-begin (click)="goBegin()" class="btn btn-lg btn-outline-light" title="Go to begin"/>
-<button-popup-weak
-        (click)="showPopupWeak()"
-        class="btn btn-lg btn-outline-light"
-        title="Open in popup (weak)"
-/>
-<button-popup-strict
-        (click)="showPopupStrict()"
-        class="btn btn-lg btn-outline-light"
-        title="Open in popup (strict)"
-/>
-<button-shuffle (click)="shuffle()" class="btn btn-lg btn-outline-light" title="Shuffle"/>
-<button-next (click)="goNext()" class="btn btn-lg btn-outline-light" title="Go next"/>
+<div class="offset-10 col-2 d-flex flex-column gap-3 px-4">
+    <button-settings/>
+    <ng-container *ngIf="state.entries.length">
+        <button-begin (click)="goBegin()" class="btn btn-lg btn-outline-light" title="Go to begin"/>
+        <button-popup-weak
+                (click)="showPopupWeak()"
+                class="btn btn-lg btn-outline-light"
+                title="Open in popup (weak)"
+        />
+        <button-popup-strict
+                (click)="showPopupStrict()"
+                class="btn btn-lg btn-outline-light"
+                title="Open in popup (strict)"
+        />
+        <button-shuffle (click)="shuffle()" class="btn btn-lg btn-outline-light" title="Shuffle"/>
+        <button-next (click)="goNext()" class="btn btn-lg btn-outline-light" title="Go next"/>
+    </ng-container>
+</div>

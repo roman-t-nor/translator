@@ -6,6 +6,7 @@
                         class="row item border p-2 fs-5"
                         [class]="{'fw-bolder': $index === state.currentEntryIndex}"
                         [style]=entry.style
+                        (dblclick)="edit(entry.id)"
                 >
                     <div class="col-6">{{ entry.text }}</div>
                     <div class="col-6">
@@ -17,14 +18,13 @@
             }
         </div>
     </div>
-    <controls
-            *ngIf="entries.length"
-            class="btn_controls offset-10 col-2 d-flex flex-column gap-3 px-4"
-            (shuffled)="shuffle()"
-    />
+    <controls (shuffled)="shuffle()" class="btn_controls"/>
 </div>
 
-@if (entries.length) {
+@if (state.isShowMemoPopup) {
     <popup-memo/>
+}
+@if (state.isShowEditPopup) {
+    <popup-edit/>
 }
 

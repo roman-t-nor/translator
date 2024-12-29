@@ -22,6 +22,9 @@ export class MemoService {
   state = inject(StateService);
   http = inject(HttpClient);
   popupService = inject(PopupService);
+  isShowMemoPopup = false;
+  isShowEditPopup = false;
+  editedEntryId: number = 0;
 
   constructor(
     @Inject('isMemoServiceInTestMode') isMemoServiceInTestMode: boolean,
@@ -38,6 +41,8 @@ export class MemoService {
     this.popupService.isOpen$.subscribe((value) => {
       if (!value) {
         this.mode = 'weak';
+        this.isShowMemoPopup = false;
+        this.isShowEditPopup = false;
       }
     });
 

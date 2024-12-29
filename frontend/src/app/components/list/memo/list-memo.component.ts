@@ -2,15 +2,22 @@ import { Component, ElementRef } from '@angular/core';
 import { MemoService, StyledEntry } from '@/services/memo.service';
 import { ControlsComponent } from '@/components/list/memo/controls/controls.component';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { PopupMemoComponent } from '@/components/list/memo/popup/popup.component';
+import { PopupMemoComponent } from '@/components/list/memo/popup-memo/popup.component';
 import { PopupService } from '@/services/popup.service';
+import { PopupMemoEditComponent } from '@/components/list/memo/popup-edit/popup.component';
 
 @Component({
   selector: 'list-memo',
   standalone: true,
   templateUrl: './list-memo.component.html',
   styles: '.animating .item {font-weight: normal !important;}',
-  imports: [ControlsComponent, AsyncPipe, NgIf, PopupMemoComponent],
+  imports: [
+    ControlsComponent,
+    AsyncPipe,
+    NgIf,
+    PopupMemoComponent,
+    PopupMemoEditComponent,
+  ],
 })
 export class ListMemoComponent {
   constructor(
@@ -114,5 +121,11 @@ export class ListMemoComponent {
     } else {
       this.state.goNext();
     }
+  }
+
+  edit(id: number) {
+    this.state.isShowEditPopup = true;
+    this.state.editedEntryId = id;
+    this.popupService.isOpen$.next(true);
   }
 }

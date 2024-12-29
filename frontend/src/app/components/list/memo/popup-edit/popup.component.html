@@ -1,0 +1,20 @@
+<popup>
+    <h5
+            class="modal-title fs-5 ps-4 text-center"
+            style="min-height: 1.5em;"
+            ngProjectAs="header"
+    >Edit element</h5>
+
+    <div class="modal-center" ngProjectAs="body">
+        <form action="" class="w-100">
+            <input class="form-control mb-3" [value]="entry.text">
+            <input class="form-control mb-3" [value]="entry.translations">
+            <textarea class="form-control mb-3" rows="4"
+            >{{ entry.context }}</textarea>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-between" ngProjectAs="footer">
+        <button class="btn btn-success">Save</button>
+        <button class="btn btn-danger">Delete</button>
+    </div>
+</popup>
