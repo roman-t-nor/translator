@@ -3,7 +3,7 @@
             class="modal-title fs-4 ps-4 text-center"
             style="min-height: 1.5em;"
             ngProjectAs="header"
-    >{{ entry.translations }}</h5>
+    >{{ state.isShowInWeakMode ? entry.translations : '' }}</h5>
 
     <div class="modal-center" ngProjectAs="body">
         <div class="wrapper">
@@ -12,7 +12,7 @@
     </div>
     <div class="modal-footer justify-content-between" ngProjectAs="footer">
         <stats [state]="state"/>
-        <div class="fs-5" [innerHTML]="entry.context"></div>
+        <div class="fs-5" [innerHTML]="state.isShowInWeakMode ? entry.context : ''"></div>
         <button class="btn btn-outline-success" (click)="goNext()">Next</button>
     </div>
 </popup>

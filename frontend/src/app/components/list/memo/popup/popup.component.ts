@@ -15,8 +15,8 @@ export class PopupMemoComponent {
 
   constructor(public state: MemoService) {
     this.entry = this.state.entries[0];
-    this.state.currentEntry$.subscribe((entry: Entry) => {
-      this.entry = entry;
+    this.state.currentEntryIndex$.subscribe((index: number) => {
+      this.entry = this.state.entries[index];
     });
   }
 

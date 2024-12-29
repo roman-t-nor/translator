@@ -30,17 +30,13 @@ export class ControlsComponent implements OnInit {
 
   showPopupWeak() {
     this.state.mode = 'weak';
-    this.state.currentEntry$.next(
-      this.state.entries[this.state.currentEntryIndex],
-    );
+    this.state.isShowInWeakMode = true;
     this.popupService.show();
   }
 
   showPopupStrict() {
     this.state.mode = 'strict';
-    this.state.currentEntry$.next(
-      this.state.entriesStrict[this.state.currentEntryIndex],
-    );
+    this.state.isShowInWeakMode = false;
     this.popupService.show();
   }
 
