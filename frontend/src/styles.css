@@ -274,3 +274,8 @@ body > .container {
 .form-switch input:hover {
     cursor: pointer !important;
 }
+
+.row.item:hover {
+    cursor: pointer;
+    color: orange;
+}

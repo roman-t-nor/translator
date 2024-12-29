@@ -6,7 +6,7 @@
                         class="row item border p-2 fs-5"
                         [class]="{'fw-bolder': $index === state.currentEntryIndex}"
                         [style]=entry.style
-                        (dblclick)="edit(entry.id)"
+                        (click)="edit(entry.id)"
                 >
                     <div class="col-6">{{ entry.text }}</div>
                     <div class="col-6">
