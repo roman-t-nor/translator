@@ -8,6 +8,7 @@ import { ButtonPopupWeakComponent } from '@/components/list/memo/controls/button
 import { ButtonPopupStrictComponent } from '@/components/list/memo/controls/button-popup-strict/button-popup-strict.component';
 import { NgIf } from '@angular/common';
 import { ButtonSettingsComponent } from '@/components/list/memo/controls/button-settings/button-settings.component';
+import { ButtonVisibilityComponent } from '@/components/list/memo/controls/button-visibility/button-visibility.component';
 
 @Component({
   selector: 'controls',
@@ -20,6 +21,7 @@ import { ButtonSettingsComponent } from '@/components/list/memo/controls/button-
     ButtonPopupWeakComponent,
     ButtonPopupStrictComponent,
     NgIf,
+    ButtonVisibilityComponent,
   ],
   templateUrl: 'controls.component.html',
 })
@@ -60,5 +62,9 @@ export class ControlsComponent {
 
   goNext() {
     this.state.goNext();
+  }
+
+  visibility() {
+    this.state.isShowListInStrictMode = !this.state.isShowListInStrictMode;
   }
 }

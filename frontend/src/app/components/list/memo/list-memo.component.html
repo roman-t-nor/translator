@@ -10,7 +10,7 @@
                 >
                     <div class="col-6">{{ entry.text }}</div>
                     <div class="col-6">
-                        @if ($index <= state.currentTranslateIndex) {
+                        @if ($index <= state.currentTranslateIndex || !state.isShowListInStrictMode) {
                             {{ entry.translations }}
                         }
                     </div>

@@ -26,6 +26,7 @@ export class MemoService {
   isShowEditPopup = false;
   isShowShowPopup = false;
   editedEntryId: number = 0;
+  isShowListInStrictMode: boolean = true;
 
   constructor(
     @Inject('isMemoServiceInTestMode') isMemoServiceInTestMode: boolean,

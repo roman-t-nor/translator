@@ -1,12 +1,12 @@
-<popup>
-    <h5 class="modal-title fs-3 ps-4 text-center"
+<popup className="modal-lg">
+    <h5 class="modal-title fs-2 ps-4 text-center"
         style="min-height: 1.5em;"
         ngProjectAs="header"
     >{{ entry.text }}</h5>
 
     <div ngProjectAs="body">
-        <p class="text-center fs-4 mb-4">{{ entry.translations }}</p>
-        <p [innerHTML]="entry.context"></p>
+        <p class="text-center fs-3 mb-4">{{ entry.translations }}</p>
+        <p class="fs-5" [innerHTML]="entry.context"></p>
     </div>
 
 </popup>
