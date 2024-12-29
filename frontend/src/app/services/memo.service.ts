@@ -24,6 +24,7 @@ export class MemoService {
   popupService = inject(PopupService);
   isShowMemoPopup = false;
   isShowEditPopup = false;
+  isShowShowPopup = false;
   editedEntryId: number = 0;
 
   constructor(
@@ -43,6 +44,7 @@ export class MemoService {
         this.mode = 'weak';
         this.isShowMemoPopup = false;
         this.isShowEditPopup = false;
+        this.isShowShowPopup = false;
       }
     });
 

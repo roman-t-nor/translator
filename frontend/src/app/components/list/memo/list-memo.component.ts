@@ -5,6 +5,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { PopupMemoComponent } from '@/components/list/memo/popup-memo/popup.component';
 import { PopupService } from '@/services/popup.service';
 import { PopupMemoEditComponent } from '@/components/list/memo/popup-edit/popup.component';
+import { PopupMemoShowComponent } from '@/components/list/memo/popup-show/popup.component';
 
 @Component({
   selector: 'list-memo',
@@ -17,6 +18,7 @@ import { PopupMemoEditComponent } from '@/components/list/memo/popup-edit/popup.
     NgIf,
     PopupMemoComponent,
     PopupMemoEditComponent,
+    PopupMemoShowComponent,
   ],
 })
 export class ListMemoComponent {
@@ -129,8 +131,12 @@ export class ListMemoComponent {
     }
   }
 
-  edit(id: number) {
-    this.state.isShowEditPopup = true;
+  edit($event: MouseEvent, id: number) {
+    if ($event.ctrlKey) {
+      this.state.isShowEditPopup = true;
+    } else {
+      this.state.isShowShowPopup = true;
+    }
     this.state.editedEntryId = id;
     this.popupService.isOpen$.next(true);
   }

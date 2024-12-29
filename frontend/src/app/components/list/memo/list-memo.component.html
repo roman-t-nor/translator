@@ -6,7 +6,7 @@
                         class="row item border p-2 fs-5"
                         [class]="{'fw-bolder': $index === state.currentEntryIndex}"
                         [style]=entry.style
-                        (click)="edit(entry.id)"
+                        (click)="edit($event,entry.id)"
                 >
                     <div class="col-6">{{ entry.text }}</div>
                     <div class="col-6">
@@ -26,5 +26,8 @@
 }
 @if (state.isShowEditPopup) {
     <popup-edit/>
+}
+@if (state.isShowShowPopup) {
+    <popup-show/>
 }
 
