@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { afterRender, Component, ElementRef } from '@angular/core';
 import { MemoService, StyledEntry } from '@/services/memo.service';
 import { ControlsComponent } from '@/components/list/memo/controls/controls.component';
 import { AsyncPipe, NgIf } from '@angular/common';
@@ -22,14 +22,91 @@ import { PopupMemoShowComponent } from '@/components/list/memo/popup-show/popup.
   ],
 })
 export class ListMemoComponent {
+  rows: HTMLElement[] = [];
+
   constructor(
     public state: MemoService,
     public popupService: PopupService,
     private ref: ElementRef,
-  ) {}
+  ) {
+    afterRender(() => {
+      this.rows = this.ref.nativeElement.querySelectorAll('.row.item');
+    });
+  }
 
   get entries(): StyledEntry[] {
     return this.state.entries;
+  }
+
+  ngOnInit(): void {
+    window.addEventListener('keydown', this.handlerKeyDown.bind(this));
+
+    const handleWheel = this.handleWheel.bind(this);
+    this.popupService.isOpen$.subscribe((value) => {
+      if (value) {
+        window.addEventListener('wheel', handleWheel);
+      } else {
+        window.removeEventListener('wheel', handleWheel);
+      }
+    });
+
+    this.state.currentEntryIndex$.subscribe((index) => {
+      this.rows.forEach((r, i) => {
+        if (i === index) {
+          this.scrollIntoView(r);
+        }
+      });
+    });
+  }
+
+  scrollIntoView(e: HTMLElement) {
+    e.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('keydown', this.handlerKeyDown.bind(this));
+    window.removeEventListener('wheel', this.handleWheel.bind(this));
+  }
+
+  handlerKeyDown(event: KeyboardEvent) {
+    if (this.state.isShowEditPopup) {
+      return;
+    }
+    if (['ArrowLeft', 'ArrowUp'].includes(event.code)) {
+      this.state.goPrevious();
+      event.preventDefault();
+    }
+    if (['ArrowRight', 'ArrowDown', 'Space', 'Enter'].includes(event.code)) {
+      console.log('this.memo.goNext();');
+      this.state.goNext();
+      event.preventDefault();
+    }
+
+    if (event.code === 'Escape') {
+      this.popupService.isOpen$.next(false);
+      event.preventDefault();
+    }
+  }
+
+  handleWheel(event: WheelEvent) {
+    if (this.state.isShowEditPopup) {
+      return;
+    }
+    if (event.deltaY < 0) {
+      this.state.goPrevious();
+    } else {
+      this.state.goNext();
+    }
+  }
+
+  edit($event: MouseEvent, id: number) {
+    if ($event.ctrlKey) {
+      this.state.isShowEditPopup = true;
+    } else {
+      this.state.isShowShowPopup = true;
+    }
+    this.state.editedEntryId = id;
+    this.popupService.isOpen$.next(true);
   }
 
   shuffle() {
@@ -80,64 +157,5 @@ export class ListMemoComponent {
       container.style.height = 'auto';
       container.classList.remove('animating');
     }, transitionTime);
-  }
-
-  ngOnInit(): void {
-    window.addEventListener('keydown', this.handlerKeyDown.bind(this));
-
-    const handleWheel = this.handleWheel.bind(this);
-    this.popupService.isOpen$.subscribe((value) => {
-      if (value) {
-        window.addEventListener('wheel', handleWheel);
-      } else {
-        window.removeEventListener('wheel', handleWheel);
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    window.removeEventListener('keydown', this.handlerKeyDown.bind(this));
-    window.removeEventListener('wheel', this.handleWheel.bind(this));
-  }
-
-  handlerKeyDown(event: KeyboardEvent) {
-    if (this.state.isShowEditPopup) {
-      return;
-    }
-    if (['ArrowLeft', 'ArrowUp'].includes(event.code)) {
-      this.state.goPrevious();
-      event.preventDefault();
-    }
-
-    if (['ArrowRight', 'ArrowDown', 'Space', 'Enter'].includes(event.code)) {
-      this.state.goNext();
-      event.preventDefault();
-    }
-
-    if (event.code === 'Escape') {
-      this.popupService.isOpen$.next(false);
-      event.preventDefault();
-    }
-  }
-
-  handleWheel(event: WheelEvent) {
-    if (this.state.isShowEditPopup) {
-      return;
-    }
-    if (event.deltaY < 0) {
-      this.state.goPrevious();
-    } else {
-      this.state.goNext();
-    }
-  }
-
-  edit($event: MouseEvent, id: number) {
-    if ($event.ctrlKey) {
-      this.state.isShowEditPopup = true;
-    } else {
-      this.state.isShowShowPopup = true;
-    }
-    this.state.editedEntryId = id;
-    this.popupService.isOpen$.next(true);
   }
 }

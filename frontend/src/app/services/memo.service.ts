@@ -50,11 +50,10 @@ export class MemoService {
     });
 
     this.state.sectionId$.subscribe((sectionId) => this.getEntries(sectionId));
-    this.getEntries(this.state.sectionId);
   }
 
   addTestEntries() {
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 20; i++) {
       this.entries.push(
         new Entry(i, `Text ${i}`, `Context ${i}`, `Translation ${i}`),
       );
@@ -91,6 +90,7 @@ export class MemoService {
   }
 
   goNext() {
+    console.log('goNext() ');
     const nextIndex = this.currentEntryIndex + 1;
     if (nextIndex === this.entries.length) {
       this.currentTranslateIndex++;

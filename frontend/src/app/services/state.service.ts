@@ -11,7 +11,7 @@ export class StateService {
 
   sections: DbSectionType[] = [];
   sectionId$: Subject<number> = new Subject<number>();
-  sectionId: number = 148;
+  sectionId: number = 0;
 
   private http = inject(HttpClient);
 
