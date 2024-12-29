@@ -1,4 +1,4 @@
-import { afterRender, Component, ElementRef, output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { ButtonNextComponent } from './button-next/button-next.component';
 import { ButtonShuffleComponent } from '@/components/list/memo/controls/button-shuffle/button-shuffle.component';
 import { ButtonBeginComponent } from '@/components/list/memo/controls/button-begin/button-begin.component';
@@ -30,13 +30,8 @@ export class ControlsComponent {
 
   constructor(
     public state: MemoService,
-    private ref: ElementRef,
     private popupService: PopupService,
-  ) {
-    afterRender(() => {
-      // this.ref.nativeElement.style.marginTop = `-${this.ref.nativeElement.offsetHeight}px`;
-    });
-  }
+  ) {}
 
   showPopupWeak() {
     this.state.mode = 'weak';
