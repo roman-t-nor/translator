@@ -99,6 +99,9 @@ export class ListMemoComponent {
   }
 
   handlerKeyDown(event: KeyboardEvent) {
+    if (this.state.isShowEditPopup) {
+      return;
+    }
     if (['ArrowLeft', 'ArrowUp'].includes(event.code)) {
       this.state.goPrevious();
       event.preventDefault();
@@ -116,6 +119,9 @@ export class ListMemoComponent {
   }
 
   handleWheel(event: WheelEvent) {
+    if (this.state.isShowEditPopup) {
+      return;
+    }
     if (event.deltaY < 0) {
       this.state.goPrevious();
     } else {

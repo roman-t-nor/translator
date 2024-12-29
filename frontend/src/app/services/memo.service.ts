@@ -47,6 +47,7 @@ export class MemoService {
     });
 
     this.state.sectionId$.subscribe((sectionId) => this.getEntries(sectionId));
+    this.getEntries(this.state.sectionId);
   }
 
   addTestEntries() {
@@ -58,14 +59,14 @@ export class MemoService {
   }
 
   getEntries(sectionId: number) {
-    this.entries = [];
-    this.resetCurrentIndex();
     if (!sectionId) {
       return;
     }
     this.http
       .get<DbElementType[]>(`sections/${sectionId}/elements`)
       .subscribe((elements) => {
+        this.entries = [];
+        this.resetCurrentIndex();
         elements.forEach((e) => {
           this.entries.push(new Entry(e.id, e.name, e.context, e.translation));
         });

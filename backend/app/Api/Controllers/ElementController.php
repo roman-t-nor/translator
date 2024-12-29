@@ -61,4 +61,27 @@ class ElementController
         return $duplicates;
     }
 
+    public function update(Request $request, Section $section, Element $element)
+    {
+        $request->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'translation' => ['required', 'min:3', 'max:255'],
+            'context' => ['min:3', 'max:1500', 'nullable']
+        ]);
+
+        $element->update([
+            'name' => $request->input('title'),
+            'translation' => $request->input('translation'),
+            'context' => $request->input('context'),
+        ]);
+
+        return 'Element "'.$element->name.'" updated';
+    }
+
+    public function destroy(Section $section, Element $element)
+    {
+        $element->delete();
+        return 'Element "'.$element->name.'" deleted';
+    }
+
 }

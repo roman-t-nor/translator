@@ -1,20 +1,31 @@
 <popup>
-    <h5
-            class="modal-title fs-5 ps-4 text-center"
-            style="min-height: 1.5em;"
-            ngProjectAs="header"
+    <h5 class="modal-title fs-5 ps-4 text-center"
+        style="min-height: 1.5em;"
+        ngProjectAs="header"
     >Edit element</h5>
 
     <div class="modal-center" ngProjectAs="body">
-        <form action="" class="w-100">
-            <input class="form-control mb-3" [value]="entry.text">
-            <input class="form-control mb-3" [value]="entry.translations">
-            <textarea class="form-control mb-3" rows="4"
-            >{{ entry.context }}</textarea>
+
+        <form action="" class="w-100" id="entry_edit" (submit)="submit($event)">
+            <input class="form-control mb-3" [(ngModel)]="entry.text" name="title">
+            <input class="form-control mb-3" [(ngModel)]="entry.translations" name="translation">
+            <textarea class="form-control mb-3"
+                      rows="4"
+                      [(ngModel)]="entry.context"
+                      name="context"
+            ></textarea>
+            <input type="hidden" name="_method" value="PUT">
         </form>
+
+        <form action="" id="entry_delete" (submit)="submit($event)">
+            <input type="hidden" name="_method" value="DELETE">
+        </form>
+
     </div>
+
     <div class="modal-footer justify-content-between" ngProjectAs="footer">
-        <button class="btn btn-success">Save</button>
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-success" form="entry_edit">Save</button>
+        <button class="btn btn-danger" form="entry_delete">Delete</button>
     </div>
+
 </popup>
