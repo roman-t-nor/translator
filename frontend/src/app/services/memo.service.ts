@@ -25,7 +25,7 @@ export class MemoService {
   isShowMemoPopup = false;
   isShowEditPopup = false;
   isShowShowPopup = false;
-  editedEntryId: number = 0;
+  editedEntry: Entry;
   isShowListInStrictMode: boolean = true;
 
   constructor(
@@ -38,6 +38,7 @@ export class MemoService {
     this.currentEntryIndex$.subscribe((index) => {
       this.currentEntryIndex = index;
       this.currentTranslateIndex = index - 1;
+      this.editedEntry = this.entries[index];
     });
 
     this.popupService.isOpen$.subscribe((value) => {
@@ -50,6 +51,7 @@ export class MemoService {
     });
 
     this.state.sectionId$.subscribe((sectionId) => this.getEntries(sectionId));
+    this.editedEntry = this.entries[0];
   }
 
   addTestEntries() {

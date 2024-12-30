@@ -6,6 +6,7 @@ import { PopupMemoComponent } from '@/components/list/memo/popup-memo/popup.comp
 import { PopupService } from '@/services/popup.service';
 import { PopupMemoEditComponent } from '@/components/list/memo/popup-edit/popup.component';
 import { PopupMemoShowComponent } from '@/components/list/memo/popup-show/popup.component';
+import { Entry } from '@/Entry';
 
 @Component({
   selector: 'list-memo',
@@ -79,10 +80,19 @@ export class ListMemoComponent {
       this.state.goPrevious();
       event.preventDefault();
     }
-    if (['ArrowRight', 'ArrowDown', 'Space', 'Enter'].includes(event.code)) {
-      console.log('this.memo.goNext();');
+    if (['ArrowRight', 'ArrowDown', 'Space'].includes(event.code)) {
       this.state.goNext();
       event.preventDefault();
+    }
+
+    if (event.code === 'Enter') {
+      if (this.popupService.isOpen$.getValue()) {
+        this.state.goNext();
+      } else {
+        this.state.isShowShowPopup = true;
+        this.popupService.isOpen$.next(true);
+        event.preventDefault();
+      }
     }
 
     if (event.code === 'Escape') {
@@ -102,13 +112,13 @@ export class ListMemoComponent {
     }
   }
 
-  edit($event: MouseEvent, id: number) {
+  edit($event: MouseEvent, entry: Entry) {
     if ($event.ctrlKey) {
       this.state.isShowEditPopup = true;
     } else {
       this.state.isShowShowPopup = true;
     }
-    this.state.editedEntryId = id;
+    this.state.editedEntry = entry;
     this.popupService.isOpen$.next(true);
   }
 

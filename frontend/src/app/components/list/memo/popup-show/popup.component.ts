@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PopupComponent } from '@/components/popup/popup.component';
-import { MemoService } from '@/services/memo.service';
 import { Entry } from '@/Entry';
 
 @Component({
@@ -10,12 +9,5 @@ import { Entry } from '@/Entry';
   templateUrl: './popup.component.html',
 })
 export class PopupMemoShowComponent {
-  entry: Entry;
-  memoService = inject(MemoService);
-
-  constructor() {
-    this.entry = this.memoService.entries.find(
-      (e) => e.id === this.memoService.editedEntryId,
-    ) as Entry;
-  }
+  @Input() entry!: Entry;
 }
