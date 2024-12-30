@@ -23,6 +23,8 @@ import { PopupMemoShowComponent } from '@/components/list/memo/popup-show/popup.
 })
 export class ListMemoComponent {
   rows: HTMLElement[] = [];
+  handlerKeyDown: (e: KeyboardEvent) => void;
+  handlerWheel: (e: WheelEvent) => void;
 
   constructor(
     public state: MemoService,
@@ -32,6 +34,8 @@ export class ListMemoComponent {
     afterRender(() => {
       this.rows = this.ref.nativeElement.querySelectorAll('.row.item');
     });
+    this.handlerKeyDown = this.onKeyDown.bind(this);
+    this.handlerWheel = this.onWheel.bind(this);
   }
 
   get entries(): StyledEntry[] {
@@ -39,14 +43,13 @@ export class ListMemoComponent {
   }
 
   ngOnInit(): void {
-    window.addEventListener('keydown', this.handlerKeyDown.bind(this));
+    window.addEventListener('keydown', this.handlerKeyDown);
 
-    const handleWheel = this.handleWheel.bind(this);
     this.popupService.isOpen$.subscribe((value) => {
       if (value) {
-        window.addEventListener('wheel', handleWheel);
+        window.addEventListener('wheel', this.handlerWheel);
       } else {
-        window.removeEventListener('wheel', handleWheel);
+        window.removeEventListener('wheel', this.handlerWheel);
       }
     });
 
@@ -64,11 +67,11 @@ export class ListMemoComponent {
   }
 
   ngOnDestroy(): void {
-    window.removeEventListener('keydown', this.handlerKeyDown.bind(this));
-    window.removeEventListener('wheel', this.handleWheel.bind(this));
+    window.removeEventListener('keydown', this.handlerKeyDown);
+    window.removeEventListener('wheel', this.handlerWheel);
   }
 
-  handlerKeyDown(event: KeyboardEvent) {
+  onKeyDown(event: KeyboardEvent) {
     if (this.state.isShowEditPopup) {
       return;
     }
@@ -88,7 +91,7 @@ export class ListMemoComponent {
     }
   }
 
-  handleWheel(event: WheelEvent) {
+  onWheel(event: WheelEvent) {
     if (this.state.isShowEditPopup) {
       return;
     }

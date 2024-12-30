@@ -18,25 +18,29 @@ export class ListReadComponent {
   readService: ReadService = inject(ReadService);
   popupService: PopupService = inject(PopupService);
   entriesService: EntriesProviderService = inject(EntriesProviderService);
+  handlerKeyDown: (event: KeyboardEvent) => void;
+  handlerWheel: (event: WheelEvent) => void;
 
   constructor(
     private entriesProviderService: EntriesProviderService,
     @Inject('isGetEntriesInTestMode') private isGetEntriesInTestMode: boolean,
-  ) {}
+  ) {
+    this.handlerKeyDown = this.onKeyDown.bind(this);
+    this.handlerWheel = this.onWheel.bind(this);
+  }
 
   get entries(): Entry[] {
     return this.readService.entries;
   }
 
   ngOnInit(): void {
-    window.addEventListener('keydown', this.handlerKeyDown.bind(this));
+    window.addEventListener('keydown', this.handlerKeyDown);
 
-    const handleWheel = this.handleWheel.bind(this);
     this.popupService.isOpen$.subscribe((value) => {
       if (value) {
-        window.addEventListener('wheel', handleWheel);
+        window.addEventListener('wheel', this.handlerWheel);
       } else {
-        window.removeEventListener('wheel', handleWheel);
+        window.removeEventListener('wheel', this.handlerWheel);
       }
     });
 
@@ -49,11 +53,11 @@ export class ListReadComponent {
   }
 
   ngOnDestroy(): void {
-    window.removeEventListener('keydown', this.handlerKeyDown.bind(this));
-    window.removeEventListener('wheel', this.handleWheel.bind(this));
+    window.removeEventListener('keydown', this.handlerKeyDown);
+    window.removeEventListener('wheel', this.handlerWheel);
   }
 
-  handlerKeyDown(event: KeyboardEvent) {
+  onKeyDown(event: KeyboardEvent) {
     const target = event.target as HTMLElement;
     if (target.closest('form')) {
       return;
@@ -91,7 +95,7 @@ export class ListReadComponent {
     }
   }
 
-  handleWheel(event: WheelEvent) {
+  onWheel(event: WheelEvent) {
     if (event.deltaY < 0) {
       this.readService.goPrevious();
     } else {

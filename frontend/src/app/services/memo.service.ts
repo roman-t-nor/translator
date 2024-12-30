@@ -90,7 +90,6 @@ export class MemoService {
   }
 
   goNext() {
-    console.log('goNext() ');
     const nextIndex = this.currentEntryIndex + 1;
     if (nextIndex === this.entries.length) {
       this.currentTranslateIndex++;
