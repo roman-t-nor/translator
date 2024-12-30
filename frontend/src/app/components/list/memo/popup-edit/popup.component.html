@@ -13,6 +13,7 @@
                       rows="4"
                       [(ngModel)]="entry.context"
                       name="context"
+                      (keydown.enter)="submit($event)"
             ></textarea>
             <input type="hidden" name="_method" value="PUT">
         </form>

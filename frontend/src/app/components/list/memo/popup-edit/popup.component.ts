@@ -29,10 +29,13 @@ export class PopupMemoEditComponent {
   }
 
   submit($event: Event) {
+    const target = $event.target as HTMLElement;
+    const form = target.closest('form') as HTMLFormElement;
+    const formData = new FormData(form);
     this.http
       .post(
         `sections/${this.state.sectionId}/elements/${this.entry.id}`,
-        new FormData($event.target as HTMLFormElement),
+        formData,
         { responseType: 'text' },
       )
       .subscribe((response) => {
@@ -40,5 +43,6 @@ export class PopupMemoEditComponent {
         this.popupService.isOpen$.next(false);
         this.memoService.getEntries(this.state.sectionId);
       });
+    $event.preventDefault();
   }
 }
