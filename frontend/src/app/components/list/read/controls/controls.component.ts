@@ -4,6 +4,7 @@ import { ButtonTranslateComponent } from './button-translate/button-translate.co
 import { ButtonNextComponent } from './button-next/button-next.component';
 import { ReadService } from '@/services/read.service';
 import { PopupService } from '@/services/popup.service';
+import { ButtonSettingsComponent } from '@/components/list/memo/controls/button-settings/button-settings.component';
 
 @Component({
   selector: 'controls',
@@ -12,12 +13,13 @@ import { PopupService } from '@/services/popup.service';
     ButtonTranslateComponent,
     ButtonNextComponent,
     ButtonPopupSaveComponent,
+    ButtonSettingsComponent,
   ],
   templateUrl: 'controls.component.html',
 })
 export class ControlsComponent {
   constructor(
-    private state: ReadService,
+    protected state: ReadService,
     private popupService: PopupService,
   ) {}
 

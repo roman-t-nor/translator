@@ -5,6 +5,7 @@ import { MessageComponent } from './components/message/message.component';
 import { StateService } from './services/state.service';
 import { SettingsComponent } from '@/components/settings/settings.component';
 import { HeadComponent } from '@/components/head/head.component';
+import { MemoService } from '@/services/memo.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   public constructor(
     private titleService: Title,
     private state: StateService,
+    private memo: MemoService,
   ) {}
 
   ngOnInit(): void {
