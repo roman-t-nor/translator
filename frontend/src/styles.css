@@ -207,11 +207,6 @@ table#matched_entries {
     font-size: 15px;
 }
 
-/*.message-inner .close {*/
-/*    position: absolute;*/
-/*    right: 12px;*/
-/*}*/
-
 .message-inner .close:hover {
     font-weight: bold;
     cursor: pointer;
@@ -279,4 +274,8 @@ body > .container {
 .row.item:hover {
     cursor: pointer;
     color: orange;
+}
+
+.style-strong-tag b {
+    color: orange
 }

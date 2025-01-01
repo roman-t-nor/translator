@@ -8,7 +8,6 @@ import { StateService } from '@/services/state.service';
   selector: 'popup',
   standalone: true,
   templateUrl: 'popup.component.html',
-  imports: [],
 })
 export class PopupComponent {
   modal!: Modal;
