@@ -34,7 +34,7 @@ export class PopupMemoEditComponent {
       )
       .subscribe((response) => {
         this.messageService.sendSuccess(response);
-        this.popupService.isOpen$.next(false);
+        this.popupService.hide();
         this.memoService.getEntries(this.state.sectionId);
       });
     $event.preventDefault();

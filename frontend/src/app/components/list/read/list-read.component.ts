@@ -80,7 +80,7 @@ export class ListReadComponent {
 
     if (event.code === 'Enter') {
       if (event.shiftKey) {
-        this.popupService.isOpen$.next(true);
+        this.popupService.show();
       } else if (event.ctrlKey) {
         this.readService.translate();
       } else {

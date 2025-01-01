@@ -86,7 +86,7 @@ export class ListMemoComponent {
     }
 
     if (event.code === 'Enter') {
-      if (this.popupService.isOpen$.getValue()) {
+      if (this.popupService.isOpen()) {
         this.state.goNext();
       } else {
         if (event.ctrlKey) {
@@ -94,7 +94,7 @@ export class ListMemoComponent {
         } else {
           this.state.isShowShowPopup = true;
         }
-        this.popupService.isOpen$.next(true);
+        this.popupService.show();
         event.preventDefault();
       }
     }
@@ -118,7 +118,7 @@ export class ListMemoComponent {
       this.state.isShowShowPopup = true;
     }
     this.state.currentEntry = entry;
-    this.popupService.isOpen$.next(true);
+    this.popupService.show();
   }
 
   shuffle() {
