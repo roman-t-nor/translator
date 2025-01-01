@@ -16,14 +16,20 @@ export class PopupComponent {
   body: string = '';
   subscription?: Subscription;
   @Input() className?: string;
+  handlerKeyDown: (e: KeyboardEvent) => void;
+  handlerClosePopup: () => void;
 
   constructor(
     private state: StateService,
     private elementRef: ElementRef,
     private popupService: PopupService,
-  ) {}
+  ) {
+    this.handlerKeyDown = this.onKeyDown.bind(this);
+    this.handlerClosePopup = this.onClosePopup.bind(this);
+  }
 
   ngOnInit(): void {
+    window.addEventListener('keydown', this.handlerKeyDown);
     const node = this.elementRef.nativeElement.querySelector('.modal');
     this.modal = new Modal(node);
 
@@ -37,7 +43,7 @@ export class PopupComponent {
 
     this.elementRef.nativeElement.addEventListener(
       'hidden.bs.modal',
-      this.handleClosePopup.bind(this),
+      this.handlerClosePopup,
     );
   }
 
@@ -45,11 +51,19 @@ export class PopupComponent {
     this.subscription?.unsubscribe();
     this.elementRef.nativeElement.removeEventListener(
       'hidden.bs.modal',
-      this.handleClosePopup.bind(this),
+      this.handlerClosePopup,
     );
+    window.removeEventListener('keydown', this.handlerKeyDown);
   }
 
-  handleClosePopup() {
-    this.popupService.isOpen$.next(false);
+  onKeyDown(event: KeyboardEvent) {
+    if (event.code === 'Escape') {
+      this.popupService.hide();
+      event.preventDefault();
+    }
+  }
+
+  onClosePopup() {
+    this.popupService.hide();
   }
 }

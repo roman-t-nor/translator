@@ -14,4 +14,12 @@ export class PopupService {
   show() {
     this.isOpen$.next(true);
   }
+
+  hide() {
+    this.isOpen$.next(false);
+  }
+
+  isOpen() {
+    return this.isOpen$.getValue();
+  }
 }

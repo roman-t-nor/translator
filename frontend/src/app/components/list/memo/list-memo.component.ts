@@ -89,15 +89,14 @@ export class ListMemoComponent {
       if (this.popupService.isOpen$.getValue()) {
         this.state.goNext();
       } else {
-        this.state.isShowShowPopup = true;
+        if (event.ctrlKey) {
+          this.state.isShowEditPopup = true;
+        } else {
+          this.state.isShowShowPopup = true;
+        }
         this.popupService.isOpen$.next(true);
         event.preventDefault();
       }
-    }
-
-    if (event.code === 'Escape') {
-      this.popupService.isOpen$.next(false);
-      event.preventDefault();
     }
   }
 
@@ -118,7 +117,7 @@ export class ListMemoComponent {
     } else {
       this.state.isShowShowPopup = true;
     }
-    this.state.editedEntry = entry;
+    this.state.currentEntry = entry;
     this.popupService.isOpen$.next(true);
   }
 

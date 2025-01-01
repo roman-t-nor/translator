@@ -88,11 +88,6 @@ export class ListReadComponent {
       }
       event.preventDefault();
     }
-
-    if (event.code === 'Escape') {
-      this.popupService.isOpen$.next(false);
-      event.preventDefault();
-    }
   }
 
   onWheel(event: WheelEvent) {

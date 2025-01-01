@@ -25,9 +25,9 @@
     <popup-memo/>
 }
 @if (state.isShowEditPopup) {
-    <popup-edit [entry]="state.editedEntry"/>
+    <popup-edit [entry]="state.currentEntry"/>
 }
 @if (state.isShowShowPopup) {
-    <popup-show [entry]="state.editedEntry"/>
+    <popup-show [entry]="state.currentEntry"/>
 }
 
