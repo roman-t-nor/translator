@@ -61,6 +61,8 @@ export class ListMemoComponent {
         }
       });
     });
+
+    this.state.getEntries();
   }
 
   scrollIntoView(e: HTMLElement) {

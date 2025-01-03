@@ -35,7 +35,7 @@ export class PopupMemoEditComponent {
       )
       .subscribe((response) => {
         this.messageService.sendSuccess(response);
-        this.memoService.getEntries(this.state.sectionId);
+        this.memoService.getEntries();
       });
     $event.preventDefault();
   }

@@ -66,12 +66,13 @@ export class MemoService {
     }
   }
 
-  getEntries(sectionId: number) {
-    if (!sectionId) {
+  getEntries(sectionId?: number) {
+    const sId = sectionId ?? this.state.sectionId;
+    if (!sId) {
       return;
     }
     this.http
-      .get<DbElementType[]>(`sections/${sectionId}/elements`)
+      .get<DbElementType[]>(`sections/${sId}/elements`)
       .subscribe((elements) => {
         this.entries = [];
         elements.forEach((e) => {
