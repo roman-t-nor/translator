@@ -26,6 +26,7 @@ export class PopupMemoEditComponent {
     const target = $event.target as HTMLElement;
     const form = target.closest('form') as HTMLFormElement;
     const formData = new FormData(form);
+    this.popupService.hide();
     this.http
       .post(
         `sections/${this.state.sectionId}/elements/${this.entry.id}`,
@@ -34,7 +35,6 @@ export class PopupMemoEditComponent {
       )
       .subscribe((response) => {
         this.messageService.sendSuccess(response);
-        this.popupService.hide();
         this.memoService.getEntries(this.state.sectionId);
       });
     $event.preventDefault();

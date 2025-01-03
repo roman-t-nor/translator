@@ -14,14 +14,11 @@ export class TranslateProdService extends TranslateService {
     languageFrom: LanguageFromType,
     languageTo: LanguageToType,
   ): Observable<string> {
-    return this.http.get('translate', {
-      params: {
-        text: entry.text,
-        languageFrom,
-        languageTo,
-        context: entry.context,
-      },
-      responseType: 'text',
-    });
+    const fd = new FormData();
+    fd.set('text', entry.text);
+    fd.set('languageFrom', languageFrom);
+    fd.set('languageTo', languageTo);
+    fd.set('context', entry.context);
+    return this.http.post('translate', fd, { responseType: 'text' });
   }
 }

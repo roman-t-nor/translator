@@ -3,8 +3,8 @@ import { Entry } from '@/Entry';
 import { BehaviorSubject, Subject, zip } from 'rxjs';
 import { HelperService } from '@/services/helper.service';
 import { TranslateService } from '@/services/translate/translate.service';
-import { LanguageToType } from '@/types/languages';
 import { ReadService } from '@/services/read.service';
+import { LanguageToType } from '@/types/languages';
 
 @Injectable({
   providedIn: 'root',

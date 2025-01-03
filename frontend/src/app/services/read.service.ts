@@ -81,6 +81,9 @@ export class ReadService {
   }
 
   translate() {
+    if (this.isTranslating) {
+      return;
+    }
     const doneTranslationsCount = this.currentEntry.translations.length;
     const settingsLanguagesToCount = this.settingsLanguages.to.length;
     if (doneTranslationsCount >= settingsLanguagesToCount) {
