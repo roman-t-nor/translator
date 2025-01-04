@@ -1,15 +1,7 @@
 <div class="modal-footer justify-content-center py-4">
-    <div class="me-auto" style="width: 75px;"></div>
     <div class="d-flex gap-3">
         <popup-button-previous (click)="goPrevious()"/>
         <popup-button-translate (click)="translate()"/>
         <popup-button-next (click)="goNext()"/>
-    </div>
-    <div class="ms-auto">
-        @if (!isInEditingMode) {
-            <popup-button-edit (click)="edit()"/>
-        } @else {
-            <popup-button-save (click)="save()"/>
-        }
     </div>
 </div>

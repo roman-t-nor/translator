@@ -11,7 +11,13 @@ import { StatsComponent } from '@/components/stats/stats.component';
   styles: ':host{width: 100%}',
 })
 export class PopupHeaderReadComponent {
-  constructor(public state: ReadService) {}
+  isInEditingMode: boolean = false;
+
+  constructor(public state: ReadService) {
+    this.state.isInEditingMode$.subscribe((value: boolean) => {
+      this.isInEditingMode = value;
+    });
+  }
 
   get isInSavingMode() {
     return this.state.isInSavingMode$;
@@ -19,5 +25,14 @@ export class PopupHeaderReadComponent {
 
   get text() {
     return this.state.currentEntry.text;
+  }
+
+  edit() {
+    this.state.isInEditingMode$.next(true);
+  }
+
+  save() {
+    this.state.refreshEntries();
+    this.state.isInEditingMode$.next(false);
   }
 }

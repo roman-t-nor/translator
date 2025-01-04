@@ -1,5 +1,10 @@
 @if ((isInSavingMode | async) === false) {
-    <stats [state]="state"/>
+    <stats [state]="state"/>&ngsp;
+    @if (!isInEditingMode) {
+        <a href="#" (click)="edit()">edit</a>
+    } @else {
+        <a href="#" (click)="save()">save</a>
+    }
 } @else {
     <h5 class="modal-title translate-on-select text-center fs-1">
         {{ text }}

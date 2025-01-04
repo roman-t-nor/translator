@@ -6,7 +6,7 @@ import { MemoService } from '@/services/memo.service';
   selector: 'stats',
   standalone: true,
   template:
-    '<div class="stats">{{ index }} / {{ total }} ({{ percent }}%)</div>',
+    '<span class="stats">{{ index }} / {{ total }} ({{ percent }}%)</span>',
 })
 export class StatsComponent {
   @Input({ required: true }) state!: ReadService | MemoService;
