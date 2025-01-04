@@ -7,6 +7,7 @@ import { PopupService } from '@/services/popup.service';
 import { PopupMemoEditComponent } from '@/components/list/memo/popup-edit/popup.component';
 import { PopupMemoShowComponent } from '@/components/list/memo/popup-show/popup.component';
 import { Entry } from '@/Entry';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'list-memo',
@@ -26,6 +27,7 @@ export class ListMemoComponent {
   rows: HTMLElement[] = [];
   handlerKeyDown: (e: KeyboardEvent) => void;
   handlerWheel: (e: WheelEvent) => void;
+  subscription: Subscription;
 
   constructor(
     public state: MemoService,
@@ -37,6 +39,14 @@ export class ListMemoComponent {
     });
     this.handlerKeyDown = this.onKeyDown.bind(this);
     this.handlerWheel = this.onWheel.bind(this);
+
+    this.subscription = this.popupService.isOpen$.subscribe((value) => {
+      if (value) {
+        window.addEventListener('wheel', this.handlerWheel);
+      } else {
+        window.removeEventListener('wheel', this.handlerWheel);
+      }
+    });
   }
 
   get entries(): StyledEntry[] {
@@ -45,14 +55,6 @@ export class ListMemoComponent {
 
   ngOnInit(): void {
     window.addEventListener('keydown', this.handlerKeyDown);
-
-    this.popupService.isOpen$.subscribe((value) => {
-      if (value) {
-        window.addEventListener('wheel', this.handlerWheel);
-      } else {
-        window.removeEventListener('wheel', this.handlerWheel);
-      }
-    });
 
     this.state.currentEntryIndex$.subscribe((index) => {
       this.rows.forEach((r, i) => {
@@ -72,6 +74,7 @@ export class ListMemoComponent {
   ngOnDestroy(): void {
     window.removeEventListener('keydown', this.handlerKeyDown);
     window.removeEventListener('wheel', this.handlerWheel);
+    this.subscription.unsubscribe();
   }
 
   onKeyDown(event: KeyboardEvent) {

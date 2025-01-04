@@ -6,6 +6,7 @@ import { PopupReadComponent } from '@/components/list/read/popup/popup.component
 import { ReadService } from '@/services/read.service';
 import { PopupService } from '@/services/popup.service';
 import { EntriesProviderService } from '@/services/entries-provider.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'list-read',
@@ -19,6 +20,7 @@ export class ListReadComponent {
   entriesService: EntriesProviderService = inject(EntriesProviderService);
   handlerKeyDown: (event: KeyboardEvent) => void;
   handlerWheel: (event: WheelEvent) => void;
+  subscription: Subscription;
 
   constructor(
     private entriesProviderService: EntriesProviderService,
@@ -26,6 +28,14 @@ export class ListReadComponent {
   ) {
     this.handlerKeyDown = this.onKeyDown.bind(this);
     this.handlerWheel = this.onWheel.bind(this);
+
+    this.subscription = this.popupService.isOpen$.subscribe((value) => {
+      if (value) {
+        window.addEventListener('wheel', this.handlerWheel);
+      } else {
+        window.removeEventListener('wheel', this.handlerWheel);
+      }
+    });
   }
 
   get entries(): Entry[] {
@@ -34,14 +44,6 @@ export class ListReadComponent {
 
   ngOnInit(): void {
     window.addEventListener('keydown', this.handlerKeyDown);
-
-    this.popupService.isOpen$.subscribe((value) => {
-      if (value) {
-        window.addEventListener('wheel', this.handlerWheel);
-      } else {
-        window.removeEventListener('wheel', this.handlerWheel);
-      }
-    });
 
     if (this.isGetEntriesInTestMode) {
       const entries = this.entriesService.getTestEntries();
@@ -54,6 +56,7 @@ export class ListReadComponent {
   ngOnDestroy(): void {
     window.removeEventListener('keydown', this.handlerKeyDown);
     window.removeEventListener('wheel', this.handlerWheel);
+    this.subscription.unsubscribe();
   }
 
   onKeyDown(event: KeyboardEvent) {
