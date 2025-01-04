@@ -25,7 +25,7 @@ export class ItemComponent implements OnInit {
   }
 
   get className() {
-    this.$className = ['list_item m-2 fs-5'];
+    this.$className = ['list_item my-2 fs-5'];
     if (this.isCurrentEntry) {
       this.$className.push('active');
     }

@@ -12,7 +12,6 @@ import { EntriesProviderService } from '@/services/entries-provider.service';
   standalone: true,
   imports: [ItemComponent, ControlsComponent, PopupReadComponent],
   templateUrl: './list-read.component.html',
-  styles: ':host{display: flex;flex-direction: column;flex-grow: 1;}',
 })
 export class ListReadComponent {
   readService: ReadService = inject(ReadService);

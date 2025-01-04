@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-10" data-shuffled>
+<div class="row align-items-center">
+    <div class="col-10 fixed-list" data-shuffled>
         <div class="container position-relative">
             @for (entry of entries; track entry.id) {
                 <div
@@ -18,7 +18,7 @@
             }
         </div>
     </div>
-    <controls (shuffled)="shuffle()" class="col-2 btn_controls"/>
+    <controls (shuffled)="shuffle()" class="col-2"/>
 </div>
 
 @if (state.isShowMemoPopup) {
