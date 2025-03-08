@@ -33,6 +33,7 @@ class ElementController
 
     public function store(StoreElementRequest $request, Section $section)
     {
+        
         $element = Element::store(
             sectionId: $section->id,
             title: $request->input('title'),
