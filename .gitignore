@@ -1,12 +1,13 @@
 /backend/.phpunit.cache
 /backend/node_modules
-#/backend/public_html
+/backend/public
 /backend/public/build
 /backend/public/hot
 /backend/public/storage
 /backend/storage/*.key
 /backend/storage/pail
 /backend/vendor
+/backend/resources/frontend
 /frontend/node_modules
 /frontend/.angular
 .env
