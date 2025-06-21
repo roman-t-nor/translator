@@ -29,3 +29,6 @@ yarn-error.log
 /.vite
 /.AdminLTE
 *.gz
+_ide_helper.php
+.phpstorm.meta.php
+package-lock.json
