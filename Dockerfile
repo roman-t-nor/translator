@@ -3,7 +3,7 @@ FROM php:8.3-apache
 ARG WWWUSER=1000
 ARG WWWGROUP=1000
 
-# Install system dependencies + Node.js 20
+# Install system dependencies and Node.js 20
 RUN apt-get update && apt-get install -y \
     git \
     zip \
@@ -23,16 +23,19 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
-    && npm install -g npm@latest \
+    && npm install -g npm@11.4.2 \
+    && npm install -g @angular/cli@latest \
     && docker-php-ext-configure gd --with-jpeg --with-freetype --with-webp \
     && docker-php-ext-install pdo pdo_mysql zip gd bcmath pcntl opcache \
-    && a2enmod rewrite headers
+    && a2enmod rewrite headers \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 # Add user and group for Laravel
 RUN groupadd -g $WWWGROUP sailgroup \
     && useradd -u $WWWUSER -g sailgroup -m sail
 
-# Install Xdebug (optional)
+# Install Xdebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
@@ -56,7 +59,7 @@ COPY ./startup.sh /docker/startup.sh
 RUN chmod +x /docker/startup.sh
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/backend
 
 # Start container
 CMD ["/docker/startup.sh"]

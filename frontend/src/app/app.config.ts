@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([baseInterceptor])),
     {
       provide: DEVELOPMENT_DOMAIN,
-      useValue: 'http://translator.loc',
+      useValue: 'http://localhost',
     },
     { provide: 'isGetEntriesInTestMode', useValue: false },
     { provide: 'isTranslateServiceInTestMode', useValue: false },

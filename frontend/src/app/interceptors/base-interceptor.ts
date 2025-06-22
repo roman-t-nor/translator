@@ -13,7 +13,7 @@ export function baseInterceptor(
   const developmentDomain = inject<string>(DEVELOPMENT_DOMAIN);
   const domain = isDevMode() ? developmentDomain : '';
 
-  let url = `${domain}/admin/api`;
+  let url = `${domain}/api`;
   url = req.url ? `${url}/${req.url}` : url;
   const cloneReq = req.clone({ url });
 

@@ -17,8 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "deployUrl": "dist/",
-            "baseHref": "/",
+            "baseHref": "/angular/browser/",
+            "deployUrl": "/angular/browser/",
             "outputPath": "../backend/public/angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -66,7 +66,9 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "baseHref": "/",
+              "deployUrl": "/",
             }
           },
           "defaultConfiguration": "production"
@@ -108,5 +110,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

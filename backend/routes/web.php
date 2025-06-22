@@ -4,8 +4,6 @@ use App\Http\Controllers\ElementController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home.index')->name('home');
-
 Route::prefix('/admin')->group(
     function () {
         Route::get('/', [SectionController::class, 'index'])->name('index');
