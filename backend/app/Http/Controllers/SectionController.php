@@ -42,7 +42,7 @@ class SectionController
             $section = Section::create($attributes);
         }
 
-        Message::add('Section "'.$section->name.'" created');
+        Message::add('Section "' . $section->name . '" created');
         return redirect()->route('sections.show', compact('section'));
     }
 
@@ -53,7 +53,7 @@ class SectionController
             [
                 'sections' => Section::getChildSections($section),
                 'section' => $section,
-                'title' => 'Section: '.$section->name
+                'title' => 'Section: ' . $section->name
             ]
         );
     }
@@ -61,7 +61,7 @@ class SectionController
     public function edit(Section $section)
     {
         return view('sections.create-edit', [
-            'title' => 'Edit section: '.$section->name,
+            'title' => 'Edit section: ' . $section->name,
             'sections' => Section::getAllSections(),
             'section' => $section,
             'parent_section_id' => $section->parent_id ?? null,
@@ -87,7 +87,7 @@ class SectionController
             $back = redirect()->route('sections.index');
         }
 
-        Message::add('Section "'.$section->name.'" updated');
+        Message::add('Section "' . $section->name . '" updated');
         return $back;
     }
 
@@ -103,7 +103,7 @@ class SectionController
             $back = redirect()->route('sections.index');
         }
 
-        Message::add('Section "'.$section->name.'" deleted');
+        Message::add('Section "' . $section->name . '" deleted');
         return $back;
     }
 }

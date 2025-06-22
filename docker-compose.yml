@@ -128,4 +128,5 @@ volumes:
 # sail root-shell => usermod -aG www-data sail
 # sail shell => id (OR whoami) => to check current user name and group
 # id OR id -u OR id -g
+# Xdebug: launch.json: "pathMappings": {"/var/www/html": "${workspaceFolder}"}, "hostname": "0.0.0.0"
 ##########################################################
