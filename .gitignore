@@ -1,6 +1,6 @@
 /backend/.phpunit.cache
 /backend/node_modules
-/backend/public
+/backend/public/angular
 /backend/public/build
 /backend/public/hot
 /backend/public/storage
