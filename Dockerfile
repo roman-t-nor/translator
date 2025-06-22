@@ -30,11 +30,6 @@ RUN apt-get update && apt-get install -y \
     && a2enmod rewrite headers \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
-# Add user and group for Laravel
-RUN groupadd -g $WWWGROUP sailgroup \
-    && useradd -u $WWWUSER -g sailgroup -m sail
-
 # Install Xdebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug \

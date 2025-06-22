@@ -10,6 +10,7 @@ LARAVEL_DIR="$ROOT/backend"
 ANGULAR_DIR="$ROOT/frontend"
 PUBLIC_LINK="$ROOT/public_html"
 ANGULAR_OUTPUT_DIR="$LARAVEL_DIR/public/angular"
+LARAVEL_OUTPUT_DIR="$LARAVEL_DIR/public/build"
 ENV_LINK="$ROOT/.env"
 LARAVEL_ENV_FILE="$LARAVEL_DIR/.env"
 
@@ -55,6 +56,14 @@ fi
 echo "🔐 Setting permissions..."
 chown -R www-data:www-data $LARAVEL_DIR
 chown -h www-data:www-data $PUBLIC_LINK
+
+# Add user and group for Laravel
+groupadd -g $WWWGROUP sailgroup \
+    && useradd -u $WWWUSER -g sailgroup -m sail \
+    && usermod -aG www-data sail
+	
+chmod -R g+w $ANGULAR_OUTPUT_DIR
+chmod -R g+w $LARAVEL_OUTPUT_DIR
 
 # Step 6: Start Apache
 echo "🧭 Starting Apache..."

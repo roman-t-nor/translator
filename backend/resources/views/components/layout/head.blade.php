@@ -10,6 +10,8 @@
         integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous">
     <link rel="stylesheet" href="/build/css/adminlte.min.css">
 
+    <link rel="icon" href="{{ asset('build/favicon.ico') }}" type="image/x-icon">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>

@@ -124,4 +124,7 @@ volumes:
 # sail down -v (stop containers and remove volumes)
 # ng serve --host 0.0.0.0
 # ng build
+# sail root-shell => usermod -aG www-data sail
+# sail shell => id (OR whoami) => to check current user name and group
+# id OR id -u OR id -g
 ##########################################################
