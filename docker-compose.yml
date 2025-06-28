@@ -74,31 +74,6 @@ volumes:
         driver: local
 
 ##########################################################
-# Steps:
-# 1.  mkdir vander
-# 2.  cd vander
-# 3.  git clone git@github.com:vanderproject/vanderweb.git .
-# 4.  copy/paste modified files
-# 5.  cd vander-original
-# 6.  docker compose up OR docker compose up --build
-
-#       In DBeaver 
-#       Create connection:
-#        1. Server host: localhost:3306
-#        2. Database: vander
-#        3. Username: admin
-#        4. Password: 12345
-#        5. Local client: MySQL binaries
-#        6. Connection > Driver Properties tab > allowPublicKeyRetrieval > true 
-#        7. On vander db > context menu > Tools > Restore database    
-
-# 7.  docker exec -it vander-original-laravel.test-1 sh
-# 8.  composer install && npm i && npm run dev
-# 10. chmod -R 777 storage bootstrap/cache
-# 11. Xdebug: launch.json: "pathMappings": {"/var/www/html": "${workspaceFolder}"}, "hostname": "0.0.0.0"
-##########################################################
-
-##########################################################
 # docker compose build - This will rebuild all services defined in your docker-compose.yml file.
 # docker compose up --build - Rebuild and restart the containers
 ##########################################################
@@ -129,4 +104,21 @@ volumes:
 # sail shell => id (OR whoami) => to check current user name and group
 # id OR id -u OR id -g
 # Xdebug: launch.json: "pathMappings": {"/var/www/html": "${workspaceFolder}"}, "hostname": "0.0.0.0"
+##########################################################
+
+##########################################################
+# Steps on hostinger.com
+# rm -rf tytov-roman.com
+# mkdir tytov-roman.com
+# cd tytov-roman.com
+# git clone git@github.com:roman-t-nor/translator.git .
+# cd frontend
+# npm i
+# ng build
+# cd ../backend
+# composer install
+# npm i
+# npm run build
+# ln -s /home/u199591996/domains/tytov-roman.com/backend/public /home/u199591996/domains/tytov-roman.com/public_html
+# copy .env (production) to /backend
 ##########################################################
