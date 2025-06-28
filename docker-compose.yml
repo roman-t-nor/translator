@@ -133,9 +133,9 @@ volumes:
 # git clone git@github.com:roman-t-nor/translator.git .
 # copy .env (production) to /backend
 # cd backend
-# sail npm i
-# sail npm run build
-# sail shell
+# composer install
+# npm i
+# npm run build
 # cd ../frontend
 # npm i
 # ng build
