@@ -120,5 +120,7 @@ volumes:
 # npm i
 # npm run build
 # ln -s /home/u199591996/domains/tytov-roman.com/backend/public /home/u199591996/domains/tytov-roman.com/public_html
+# (local version) ln -s /home/translator/backend/public /home/translator/public_html
+# (local version) ln -s /var/www/html/backend/public /var/www/html/public_html
 # copy .env (production) to /backend
 ##########################################################
