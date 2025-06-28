@@ -131,14 +131,12 @@ volumes:
 # mkdir tytov-roman.com
 # cd tytov-roman.com
 # git clone git@github.com:roman-t-nor/translator.git .
-# cd frontend
+# copy .env (production) to /backend
+# cd backend
+# sail npm i
+# sail npm run build
+# sail shell
+# cd ../frontend
 # npm i
 # ng build
-# cd ../backend
-# composer install
-# npm i
-# npm run build
-# ln -s ./backend/.env ./.env
-# ln -s ./backend/public ./public_html
-# copy .env (production) to /backend
 ##########################################################
