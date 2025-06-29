@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  DEPLOY_PATH: "/home/u199591996/domains/tytov-roman.com"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,12 +16,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to Server via SSH
+      - name: Upload project to server
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 65002
-          source: "."
-          target: "/home/u199591996/domains/tytov-roman.com"
+          source: "."  # upload everything
+          target: "${{ env.DEPLOY_PATH }}"
+
+      - name: Run build scripts on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 65002
+          script: |
+            cd $DEPLOY_PATH/backend
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            npm install
+            npm run build
+
+            cd $DEPLOY_PATH/frontend
+            npm install
+            npm run build
