@@ -34,11 +34,11 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 65002
           script: |
-            cd $DEPLOY_PATH/backend
+            cd ${{ env.DEPLOY_PATH }}/backend
             composer install --no-interaction --prefer-dist --optimize-autoloader
             npm install
             npm run build
 
-            cd $DEPLOY_PATH/frontend
+            cd ${{ env.DEPLOY_PATH }}/frontend
             npm install
-            npm run build
+            ng build
