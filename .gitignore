@@ -2,8 +2,8 @@
 /backend/.env.production
 /backend/.phpunit.cache
 /backend/node_modules
-/backend/public/angular
-/backend/public/build
+#/backend/public/angular
+#/backend/public/build
 /backend/public/hot
 /backend/public/storage
 /backend/storage/*.key
