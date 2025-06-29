@@ -35,12 +35,7 @@ jobs:
           port: 65002
           script: |
             export PATH=$PATH:/home/u199591996/nodejs/bin:/home/u199591996/.npm-global/bin
-            ulimit -u 2048
             cd ${{ env.DEPLOY_PATH }}/backend
             composer install --no-interaction --prefer-dist --optimize-autoloader
             npm install
             npm run build
-
-            cd ${{ env.DEPLOY_PATH }}/frontend
-            npm install
-            ng build
