@@ -23,4 +23,7 @@ export default defineConfig({
         })
     ],
     publicDir: "resources/public",
+    build: {
+        workerThreads: false, // <== prevent using extra OS threads
+    }
 });
