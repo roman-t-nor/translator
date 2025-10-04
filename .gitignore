@@ -12,6 +12,10 @@
 /backend/resources/frontend
 /frontend/node_modules
 /frontend/.angular
+/public_html/angular
+/public_html/build
+/backend/public/angular
+/backend/public/build
 .phpactor.json
 .phpunit.result.cache
 Homestead.json

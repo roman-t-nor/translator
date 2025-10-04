@@ -14,14 +14,15 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    # Not root routes served by Laravel (except existing files and folders)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !^/$
+    RewriteRule ^ index.php [L]
+
     # Root route (/) served by Angular
     RewriteCond %{REQUEST_URI} ^/$
     RewriteRule ^$ angular/browser/index.html [L]
-
-    # Not root routes (/) served by Laravel (except existing files and folders)
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
 
 </IfModule>
 
