@@ -1,11 +1,11 @@
-<div class="row align-items-center">
+<div class="row">
     <div
             class="col-10"
             data-shuffled
-            style="max-height: calc(100vh - 140px);"
     >
         <div class="container position-relative">
-            @for (entry of entries; track entry.id) {
+            @if (entries.length) {
+              @for (entry of entries; track entry.id) {
                 <div
                         class="row item border p-2 fs-5"
                         [class]="{'fw-bolder': $index === state.currentEntryIndex}"
@@ -19,10 +19,17 @@
                         }
                     </div>
                 </div>
+              }
+            } @else {
+              <p class="row border rounded p-2">No entries</p>
             }
+
         </div>
     </div>
-    <controls (shuffled)="shuffle()" class="col-2"/>
+    <controls
+      (shuffled)="shuffle()"
+      class="col-2 fixed-center fixed-center-adjust-top-position"
+    />
 </div>
 
 @if (state.isShowMemoPopup) {
