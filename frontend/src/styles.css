@@ -280,3 +280,13 @@ body > .container {
 .style-strong-tag b {
     color: orange
 }
+
+.fixed-center {
+  position: sticky;
+  top: 50%;
+  right: 0%;
+  height: fit-content;
+}
+.fixed-center-adjust-top-position {
+  transform: translateY(-40%);
+}

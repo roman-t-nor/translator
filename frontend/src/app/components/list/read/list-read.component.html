@@ -1,23 +1,21 @@
-<div class="container-lg">
+<div class="row d-md-none">
+    <controls class="d-flex justify-content-center mb-4"/>
+</div>
 
-    <div class="row d-md-none">
-        <controls class="d-flex justify-content-center mb-4"/>
-    </div>
-
-    <div class="row align-items-center">
-        @if (entries.length) {
-            <div class="col-md-10 d-flex justify-content-center border">
-                <div class="ajax-translate px-4">
-                    @for (entry of entries; track entry.id) {
-                        <item [entry]="entry" [index]="$index"></item>
-                    }
-                </div>
-            </div>
-        } @else {
-            <div class="col-md-10"></div>
-        }
-        <controls class="col-md-2 d-none d-md-block btn_controls"/>
-    </div>
+<div class="row" id="list-read">
+  @if (entries.length) {
+      <div class="col-md-10 d-flex justify-content-center ">
+          <div class="ajax-translate px-4 border">
+              @for (entry of entries; track entry.id) {
+                  <item [entry]="entry" [index]="$index"></item>
+              }
+          </div>
+      </div>
+      <controls class="fixed-center fixed-center-adjust-top-position col-md-2 d-none d-md-block btn_controls"/>
+  } @else{
+      <div class="col-md-10"></div>
+      <controls class="fixed-center col-md-2 d-none d-md-block btn_controls" />
+  }
 </div>
 
 @if (entries.length) {
