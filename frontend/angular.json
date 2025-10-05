@@ -68,7 +68,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "baseHref": "/",
-              "deployUrl": "/",
+              "deployUrl": "/angular/browser/",
             }
           },
           "defaultConfiguration": "production"
