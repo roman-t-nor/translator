@@ -28,7 +28,9 @@
     </div>
     <controls
       (shuffled)="shuffle()"
-      class="col-2 fixed-center fixed-center-adjust-top-position"
+      class="col-2"
+      [class.fixed-center]="entries.length > 0"
+      [class.fixed-center-adjust-top-position]="entries.length > 0"
     />
 </div>
 

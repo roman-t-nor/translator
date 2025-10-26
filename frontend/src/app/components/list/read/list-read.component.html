@@ -14,7 +14,10 @@
       <controls class="fixed-center fixed-center-adjust-top-position col-md-2 d-none d-md-block btn_controls"/>
   } @else{
       <div class="col-md-10"></div>
-      <controls class="fixed-center col-md-2 d-none d-md-block btn_controls" />
+      <controls
+        class="fixed-center d-none d-md-block btn_controls"
+        [class.col-md-2]="entries.length > 0"
+      />
   }
 </div>
 
