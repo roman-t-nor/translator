@@ -14,14 +14,16 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::middleware(['web', 'auth'])
                 ->prefix('admin')
                 ->group(__DIR__ . '/../routes/admin.php');
-            Route::middleware(['api'])
+            Route::middleware(['web', 'auth'])
                 ->prefix('api')
                 ->name('api.')
                 ->group(__DIR__ . '/../routes/api.php');
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->validateCsrfTokens(except: [
+            'api/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

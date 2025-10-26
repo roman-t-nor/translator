@@ -15,7 +15,7 @@ export function baseInterceptor(
 
   let url = `${domain}/api`;
   url = req.url ? `${url}/${req.url}` : url;
-  const cloneReq = req.clone({ url });
+  const cloneReq = req.clone({ url, withCredentials: true });
 
   return next(cloneReq).pipe(
     catchError((event) => {
