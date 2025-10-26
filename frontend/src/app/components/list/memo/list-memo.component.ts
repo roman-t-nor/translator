@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   selector: 'list-memo',
   standalone: true,
   templateUrl: './list-memo.component.html',
-  styles: '.animating .item {font-weight: normal !important;}',
+  styles: ':host{display: flex; flex-grow: 1; flex-direction: column;}.animating .item {font-weight: normal !important;}',
   imports: [
     ControlsComponent,
     AsyncPipe,
